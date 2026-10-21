@@ -200,78 +200,119 @@ footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line
 .mas { margin-top: 0.8rem; font-size: 0.9rem; min-height: 40px; }
 .restantes { color: var(--tinta-3); }
 
-/* ======================================================== el acta, por pasos
-   Un campo a la vez y a pantalla completa. El formulario largo seguía viéndose
-   a formulario largo; esto se lee como una conversación con una pregunta. */
 
-.oculto-visual {
-  position: absolute; width: 1px; height: 1px; overflow: hidden;
-  clip-path: inset(50%); white-space: nowrap;
+/* ======================================================= el acta, por pasos
+   Dos naturalezas de pantalla: escena (una pregunta, prosa, hechos al lado) y
+   ficha (varios campos estructurados juntos). La asimetría es el punto: ocho
+   pantallas iguales se cuentan como ocho deberes; ocho distintas, no. */
+
+.oculto-visual { position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; }
+
+.barra-etapa {
+  position: relative;
+  display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+  padding-bottom: 0.8rem; border-bottom: 1px solid var(--linea);
 }
-
-.progreso { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-  margin: 1.6rem 0 0.4rem; }
-.progreso .cuenta { margin: 0; font-family: system-ui, sans-serif; font-size: 0.78rem;
+.volver { font-family: system-ui, sans-serif; font-size: 0.85rem; text-decoration: none;
   color: var(--tinta-3); }
-.progreso .cuenta strong { color: var(--tinta); font-variant-numeric: tabular-nums; }
+.volver:hover { color: var(--plan); text-decoration: underline; }
 
-.pasos { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0; padding: 0; }
-.punto {
-  min-height: 0; width: 0.95rem; height: 0.95rem; padding: 0; border-radius: 50%;
-  border: 1px solid var(--linea); background: var(--hoja);
-  transition: background var(--rapido) var(--curva), transform var(--rapido) var(--curva);
+/* Barra continua: dice dónde vas sin que se pueda contar lo que falta. */
+.progreso { margin: 1.1rem 0 0.2rem; }
+.riel { display: flex; gap: 2px; }
+.tramo {
+  flex: 1; min-height: 0; height: 6px; padding: 0; border: 0; border-radius: 0;
+  background: var(--linea);
+  transition: background var(--rapido) var(--curva);
 }
-.punto:hover { background: var(--plan-10); }
-.punto.hecho { background: var(--plan); border-color: var(--plan); }
-.punto.aqui { background: var(--casa); border-color: var(--casa); transform: scale(1.25); }
+.tramo:hover { background: var(--plan-10); }
+.tramo.hecho { background: var(--plan); }
+.tramo.aqui { background: var(--casa); }
+.tramo:focus-visible { outline: 2px solid var(--plan); outline-offset: 2px; }
+.donde { margin: 0.45rem 0 0; font-family: system-ui, sans-serif; font-size: 0.75rem;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--tinta-3); }
 
-/* La escena: lo único que se ve del acta en este momento. */
-.escena {
-  min-height: 19rem;
-  padding: 1.8rem 0 0.6rem;
-  animation: pasa var(--normal) var(--curva);
-}
+.tablero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 2rem; align-items: start; margin-top: 1.4rem; }
+.trabajo { min-width: 0; animation: pasa var(--normal) var(--curva); }
 
-@keyframes pasa {
-  from { opacity: 0; transform: translateX(10px); }
-  to { opacity: 1; transform: none; }
-}
+@keyframes pasa { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: none; } }
 
-.de-que-va {
-  margin: 0 0 0.3rem;
-  font-family: system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--tinta-3);
-}
-.titulo-paso { margin: 0 0 0.5rem; font-size: 1.85rem; line-height: 1.15; }
-.recomendacion { margin: 0 0 1.2rem; color: var(--tinta-2); max-width: 32rem; font-size: 1.02rem; }
+.titulo-paso { margin: 0 0 0.9rem; font-size: 1.55rem; line-height: 1.18; max-width: 20ch; }
+.recomendacion { margin: -0.4rem 0 1.1rem; color: var(--tinta-2); }
 
-.campo.grande { margin: 0; }
+/* La caja no es una caja: es un renglón donde se redacta. */
 .campo.grande input[type='text'], .campo.grande textarea {
-  font-size: max(16px, 1.1rem); padding: 0.7rem 0.85rem;
+  border: 0; border-bottom: 2px solid var(--linea); border-radius: 0;
+  padding: 0.5rem 0 0.4rem; background: none;
+  font-size: max(16px, 1.05rem); max-width: 62ch;
 }
+.campo.grande input[type='text']:focus, .campo.grande textarea:focus {
+  border-bottom-color: var(--plan); outline: none;
+}
+.campo.grande textarea { min-height: 5.2rem; }
+::placeholder { color: var(--tinta-3); opacity: 0.65; font-style: italic; }
 
-.pasos-acciones {
-  display: flex; gap: 0.7rem; align-items: center;
-  margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1px solid var(--linea);
+/* El nombre formal baja: arriba en versalitas con una pregunta debajo es, letra
+   por letra, la gramática de un reactivo de examen. */
+.apunte { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+  margin: 0.8rem 0 0; font-size: 0.85rem; color: var(--tinta-3); }
+.chip { font-family: system-ui, sans-serif; font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.15rem 0.5rem; border: 1px solid var(--linea);
+  color: var(--tinta-2); }
+
+.ficha { display: grid; gap: 1rem; }
+.ficha .campo { margin: 0; }
+.ficha label { font-size: 0.95rem; }
+.ficha textarea { min-height: 3.2rem; }
+
+/* --------------------------------------------------------- riel derecho */
+.riel-derecho { position: sticky; top: 1.5rem; display: grid; gap: 1rem; min-width: 0; }
+
+.hechos { padding: 0.9rem 1rem; background: var(--casa-10); border-left: 3px solid var(--casa); }
+.hechos h3 { margin: 0 0 0.5rem; font-family: system-ui, sans-serif; font-size: 0.7rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--casa); }
+.hechos ul { margin: 0; padding-left: 1.05rem; display: grid; gap: 0.35rem; }
+.hechos li { font-style: italic; font-size: 0.95rem; }
+.ojo { margin: 0.6rem 0 0; font-size: 0.78rem; color: var(--tinta-3); }
+
+.acta-hasta-ahora { padding: 0.9rem 1rem; background: var(--hoja); border: 1px solid var(--linea); }
+.acta-hasta-ahora h3 { margin: 0; font-size: 0.95rem; }
+.cuantas { margin: 0.1rem 0 0.7rem; font-family: system-ui, sans-serif; font-size: 0.75rem;
+  color: var(--tinta-3); }
+.acta-hasta-ahora ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.1rem; }
+.acta-hasta-ahora button {
+  width: 100%; min-height: 0; padding: 0.25rem 0; border: 0; background: none;
+  display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 0.6rem;
+  text-align: left; font-size: 0.8rem; border-bottom: 1px dotted var(--linea);
 }
+.acta-hasta-ahora button:hover { background: var(--plan-10); }
+.acta-hasta-ahora .nombre { font-family: system-ui, sans-serif; font-size: 0.7rem;
+  letter-spacing: 0.04em; text-transform: uppercase; color: var(--tinta-3); }
+.acta-hasta-ahora .resumen { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: var(--tinta); }
+.acta-hasta-ahora .pendiente .resumen { color: var(--tinta-3); }
+.acta-hasta-ahora .escrito .nombre { color: var(--camino); }
+
+.pasos-acciones { display: flex; gap: 0.7rem; align-items: center; margin-top: 1.6rem;
+  padding-top: 1.1rem; border-top: 1px solid var(--linea); }
 .pasos-acciones .primario { margin-left: auto; }
+.intentos { margin: 0.7rem 0 0; font-family: system-ui, sans-serif; font-size: 0.8rem;
+  color: var(--tinta-3); }
 
 /* ------------------------------------------------------------- revisión */
-.intro-revision { margin: 0 0 1.2rem; color: var(--tinta-2); }
+.intro-revision { margin: 0 0 1.1rem; color: var(--tinta-2); }
 .revision dl { margin: 0; display: grid; gap: 0.1rem; }
-.revision .renglon {
-  display: grid; grid-template-columns: 11rem 1fr; gap: 0 1.2rem;
-  padding: 0.65rem 0; border-bottom: 1px solid var(--linea);
-}
+.revision .renglon { display: grid; grid-template-columns: 11rem 1fr; gap: 0 1.2rem;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--linea); }
 .revision dt { margin: 0; }
-.revision dt button {
-  min-height: 0; padding: 0; border: 0; background: none;
-  font-family: system-ui, sans-serif; font-size: 0.8rem; color: var(--tinta-3);
-  text-align: left; display: flex; flex-direction: column; gap: 0.1rem;
-}
+.revision dt button { min-height: 0; padding: 0; border: 0; background: none;
+  font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--tinta-3);
+  text-align: left; display: flex; flex-direction: column; }
 .revision dt button:hover { background: none; color: var(--plan); }
 .revision .editar { font-size: 0.7rem; opacity: 0; text-decoration: underline; }
-.revision .renglon:hover .editar, .revision dt button:focus-visible .editar { opacity: 1; }
+.revision .renglon:hover .editar { opacity: 1; }
 .revision dd { margin: 0; }
 .revision dd ul { margin: 0; padding-left: 1.1rem; }
 .revision .sin-llenar { color: var(--casa); font-style: italic; }
@@ -279,16 +320,21 @@ footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line
 
 .arreglar { margin-top: 0.5rem; min-height: 36px; padding: 0.25rem 0.7rem; font-size: 0.85rem; }
 
+@media (max-width: 52rem) {
+  .tablero { grid-template-columns: 1fr; gap: 1.4rem; }
+  /* En teléfono los hechos van ARRIBA del campo: son contexto, se leen antes. */
+  .riel-derecho { position: static; }
+  .tablero { display: flex; flex-direction: column; }
+  .riel-derecho { order: -1; }
+  .acta-hasta-ahora { order: 2; }
+}
+
 @media (max-width: 34rem) {
-  .titulo-paso { font-size: 1.5rem; }
-  .escena { min-height: 16rem; }
+  main { padding: 1.5rem 1rem 3rem; }
+  .titulo-paso { font-size: 1.35rem; }
   .pasos-acciones { flex-direction: column-reverse; align-items: stretch; }
   .pasos-acciones .primario { margin-left: 0; }
   .revision .renglon { grid-template-columns: 1fr; gap: 0.2rem; }
   .revision .editar { opacity: 1; }
+  .acta-hasta-ahora button { grid-template-columns: 1fr; gap: 0; }
 }
-
-/* Dentro de una etapa, el encabezado del taller cede el espacio a la pregunta. */
-header.compacto { padding-bottom: 0.9rem; }
-header.compacto h1 { font-size: 1.5rem; margin: 0.2rem 0 0; }
-header.compacto + .etapa-activa .cabecera-etapa { padding-top: 1.1rem; }

@@ -2,7 +2,7 @@ import { sensor } from '../etapas/acta/sensores.js'
 
 /** Cuatro tipos y ninguno más: corto, largo, lista y fecha. */
 export default function Campo({ spec, valor, onCambio, onSalir, onEnviar, avisos = [], grande = false }) {
-  const { campo, etiqueta, tipo, ayuda } = spec
+  const { campo, etiqueta, tipo, ayuda, ejemplo } = spec
   const id = `campo-${campo}`
   const idAyuda = `${id}-ayuda`
   const s = sensor(campo, valor)
@@ -15,6 +15,8 @@ export default function Campo({ spec, valor, onCambio, onSalir, onEnviar, avisos
     // Enter avanza donde no hace falta para escribir. En un textarea, Enter es
     // un renglon nuevo y quitarselo seria pelearse con el navegador.
     onKeyDown: onEnviar ? (e) => { if (e.key === 'Enter') { e.preventDefault(); onEnviar() } } : undefined,
+    // Una caja con algo escrito dentro deja de ser un blanco de examen.
+    placeholder: ejemplo || undefined,
   }
 
   return (

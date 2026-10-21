@@ -1,24 +1,23 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { evaluar } from '../../motor/motor.js'
 import { borrador, entregado } from '../../estado/taller.js'
+import ActaHastaAhora from '../../componentes/ActaHastaAhora.jsx'
 import Campo from '../../componentes/Campo.jsx'
 import Hallazgos from '../../componentes/Hallazgos.jsx'
 import Progreso from '../../componentes/Progreso.jsx'
 import Sello from '../../componentes/Sello.jsx'
 import Revision from './Revision.jsx'
-import { CAMPOS } from './campos.js'
+import { PASOS, REVISION, SEMILLAS, TOTAL, pasoDe } from './campos.js'
 
 // Espera deliberada antes del veredicto. La evaluación tarda menos de 5 ms y un
-// resultado instantáneo se siente a que la máquina no leyó tu trabajo. Es peso,
-// no latencia: el mismo truco que usan los juegos para que un golpe pese.
+// resultado instantáneo se siente a que la máquina no leyó tu trabajo.
 const PESO = 320
-const REVISION = CAMPOS.length
-const TOTAL = CAMPOS.length + 1
 
 /** Avisos de un campo: lo que conviene mirar, nunca lo que bloquea. */
-function sinJuicio(estado, campo) {
+function sinJuicio(estado, campos) {
+  const suyos = new Set(campos)
   return evaluar('acta', borrador(estado, 'acta'))
-    .hallazgos.filter((h) => h.campo === campo && h.gravedad === 'aviso')
+    .hallazgos.filter((h) => suyos.has(h.campo) && h.gravedad === 'aviso')
 }
 
 export default function FormularioActa({ estado, despachar }) {
@@ -34,13 +33,21 @@ export default function FormularioActa({ estado, despachar }) {
   const panel = useRef(null)
 
   const enRevision = paso === REVISION
-  const spec = CAMPOS[paso]
+  const actual = PASOS[paso]
+  const campos = actual ? (actual.campos ?? [actual]) : []
 
-  // Al cambiar de paso el foco se va al campo: sin esto, quien navega con
-  // teclado o lector de pantalla se queda atrás en el botón de siguiente.
+  // El enfoque viene escrito de fábrica: si el estudiante pudiera elegir aquí
+  // un método adaptativo, el giro de la etapa 4 no tendría contra qué romper.
   useEffect(() => {
-    const campo = escena.current?.querySelector('input, textarea')
-    campo?.focus({ preventScroll: true })
+    for (const [campo, texto] of Object.entries(SEMILLAS)) {
+      if (!datos[campo]) despachar({ tipo: 'escribir', artefacto: 'acta', campo, valor: texto })
+    }
+    // Solo al abrir la etapa.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    escena.current?.querySelector('input, textarea')?.focus({ preventScroll: true })
   }, [paso])
 
   const escribir = useCallback((campo, valor) => {
@@ -48,27 +55,21 @@ export default function FormularioActa({ estado, despachar }) {
     setAvisos(null)
   }, [despachar])
 
-  // Los avisos del campo salen al dejarlo, no mientras se escribe. Los
-  // incumplimientos se guardan para cuando el estudiante pida el veredicto.
-  const revisarEste = useCallback(() => {
-    if (!spec) return
-    const suyos = sinJuicio(estado, spec.campo)
-    if (suyos.length) setAvisos(suyos)
-  }, [estado, spec])
-
   const ir = useCallback((n) => {
     setAvisos(null)
     setPaso(Math.max(0, Math.min(REVISION, n)))
   }, [])
 
-  // Si el campo tiene algo que vale la pena mirar, se muestra y el paso se
-  // queda. Volver a pulsar avanza: el aviso informa, nunca bloquea.
+  // Si hay algo que vale la pena mirar, se muestra y el paso se queda. Volver
+  // a pulsar avanza: el aviso informa, nunca detiene.
   const siguiente = useCallback(() => {
     if (avisos) { setAvisos(null); setPaso((p) => Math.min(REVISION, p + 1)); return }
-    const pendientes = spec ? sinJuicio(estado, spec.campo) : []
+    const aqui = PASOS[paso]
+    const suyos = (aqui?.campos ?? (aqui ? [aqui] : [])).map((c) => c.campo)
+    const pendientes = sinJuicio(estado, suyos)
     if (pendientes.length) { setAvisos(pendientes); return }
     setPaso((p) => Math.min(REVISION, p + 1))
-  }, [avisos, estado, spec])
+  }, [avisos, estado, paso])
 
   const leerAlBurro = useCallback(() => {
     setLeyendo(true)
@@ -83,73 +84,88 @@ export default function FormularioActa({ estado, despachar }) {
   }, [datos, despachar])
 
   const arreglar = useCallback((campo) => {
-    const i = CAMPOS.findIndex((c) => c.campo === campo)
+    const i = pasoDe(campo)
     if (i >= 0) { setResultado(null); setAvisos(null); setPaso(i) }
   }, [])
 
   const sellada = resultado?.resumen.pasa || (yaEntregado && registro?.resumen?.pasa)
-  const fechaSello = registro?.entregadoEn
-    ? new Date(registro.entregadoEn).toLocaleDateString('es-MX')
-    : null
+  const siguienteNombre = paso + 1 < REVISION
+    ? (PASOS[paso + 1].titulo ?? PASOS[paso + 1].etiqueta)
+    : 'Revisar el acta'
 
   return (
     <section className="etapa-activa">
-      <header className="cabecera-etapa">
+      <div className="barra-etapa">
         <a className="volver" href="#inicio">← El recorrido</a>
-        <p className="eyebrow">Etapa 1 · PMI · Inicio</p>
-        <h2>El acta de constitución</h2>
-        <p className="cuento">
-          El burro ya no sirve en la granja y se va a Bremen a ser músico. Antes de salir alguien
-          tiene que escribir a qué van, porque en el camino se va a olvidar.
-        </p>
-        {sellada && <Sello fecha={fechaSello} />}
-      </header>
+        <p className="eyebrow">Etapa 1 · El acta de constitución</p>
+        {sellada && <Sello fecha={registro?.entregadoEn
+          ? new Date(registro.entregadoEn).toLocaleDateString('es-MX') : null} />}
+      </div>
 
-      <Progreso paso={paso} total={TOTAL} onIr={ir} />
+      <Progreso paso={paso} total={TOTAL} onIr={ir}
+        titulo={enRevision ? 'Revisión del acta' : (actual.titulo ?? null)} />
 
-      <div className="escena" ref={escena} key={paso}>
-        {enRevision ? (
-          <>
-            <h3 className="titulo-paso">Tu acta, completa</h3>
-            <Revision datos={datos} onEditar={ir} />
-          </>
-        ) : (
-          <>
-            <p className="de-que-va">{spec.etiqueta}</p>
-            <h3 className="titulo-paso">{spec.pregunta ?? spec.etiqueta}</h3>
-            <p className="recomendacion">{spec.ayuda}</p>
-            <Campo
-              spec={{ ...spec, etiqueta: spec.etiqueta, ayuda: '' }}
-              valor={datos[spec.campo]}
-              onCambio={escribir}
-              onSalir={revisarEste}
-              onEnviar={spec.tipo === 'largo' ? null : siguiente}
-              avisos={avisos ?? []}
-              grande
-            />
-          </>
-        )}
+      <div className="tablero">
+        <div className="trabajo" ref={escena} key={paso}>
+          {enRevision ? (
+            <>
+              <h2 className="titulo-paso">Tu acta, completa</h2>
+              <Revision datos={datos} onEditar={ir} />
+            </>
+          ) : actual.clase === 'ficha' ? (
+            <>
+              <h2 className="titulo-paso">{actual.titulo}</h2>
+              <p className="recomendacion">{actual.entrada}</p>
+              <div className="ficha">
+                {campos.map((c) => (
+                  <Campo key={c.campo} spec={c} valor={datos[c.campo]} onCambio={escribir}
+                    avisos={(avisos ?? []).filter((a) => a.campo === c.campo)} />
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <h2 className="titulo-paso">{actual.pregunta}</h2>
+              <Campo spec={{ ...actual, ayuda: '' }} valor={datos[actual.campo]}
+                onCambio={escribir}
+                onEnviar={actual.tipo === 'largo' ? null : siguiente}
+                avisos={avisos ?? []} grande />
+              <p className="apunte">
+                <span className="chip">{actual.etiqueta}</span>
+                {actual.ayuda}
+              </p>
+            </>
+          )}
+        </div>
+
+        <div className="riel-derecho">
+          {!enRevision && actual.hechos?.length > 0 && (
+            <aside className="hechos" aria-label="Lo que sabes del caso">
+              <h3>Lo que sabes</h3>
+              <ul>{actual.hechos.map((h, i) => <li key={i}>{h}</li>)}</ul>
+              <p className="ojo">No todo esto sirve para esta pregunta.</p>
+            </aside>
+          )}
+          <ActaHastaAhora datos={datos} onIr={ir} pasoDe={pasoDe} />
+        </div>
       </div>
 
       <nav className="pasos-acciones" aria-label="Avanzar en el acta">
-        <button type="button" onClick={() => ir(paso - 1)} disabled={paso === 0}>
-          ← Atrás
-        </button>
+        <button type="button" onClick={() => ir(paso - 1)} disabled={paso === 0}>← Atrás</button>
         {enRevision ? (
           <button type="button" className="primario" onClick={leerAlBurro} disabled={leyendo}>
             {leyendo ? 'El burro está escuchando…' : 'Leérselo al burro'}
           </button>
         ) : (
           <button type="button" className="primario" onClick={siguiente}>
-            {avisos ? 'Seguir de todos modos →' : 'Siguiente →'}
+            {avisos ? 'Seguir de todos modos →' : `Siguiente: ${siguienteNombre} →`}
           </button>
         )}
       </nav>
 
       {registro?.intentos > 0 && (
         <p className="intentos">
-          {registro.intentos} lectura{registro.intentos === 1 ? '' : 's'}. No hay límite: corrige
-          y vuelve a leérselo las veces que quieras.
+          {registro.intentos} lectura{registro.intentos === 1 ? '' : 's'}. No hay límite.
         </p>
       )}
 

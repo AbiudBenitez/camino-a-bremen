@@ -42,24 +42,25 @@ export default function App() {
         </div>
       )}
 
-      {/* Dentro de una etapa el encabezado se encoge: lo que tiene que estar
-          arriba es la pregunta, no la presentación del taller. */}
-      <header className={enEtapa1 ? 'compacto' : undefined}>
-        <p className="curso">Administración de Proyectos de Software · Equipo 2 · India</p>
-        <h1><a href="#inicio">Camino a Bremen</a></h1>
-        {!enEtapa1 && (
+      {/* Dentro de una etapa no hay portada. El campo tiene que caber en la
+          primera pantalla: once bloques de preámbulo repetidos en cada paso
+          eran la causa de que ocho pasos se sintieran interminables. */}
+      {!enEtapa1 && (
+        <header>
+          <p className="curso">Administración de Proyectos de Software · Equipo 2 · India</p>
+          <h1><a href="#inicio">Camino a Bremen</a></h1>
           <p className="bajada">
             Gestiona el proyecto de los músicos de Bremen. Empiezas planificando como manda el PMI
             y, cuando a media historia el objetivo cambie, terminas con Scrum.
           </p>
-        )}
-      </header>
+        </header>
+      )}
 
       {enEtapa1
         ? <FormularioActa estado={estado} despachar={despachar} />
         : <Recorrido estado={estado} />}
 
-      <Expediente taller={taller} guardadoA={guardadoA} />
+      {!enEtapa1 && <Expediente taller={taller} guardadoA={guardadoA} />}
 
       <footer>
         <p>
