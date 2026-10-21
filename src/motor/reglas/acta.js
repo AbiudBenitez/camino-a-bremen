@@ -44,7 +44,11 @@ const elementosPresentes = {
   },
 }
 
-/** Regla 2: la visión cabe en una sola oración. */
+/** Regla 2: la visión cabe en una sola oración.
+ *  Va como AVISO, no como error: contar oraciones partiendo por el punto es una
+ *  heurística y se equivoca con abreviaturas («el Sr. Pérez»). La gravedad sigue
+ *  a la confianza de la regla, no a su importancia: un falso «te falta algo» le
+ *  cuesta al estudiante la fe en las citas, que es lo que sostiene el producto. */
 const visionUnaOracion = {
   id: 'acta.vision-una-oracion',
   descripcion: 'La visión se redacta en una sola oración, corta y clara.',
@@ -57,9 +61,9 @@ const visionUnaOracion = {
     return [
       hallazgo({
         regla: 'acta.vision-una-oracion',
-        gravedad: ERROR,
+        gravedad: AVISO,
         campo: 'vision',
-        mensaje: `Tu visión tiene ${oraciones.length} oraciones. La plantilla pide una sola: si no cabe en una oración, todavía no está decidida.`,
+        mensaje: `Tu visión parece tener ${oraciones.length} oraciones. La plantilla pide una sola: si no cabe en una oración, todavía no está decidida.`,
         fuente: PLANTILLA,
       }),
     ]

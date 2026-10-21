@@ -68,3 +68,16 @@ describe('reglas del acta', () => {
     expect(f).toHaveLength(2)
   })
 })
+
+describe('gravedad de las heurísticas', () => {
+  it('la visión de varias oraciones avisa, no bloquea', () => {
+    const r = evaluar('acta', { ...completa, vision: 'Llegar a Bremen. Y ser músicos.' })
+    expect(r.resumen.errores).toBe(0)
+    expect(r.hallazgos.find((h) => h.regla === 'acta.vision-una-oracion').gravedad).toBe('aviso')
+  })
+
+  it('una abreviatura no convierte una visión válida en incumplimiento', () => {
+    const r = evaluar('acta', { ...completa, vision: 'Llevar al Sr. Pérez y a los cuatro a Bremen en 1.5 meses.' })
+    expect(r.resumen.errores).toBe(0)
+  })
+})
