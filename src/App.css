@@ -1,0 +1,107 @@
+main {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 4rem;
+}
+
+header { border-bottom: 1px solid var(--linea); padding-bottom: 1.5rem; }
+
+.curso {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tenue);
+  font-family: system-ui, sans-serif;
+}
+
+h1 { margin: 0.4rem 0 0.6rem; font-size: 2.6rem; font-weight: 600; line-height: 1.1; }
+h2 { font-size: 1.3rem; font-weight: 600; margin: 2.5rem 0 0.75rem; }
+.bajada { margin: 0; color: var(--tenue); max-width: 36rem; }
+
+.etapas { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+
+.etapa {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  grid-template-areas: 'numero enfoque' 'numero titulo' 'numero cuento' 'numero estado';
+  gap: 0.1rem 1rem;
+  padding: 0.9rem 1rem;
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-left: 3px solid var(--pmi);
+}
+
+.etapa:nth-child(n + 4) { border-left-color: var(--scrum); }
+.etapa.giro { border-left-color: var(--giro); }
+
+.numero {
+  grid-area: numero;
+  align-self: center;
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--tenue);
+}
+
+.enfoque {
+  grid-area: enfoque;
+  font-family: system-ui, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tenue);
+}
+
+.etapa strong { grid-area: titulo; font-weight: 600; }
+.cuento { grid-area: cuento; color: var(--tenue); font-style: italic; font-size: 0.92rem; }
+
+.estado {
+  grid-area: estado;
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  color: var(--tenue);
+  margin-top: 0.2rem;
+}
+
+.nota { color: var(--tenue); font-size: 0.92rem; font-style: italic; }
+.botones { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 1rem 0; }
+
+.hallazgos ul { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+
+.hallazgos li {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-left: 3px solid var(--giro);
+}
+
+.hallazgos li.aviso { border-left-color: var(--aviso); }
+
+.etiqueta {
+  font-family: system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tenue);
+}
+
+.fuente { font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--tenue); }
+
+.veredicto { font-weight: 600; margin: 1rem 0 0; }
+.veredicto.bien { color: var(--scrum); }
+.veredicto.mal { color: var(--giro); }
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--linea);
+  color: var(--tenue);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 30rem) {
+  h1 { font-size: 2rem; }
+  .etapa { grid-template-columns: 1fr; grid-template-areas: 'numero' 'enfoque' 'titulo' 'cuento' 'estado'; }
+}

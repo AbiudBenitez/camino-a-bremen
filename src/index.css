@@ -1,0 +1,38 @@
+:root {
+  --tinta: #1a1a1a;
+  --tenue: #5a5a5a;
+  --linea: #d8d8d8;
+  --fondo: #fbfbfa;
+  --papel: #ffffff;
+  --pmi: #1c4e80;
+  --scrum: #1f6b4a;
+  --giro: #8c1f24;
+  --aviso: #b8860b;
+
+  font-family: 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  line-height: 1.6;
+  color: var(--tinta);
+  background: var(--fondo);
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+}
+
+button {
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--pmi);
+  background: var(--papel);
+  color: var(--pmi);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+button:hover { background: #eef3f9; }
+button:focus-visible { outline: 2px solid var(--pmi); outline-offset: 2px; }
