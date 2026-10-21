@@ -37,7 +37,7 @@ export default function Campo({ spec, valor, onCambio, onSalir, onEnviar, avisos
           onChange={(e) => onCambio(campo, e.target.value)} />
       )}
       {tipo === 'lista' && (
-        <ListaDeTextos id={id} comunes={comunes} valor={valor ?? ['']}
+        <ListaDeTextos id={id} comunes={comunes} valor={valor}
           onCambio={(v) => onCambio(campo, v)} />
       )}
 
@@ -62,16 +62,25 @@ export default function Campo({ spec, valor, onCambio, onSalir, onEnviar, avisos
 }
 
 function ListaDeTextos({ id, comunes, valor, onCambio }) {
-  const filas = valor.length ? valor : ['']
+  // Lo guardado puede venir de una versión anterior del formulario y no ser
+  // un arreglo. Normalizar aquí evita que la pantalla se caiga entera.
+  const lista = Array.isArray(valor) ? valor : valor ? [String(valor)] : ['']
+  const filas = lista.length ? lista : ['']
   const set = (i, v) => onCambio(filas.map((x, j) => (j === i ? v : x)))
   const quitar = (i) => onCambio(filas.filter((_, j) => j !== i))
+  const agregar = () => onCambio([...filas, ''])
 
   return (
     <div className="lista-textos">
       {filas.map((v, i) => (
         <div className="fila-lista" key={i}>
           <input {...comunes} id={i === 0 ? id : `${id}-${i}`} type="text" value={v}
-            placeholder={i === 0 ? 'Cuatro integrantes reunidos' : ''}
+            placeholder={i === 0 ? comunes.placeholder : ''}
+            onKeyDown={(e) => {
+              if (e.key !== 'Enter') return
+              e.preventDefault()
+              if (v.trim()) agregar()
+            }}
             onChange={(e) => set(i, e.target.value)} />
           {filas.length > 1 && (
             <button type="button" className="quitar" onClick={() => quitar(i)}
@@ -79,7 +88,7 @@ function ListaDeTextos({ id, comunes, valor, onCambio }) {
           )}
         </div>
       ))}
-      <button type="button" className="agregar" onClick={() => onCambio([...filas, ''])}>
+      <button type="button" className="agregar" onClick={agregar}>
         Agregar otra medida
       </button>
     </div>

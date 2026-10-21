@@ -9,6 +9,11 @@ const ALIENTO = 25   // palabras que el burro dice poder recordar
 
 const palabras = (t) => String(t ?? '').trim().split(/\s+/).filter(Boolean).length
 
+// Lo guardado puede no tener la forma que espera esta pantalla: un expediente
+// escrito con una version anterior del formulario, o un campo que cambio de
+// tipo. Nada de esto debe tumbar la interfaz.
+const comoLista = (v) => (Array.isArray(v) ? v : v == null || v === '' ? [] : [v])
+
 export function sensor(campo, valor) {
   if (campo === 'vision') {
     const n = palabras(valor)
@@ -21,8 +26,9 @@ export function sensor(campo, valor) {
     }
   }
   if (campo === 'medidas') {
-    const n = (valor ?? []).filter((m) => String(m).trim()).length
-    const conCifra = (valor ?? []).filter((m) => /\d/.test(m)).length
+    const lista = comoLista(valor)
+    const n = lista.filter((m) => String(m).trim()).length
+    const conCifra = lista.filter((m) => /\d/.test(String(m))).length
     return { texto: `${n} medida${n === 1 ? '' : 's'} · ${conCifra} con cifra`, tension: 0, nota: null }
   }
   const n = palabras(valor)

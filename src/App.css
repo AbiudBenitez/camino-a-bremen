@@ -338,3 +338,10 @@ footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line
   .revision .editar { opacity: 1; }
   .acta-hasta-ahora button { grid-template-columns: 1fr; gap: 0; }
 }
+
+.se-rompio { margin: 2rem 0; padding: 1.2rem 1.3rem; background: var(--lapiz-10);
+  border-left: 3px solid var(--lapiz); }
+.se-rompio h2 { margin: 0 0 0.5rem; font-size: 1.2rem; color: var(--lapiz); }
+.se-rompio p { margin: 0 0 0.6rem; max-width: 34rem; }
+.se-rompio .detalle code { font-family: ui-monospace, Menlo, monospace; font-size: 0.78rem;
+  color: var(--tinta-2); }

@@ -70,7 +70,7 @@ export const PASOS = [
 
   prosa('medidas', '¿Cómo va a saber que lo logró?',
     'Al menos dos, y cada una con una cifra.',
-    'Los cuatro integrantes reunidos'),
+    'Los cuatro integrantes reunidos', 'lista'),
 
   // El alcance pregunta por lo que queda FUERA a proposito: en la etapa 4
   // aparece una casa que el estudiante nunca puso ni dentro ni fuera, y ahi

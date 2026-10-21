@@ -26,6 +26,10 @@ const PLANTILLA = fuente('Material del curso', 'Plantilla de carta constitutiva,
 
 const vacio = (v) => !v || String(v).trim().length === 0
 
+// Una regla recibe lo que el estudiante tenga guardado, que puede venir de una
+// version anterior del formulario. Si revienta, se lleva el taller por delante.
+const comoLista = (v) => (Array.isArray(v) ? v : v == null || v === '' ? [] : [v])
+
 /** Regla 1: los nueve elementos están presentes. */
 const elementosPresentes = {
   id: 'acta.elementos-presentes',
@@ -76,7 +80,7 @@ const medidasDeExito = {
   descripcion: 'Hay al menos dos medidas de éxito y cada una es verificable.',
   fuente: PMBOK_ACTA,
   evaluar(acta) {
-    const medidas = (acta?.medidas ?? []).map((m) => String(m).trim()).filter(Boolean)
+    const medidas = comoLista(acta?.medidas).map((m) => String(m).trim()).filter(Boolean)
     const out = []
     if (medidas.length < 2) {
       out.push(

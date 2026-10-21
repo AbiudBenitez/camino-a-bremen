@@ -4,6 +4,7 @@ import { artefactos } from './motor/motor.js'
 import { estadoEtapa, puedeEntrar } from './estado/taller.js'
 import { useTaller } from './useTaller.js'
 import FormularioActa from './etapas/acta/FormularioActa.jsx'
+import Red from './componentes/Red.jsx'
 import './App.css'
 
 const CON_REGLAS = new Set(artefactos().map((a) => a.id))
@@ -56,9 +57,11 @@ export default function App() {
         </header>
       )}
 
-      {enEtapa1
-        ? <FormularioActa estado={estado} despachar={despachar} />
-        : <Recorrido estado={estado} />}
+      <Red>
+        {enEtapa1
+          ? <FormularioActa estado={estado} despachar={despachar} />
+          : <Recorrido estado={estado} />}
+      </Red>
 
       {!enEtapa1 && <Expediente taller={taller} guardadoA={guardadoA} />}
 
