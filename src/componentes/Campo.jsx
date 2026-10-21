@@ -1,7 +1,7 @@
 import { sensor } from '../etapas/acta/sensores.js'
 
 /** Cuatro tipos y ninguno más: corto, largo, lista y fecha. */
-export default function Campo({ spec, valor, onCambio, onSalir, avisos = [] }) {
+export default function Campo({ spec, valor, onCambio, onSalir, onEnviar, avisos = [], grande = false }) {
   const { campo, etiqueta, tipo, ayuda } = spec
   const id = `campo-${campo}`
   const idAyuda = `${id}-ayuda`
@@ -12,15 +12,18 @@ export default function Campo({ spec, valor, onCambio, onSalir, avisos = [] }) {
     name: campo,
     'aria-describedby': ayuda ? idAyuda : undefined,
     onBlur: () => onSalir?.(campo),
+    // Enter avanza donde no hace falta para escribir. En un textarea, Enter es
+    // un renglon nuevo y quitarselo seria pelearse con el navegador.
+    onKeyDown: onEnviar ? (e) => { if (e.key === 'Enter') { e.preventDefault(); onEnviar() } } : undefined,
   }
 
   return (
-    <div className={`campo${avisos.length ? ' con-aviso' : ''}`}>
-      <label htmlFor={id}>{etiqueta}</label>
+    <div className={`campo${avisos.length ? ' con-aviso' : ''}${grande ? ' grande' : ''}`}>
+      <label htmlFor={id} className={grande ? 'oculto-visual' : undefined}>{etiqueta}</label>
       {ayuda && <p className="ayuda" id={idAyuda}>{ayuda}</p>}
 
       {tipo === 'largo' && (
-        <textarea {...comunes} rows={3} value={valor ?? ''}
+        <textarea {...comunes} rows={grande ? 5 : 3} value={valor ?? ''}
           onChange={(e) => onCambio(campo, e.target.value)} />
       )}
       {tipo === 'corto' && (

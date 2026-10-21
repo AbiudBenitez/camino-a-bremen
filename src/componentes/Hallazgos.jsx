@@ -11,7 +11,7 @@ import { APROBADO, PERSONAJES, vestirTodos } from '../voz/catalogo.js'
  */
 const TANDA = 3
 
-export default function Hallazgos({ resultado, id }) {
+export default function Hallazgos({ resultado, id, onArreglar }) {
   // El contador vuelve a TANDA solo porque quien la usa la monta con key nueva
   // en cada lectura. Reiniciarlo desde un efecto dispararia un render de mas.
   const [visibles, setVisibles] = useState(TANDA)
@@ -48,6 +48,11 @@ export default function Hallazgos({ resultado, id }) {
             )}
             <p className="mensaje">{h.mensaje}</p>
             <p className="fuente">{cita(h.fuente)}</p>
+            {h.campo && onArreglar && (
+              <button type="button" className="arreglar" onClick={() => onArreglar(h.campo)}>
+                Arreglar esto →
+              </button>
+            )}
           </li>
         ))}
       </ol>
