@@ -13,6 +13,7 @@ instante, citando la fuente que respalda cada observación.
 | Sitio | https://abiudbenitez.github.io/camino-a-bremen/ |
 | Entregas | 0.1 el 23 de octubre · 0.2 el 13 de noviembre · 1.0 el 20 de noviembre |
 | Planeación | Carpeta `admonpy/scrum-taller-bremen` (backlog, sprints, plan de entregas, burndown) |
+| Contexto del sprint | [`docs/contexto-scrum.md`](docs/contexto-scrum.md): equipo, fechas, backlog, capacidad, tareas con responsable y Definición de Terminado |
 
 Este taller **no otorga una certificación oficial** del PMI ni de Scrum.org.
 
@@ -42,8 +43,10 @@ src/
     catalogo.js     Qué artefacto usa qué reglas. Una etapa nueva es un renglón aquí.
     reglas/         Un archivo por artefacto. acta.js es la etapa 1.
   etapas/           Las seis etapas del taller y dónde está el giro.
+    acta/           La etapa 1: los pasos del recorrido y sus pantallas.
   componentes/      Interfaz. Sabe pintar hallazgos; no sabe de actas ni de EDT.
-  almacenamiento/   Avance del estudiante, solo en el navegador.
+  estado/           Expediente del estudiante: esquema con migraciones, reductor y almacén.
+  voz/              Qué dice cada personaje ante cada hallazgo. Aparte del motor.
   ia/               Cliente de la opinión opcional. Nunca se llama solo.
 ```
 
@@ -78,9 +81,13 @@ Obligatorias para todo el código. Un pull request que rompa una de estas no se 
 6. **Degradación digna:** si la IA falla o se agota la cuota, el taller sigue y lo dice.
 7. **La constancia declara que no es certificación oficial.**
 8. **Agregar un artefacto nuevo no obliga a tocar la interfaz.**
+9. **La IA se ve y se nombra como IA.** Su salida va separada de la del motor y etiquetada.
+10. **Nada de mecánicas de enganche:** sin puntos, experiencia, medallas, rachas,
+    temporizadores que penalicen, azar ni puntuación automática de la prosa.
 
 ## Estado
 
-Andamio del sprint 1. El motor de reglas, su contrato y las reglas de la etapa 1 están
-funcionando con pruebas; el formulario del acta es la historia H-03 y todavía no existe. La
-pantalla de inicio trae dos actas de ejemplo para ver el motor trabajando.
+Sprint 1, que cierra el 22 de octubre. El motor de reglas, su contrato y las reglas de la
+etapa 1 están funcionando con pruebas. La etapa 1 completa —el recorrido del acta, el
+expediente guardado y el veredicto— viene en el pull request de la historia H-03 y entra a
+`main` cuando pase la revisión; hasta entonces, lo que está publicado es el andamio.

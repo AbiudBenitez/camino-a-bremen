@@ -56,7 +56,7 @@ En español, en imperativo, una línea, sin punto final. Qué cambia, no qué ar
 1. ¿Cumple los criterios de aceptación de su historia?
 2. ¿Las reglas nuevas traen prueba?
 3. ¿Toda observación que se le muestra al estudiante trae su cita?
-4. ¿Se rompió alguna de las ocho reglas de diseño del README?
+4. ¿Se rompió alguna de las diez reglas de diseño del README?
 5. ¿Pasa `npm run lint`, `npm run test` y `npm run build`?
 
 Revisar es leer el código y probarlo, no apretar «Approve». Si algo no se entiende, pregúntalo
@@ -80,3 +80,7 @@ demo. Por eso `main` siempre tiene que estar sano.
 La planeación (backlog, sprints, responsables, plan de entregas y las gráficas de burndown)
 vive en la carpeta `admonpy/scrum-taller-bremen` y se genera con scripts: los `.docx` no se
 editan a mano.
+
+Lo que necesitas de ahí ya está volcado en `docs/contexto-scrum.md`: tus tareas con tus horas,
+las fechas, la capacidad del sprint y la Definición de Terminado. Ese archivo también se
+genera, así que tampoco se edita a mano.
