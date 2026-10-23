@@ -1,107 +1,347 @@
-main {
-  max-width: 48rem;
-  margin: 0 auto;
-  padding: 3rem 1.25rem 4rem;
-}
+main { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
 
-header { border-bottom: 1px solid var(--linea); padding-bottom: 1.5rem; }
-
-.curso {
+/* ------------------------------------------------------------ encabezado */
+header { border-bottom: 1px solid var(--linea); padding-bottom: 1.4rem; }
+.curso, .eyebrow {
   margin: 0;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--tenue);
-  font-family: system-ui, sans-serif;
-}
-
-h1 { margin: 0.4rem 0 0.6rem; font-size: 2.6rem; font-weight: 600; line-height: 1.1; }
-h2 { font-size: 1.3rem; font-weight: 600; margin: 2.5rem 0 0.75rem; }
-.bajada { margin: 0; color: var(--tenue); max-width: 36rem; }
-
-.etapas { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
-
-.etapa {
-  display: grid;
-  grid-template-columns: 6.5rem 1fr;
-  grid-template-areas: 'numero enfoque' 'numero titulo' 'numero cuento' 'numero estado';
-  gap: 0.1rem 1rem;
-  padding: 0.9rem 1rem;
-  background: var(--papel);
-  border: 1px solid var(--linea);
-  border-left: 3px solid var(--pmi);
-}
-
-.etapa:nth-child(n + 4) { border-left-color: var(--scrum); }
-.etapa.giro { border-left-color: var(--giro); }
-
-.numero {
-  grid-area: numero;
-  align-self: center;
-  font-family: system-ui, sans-serif;
-  font-size: 0.8rem;
-  color: var(--tenue);
-}
-
-.enfoque {
-  grid-area: enfoque;
   font-family: system-ui, sans-serif;
   font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--tenue);
-}
-
-.etapa strong { grid-area: titulo; font-weight: 600; }
-.cuento { grid-area: cuento; color: var(--tenue); font-style: italic; font-size: 0.92rem; }
-
-.estado {
-  grid-area: estado;
-  font-family: system-ui, sans-serif;
-  font-size: 0.75rem;
-  color: var(--tenue);
-  margin-top: 0.2rem;
-}
-
-.nota { color: var(--tenue); font-size: 0.92rem; font-style: italic; }
-.botones { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 1rem 0; }
-
-.hallazgos ul { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
-
-.hallazgos li {
-  display: grid;
-  gap: 0.15rem;
-  padding: 0.7rem 0.9rem;
-  background: var(--papel);
-  border: 1px solid var(--linea);
-  border-left: 3px solid var(--giro);
-}
-
-.hallazgos li.aviso { border-left-color: var(--aviso); }
-
-.etiqueta {
-  font-family: system-ui, sans-serif;
-  font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--tenue);
+  color: var(--tinta-3);
+}
+h1 { margin: 0.4rem 0 0.6rem; font-size: 2.6rem; line-height: 1.08; }
+h1 a { color: inherit; text-decoration: none; }
+h2 { font-size: 1.35rem; margin: 2.2rem 0 0.8rem; }
+.bajada { margin: 0; color: var(--tinta-2); max-width: 34rem; }
+
+/* ------------------------------------------------------------- recorrido */
+.etapas { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
+
+.etapa {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.4rem 1fr auto;
+  grid-template-areas: 'med enfoque entrar' 'med titulo entrar' 'med cuento entrar' 'med estado entrar';
+  align-items: center;
+  gap: 0.12rem 1rem;
+  padding: 0.95rem 1.1rem;
+  background: var(--hoja);
+  border: 1px solid var(--linea);
+  border-left: 3px solid var(--plan);
 }
 
-.fuente { font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--tenue); }
+.etapa.camino { border-left-color: var(--camino); border-left-style: dashed; }
+.etapa.bloqueada { opacity: 0.55; }
+.etapa.sellada { border-left-color: var(--sello); }
 
-.veredicto { font-weight: 600; margin: 1rem 0 0; }
-.veredicto.bien { color: var(--scrum); }
-.veredicto.mal { color: var(--giro); }
+.medallon {
+  grid-area: med;
+  justify-self: start;
+  display: grid;
+  place-items: center;
+  width: 2.6rem; height: 2.6rem;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--plan);
+  background: var(--plan-10);
+  border-radius: 50%;
+}
+.etapa.camino .medallon { color: var(--camino); background: var(--camino-10); }
+.etapa.sellada .medallon { color: var(--sello); background: #f6efdb; }
 
-footer {
-  margin-top: 3rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--linea);
-  color: var(--tenue);
-  font-size: 0.85rem;
+.etapa .enfoque { grid-area: enfoque; font-family: system-ui, sans-serif; font-size: 0.7rem;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--tinta-3); }
+.etapa strong { grid-area: titulo; font-size: 1.05rem; }
+.cuento { grid-area: cuento; color: var(--tinta-2); font-style: italic; }
+.etapa .estado { grid-area: estado; font-family: system-ui, sans-serif; font-size: 0.75rem;
+  color: var(--tinta-3); margin-top: 0.15rem; }
+.entrar { grid-area: entrar; align-self: center; font-family: system-ui, sans-serif;
+  font-size: 0.85rem; text-decoration: none; white-space: nowrap; }
+.entrar:hover { text-decoration: underline; }
+
+/* -------------------------------------------------------------- ruptura */
+.ruptura {
+  margin: 1.4rem 0 1.5rem;
+  padding: 1.2rem 1.3rem;
+  background: var(--casa-10);
+  border-top: 2px solid var(--casa);
+  border-bottom: 2px solid var(--casa);
+}
+.ruptura .golpe { margin: 0 0 0.4rem; font-size: 1.25rem; font-weight: 600; color: var(--casa); }
+.ruptura .explica { margin: 0 0 0.7rem; color: var(--tinta-2); max-width: 34rem; }
+.ruptura .viraje { margin: 0; font-family: system-ui, sans-serif; font-size: 0.72rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--casa); }
+
+/* ------------------------------------------------------------ formulario */
+.cabecera-etapa { position: relative; border: 0; padding: 1.6rem 0 1.2rem; }
+.cabecera-etapa h2 { margin: 0.35rem 0 0.5rem; }
+.cabecera-etapa .cuento { display: block; max-width: 34rem; }
+
+.campo { margin: 1.3rem 0; }
+.campo label { display: block; font-weight: 600; margin-bottom: 0.15rem; }
+.ayuda { margin: 0 0 0.45rem; font-size: 0.88rem; color: var(--tinta-3); }
+
+.pie-campo { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; margin-top: 0.3rem;
+  font-family: system-ui, sans-serif; font-size: 0.75rem; }
+.sensor { color: var(--tinta-3); display: inline-flex; align-items: center; gap: 0.4rem; }
+.sensor-nota { color: var(--casa); }
+
+/* El aliento del burro: un límite legible, no una penalización. */
+.aliento { display: inline-block; width: 3rem; height: 3px; background: var(--linea); }
+.aliento span { display: block; height: 100%; background: var(--casa); transform-origin: left;
+  transition: transform var(--normal) var(--curva); }
+
+.aviso-campo { color: var(--casa); }
+
+.lista-textos { display: grid; gap: 0.4rem; }
+.fila-lista { display: flex; gap: 0.4rem; }
+.quitar { min-height: 0; padding: 0 0.6rem; border-color: var(--linea); color: var(--tinta-3); }
+.agregar { justify-self: start; min-height: 0; padding: 0.3rem 0.7rem; font-size: 0.85rem; }
+
+.acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; margin: 1.8rem 0 0; }
+.intentos { font-family: system-ui, sans-serif; font-size: 0.8rem; color: var(--tinta-3); }
+
+/* ------------------------------------------------------------- hallazgos */
+.panel-veredicto:focus { outline: none; }
+.hallazgos { margin-top: 1.8rem; }
+.veredicto { font-size: 1.05rem; margin: 0 0 1rem; }
+.veredicto.bien { color: var(--camino); }
+.veredicto.mal { color: var(--tinta); }
+.quien { font-family: system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--tinta-3); margin-right: 0.5rem; }
+
+/* Anotaciones al margen, no una lista de errores. */
+.anotaciones { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+.anotaciones li {
+  padding: 0.75rem 0.9rem 0.75rem 1rem;
+  background: var(--hoja);
+  border: 1px solid var(--linea);
+  border-left: 3px solid var(--lapiz);
+  animation: entra var(--normal) var(--curva) backwards;
+  animation-delay: calc(var(--i) * 50ms);
+}
+.anotaciones li.aviso { border-left-color: var(--casa); }
+.anotaciones .dice { margin: 0 0 0.2rem; color: var(--tinta-2); font-style: italic; }
+.anotaciones .mensaje { margin: 0; }
+.anotaciones .fuente {
+  margin: 0.35rem 0 0;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.75rem;
+  color: var(--tinta-3);
+  /* La cita entra después del mensaje: primero se lee qué falta, luego de dónde sale. */
+  animation: entra var(--normal) var(--curva) backwards;
+  animation-delay: calc(var(--i) * 50ms + 150ms);
+}
+.pie-hallazgos { margin-top: 1rem; font-size: 0.85rem; color: var(--tinta-3); }
+
+@keyframes entra {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
 }
 
-@media (max-width: 30rem) {
+/* ----------------------------------------------------------------- sello */
+.sello {
+  position: absolute; top: 1.2rem; right: 0;
+  display: grid; justify-items: center; gap: 0.1rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--sello);
+  color: var(--sello);
+  transform: rotate(-4deg);
+  animation: sella 260ms cubic-bezier(0.2, 1.3, 0.4, 1) backwards;
+}
+.sello-texto { font-family: system-ui, sans-serif; font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; }
+.sello-fecha { font-family: ui-monospace, Menlo, monospace; font-size: 0.68rem; }
+
+@keyframes sella {
+  from { opacity: 0; transform: rotate(-4deg) scale(1.5); }
+  to { opacity: 1; transform: rotate(-4deg) scale(1); }
+}
+
+/* ------------------------------------------------------------ expediente */
+.expediente { margin-top: 3rem; padding-top: 1.4rem; border-top: 1px solid var(--linea); }
+.expediente p { margin: 0 0 0.4rem; }
+.guardado { font-family: system-ui, sans-serif; font-size: 0.8rem; color: var(--camino); }
+.como-boton { display: inline-grid; place-items: center; min-height: 44px; padding: 0.5rem 1rem;
+  border: 1px solid var(--plan); color: var(--plan); border-radius: 2px; cursor: pointer;
+  font-size: max(16px, 1rem); }
+.como-boton:hover { background: var(--plan-10); }
+.confirmar { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+  font-size: 0.9rem; }
+
+.banner { background: var(--casa-10); border: 1px solid var(--casa); padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center;
+  justify-content: space-between; }
+.banner p { margin: 0; max-width: 34rem; }
+
+footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--linea);
+  color: var(--tinta-3); font-size: 0.85rem; }
+
+@media (max-width: 34rem) {
+  main { padding: 1.8rem 1rem 3rem; }
   h1 { font-size: 2rem; }
-  .etapa { grid-template-columns: 1fr; grid-template-areas: 'numero' 'enfoque' 'titulo' 'cuento' 'estado'; }
+  .etapa {
+    grid-template-columns: 2.8rem 1fr;
+    grid-template-areas: 'med enfoque' 'med titulo' 'cuento cuento' 'estado estado' 'entrar entrar';
+    align-items: start;
+  }
+  .etapa > * { min-width: 0; }
+  .entrar { justify-self: start; margin-top: 0.5rem; }
+  .sello { position: static; justify-self: start; margin-top: 0.8rem; width: fit-content; }
+  .acciones button, .acciones .como-boton { width: 100%; }
 }
+
+.volver { display: inline-block; margin-bottom: 0.8rem; font-family: system-ui, sans-serif;
+  font-size: 0.85rem; text-decoration: none; color: var(--tinta-3); }
+.volver:hover { color: var(--plan); text-decoration: underline; }
+
+/* Los hallazgos salen de tres en tres: doce de golpe no es informar, es regañar. */
+.mas { margin-top: 0.8rem; font-size: 0.9rem; min-height: 40px; }
+.restantes { color: var(--tinta-3); }
+
+
+/* ======================================================= el acta, por pasos
+   Dos naturalezas de pantalla: escena (una pregunta, prosa, hechos al lado) y
+   ficha (varios campos estructurados juntos). La asimetría es el punto: ocho
+   pantallas iguales se cuentan como ocho deberes; ocho distintas, no. */
+
+.oculto-visual { position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; }
+
+.barra-etapa {
+  position: relative;
+  display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+  padding-bottom: 0.8rem; border-bottom: 1px solid var(--linea);
+}
+.volver { font-family: system-ui, sans-serif; font-size: 0.85rem; text-decoration: none;
+  color: var(--tinta-3); }
+.volver:hover { color: var(--plan); text-decoration: underline; }
+
+/* Barra continua: dice dónde vas sin que se pueda contar lo que falta. */
+.progreso { margin: 1.1rem 0 0.2rem; }
+.riel { display: flex; gap: 2px; }
+.tramo {
+  flex: 1; min-height: 0; height: 6px; padding: 0; border: 0; border-radius: 0;
+  background: var(--linea);
+  transition: background var(--rapido) var(--curva);
+}
+.tramo:hover { background: var(--plan-10); }
+.tramo.hecho { background: var(--plan); }
+.tramo.aqui { background: var(--casa); }
+.tramo:focus-visible { outline: 2px solid var(--plan); outline-offset: 2px; }
+.donde { margin: 0.45rem 0 0; font-family: system-ui, sans-serif; font-size: 0.75rem;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--tinta-3); }
+
+.tablero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 2rem; align-items: start; margin-top: 1.4rem; }
+.trabajo { min-width: 0; animation: pasa var(--normal) var(--curva); }
+
+@keyframes pasa { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: none; } }
+
+.titulo-paso { margin: 0 0 0.9rem; font-size: 1.55rem; line-height: 1.18; max-width: 20ch; }
+.recomendacion { margin: -0.4rem 0 1.1rem; color: var(--tinta-2); }
+
+/* La caja no es una caja: es un renglón donde se redacta. */
+.campo.grande input[type='text'], .campo.grande textarea {
+  border: 0; border-bottom: 2px solid var(--linea); border-radius: 0;
+  padding: 0.5rem 0 0.4rem; background: none;
+  font-size: max(16px, 1.05rem); max-width: 62ch;
+}
+.campo.grande input[type='text']:focus, .campo.grande textarea:focus {
+  border-bottom-color: var(--plan); outline: none;
+}
+.campo.grande textarea { min-height: 5.2rem; }
+::placeholder { color: var(--tinta-3); opacity: 0.65; font-style: italic; }
+
+/* El nombre formal baja: arriba en versalitas con una pregunta debajo es, letra
+   por letra, la gramática de un reactivo de examen. */
+.apunte { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+  margin: 0.8rem 0 0; font-size: 0.85rem; color: var(--tinta-3); }
+.chip { font-family: system-ui, sans-serif; font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.15rem 0.5rem; border: 1px solid var(--linea);
+  color: var(--tinta-2); }
+
+.ficha { display: grid; gap: 1rem; }
+.ficha .campo { margin: 0; }
+.ficha label { font-size: 0.95rem; }
+.ficha textarea { min-height: 3.2rem; }
+
+/* --------------------------------------------------------- riel derecho */
+.riel-derecho { position: sticky; top: 1.5rem; display: grid; gap: 1rem; min-width: 0; }
+
+.hechos { padding: 0.9rem 1rem; background: var(--casa-10); border-left: 3px solid var(--casa); }
+.hechos h3 { margin: 0 0 0.5rem; font-family: system-ui, sans-serif; font-size: 0.7rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--casa); }
+.hechos ul { margin: 0; padding-left: 1.05rem; display: grid; gap: 0.35rem; }
+.hechos li { font-style: italic; font-size: 0.95rem; }
+.ojo { margin: 0.6rem 0 0; font-size: 0.78rem; color: var(--tinta-3); }
+
+.acta-hasta-ahora { padding: 0.9rem 1rem; background: var(--hoja); border: 1px solid var(--linea); }
+.acta-hasta-ahora h3 { margin: 0; font-size: 0.95rem; }
+.cuantas { margin: 0.1rem 0 0.7rem; font-family: system-ui, sans-serif; font-size: 0.75rem;
+  color: var(--tinta-3); }
+.acta-hasta-ahora ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.1rem; }
+.acta-hasta-ahora button {
+  width: 100%; min-height: 0; padding: 0.25rem 0; border: 0; background: none;
+  display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 0.6rem;
+  text-align: left; font-size: 0.8rem; border-bottom: 1px dotted var(--linea);
+}
+.acta-hasta-ahora button:hover { background: var(--plan-10); }
+.acta-hasta-ahora .nombre { font-family: system-ui, sans-serif; font-size: 0.7rem;
+  letter-spacing: 0.04em; text-transform: uppercase; color: var(--tinta-3); }
+.acta-hasta-ahora .resumen { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: var(--tinta); }
+.acta-hasta-ahora .pendiente .resumen { color: var(--tinta-3); }
+.acta-hasta-ahora .escrito .nombre { color: var(--camino); }
+
+.pasos-acciones { display: flex; gap: 0.7rem; align-items: center; margin-top: 1.6rem;
+  padding-top: 1.1rem; border-top: 1px solid var(--linea); }
+.pasos-acciones .primario { margin-left: auto; }
+.intentos { margin: 0.7rem 0 0; font-family: system-ui, sans-serif; font-size: 0.8rem;
+  color: var(--tinta-3); }
+
+/* ------------------------------------------------------------- revisión */
+.intro-revision { margin: 0 0 1.1rem; color: var(--tinta-2); }
+.revision dl { margin: 0; display: grid; gap: 0.1rem; }
+.revision .renglon { display: grid; grid-template-columns: 11rem 1fr; gap: 0 1.2rem;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--linea); }
+.revision dt { margin: 0; }
+.revision dt button { min-height: 0; padding: 0; border: 0; background: none;
+  font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--tinta-3);
+  text-align: left; display: flex; flex-direction: column; }
+.revision dt button:hover { background: none; color: var(--plan); }
+.revision .editar { font-size: 0.7rem; opacity: 0; text-decoration: underline; }
+.revision .renglon:hover .editar { opacity: 1; }
+.revision dd { margin: 0; }
+.revision dd ul { margin: 0; padding-left: 1.1rem; }
+.revision .sin-llenar { color: var(--casa); font-style: italic; }
+.revision .vacio dt button { color: var(--casa); }
+
+.arreglar { margin-top: 0.5rem; min-height: 36px; padding: 0.25rem 0.7rem; font-size: 0.85rem; }
+
+@media (max-width: 52rem) {
+  .tablero { grid-template-columns: 1fr; gap: 1.4rem; }
+  /* En teléfono los hechos van ARRIBA del campo: son contexto, se leen antes. */
+  .riel-derecho { position: static; }
+  .tablero { display: flex; flex-direction: column; }
+  .riel-derecho { order: -1; }
+  .acta-hasta-ahora { order: 2; }
+}
+
+@media (max-width: 34rem) {
+  main { padding: 1.5rem 1rem 3rem; }
+  .titulo-paso { font-size: 1.35rem; }
+  .pasos-acciones { flex-direction: column-reverse; align-items: stretch; }
+  .pasos-acciones .primario { margin-left: 0; }
+  .revision .renglon { grid-template-columns: 1fr; gap: 0.2rem; }
+  .revision .editar { opacity: 1; }
+  .acta-hasta-ahora button { grid-template-columns: 1fr; gap: 0; }
+}
+
+.se-rompio { margin: 2rem 0; padding: 1.2rem 1.3rem; background: var(--lapiz-10);
+  border-left: 3px solid var(--lapiz); }
+.se-rompio h2 { margin: 0 0 0.5rem; font-size: 1.2rem; color: var(--lapiz); }
+.se-rompio p { margin: 0 0 0.6rem; max-width: 34rem; }
+.se-rompio .detalle code { font-family: ui-monospace, Menlo, monospace; font-size: 0.78rem;
+  color: var(--tinta-2); }

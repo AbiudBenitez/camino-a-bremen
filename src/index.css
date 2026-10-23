@@ -1,38 +1,91 @@
 :root {
-  --tinta: #1a1a1a;
-  --tenue: #5a5a5a;
-  --linea: #d8d8d8;
-  --fondo: #fbfbfa;
-  --papel: #ffffff;
-  --pmi: #1c4e80;
-  --scrum: #1f6b4a;
-  --giro: #8c1f24;
-  --aviso: #b8860b;
+  /* Papel y tinta: el mundo del expediente. */
+  --papel: #faf7f2;
+  --hoja: #ffffff;
+  --tinta: #1b1a17;
+  --tinta-2: #4a4742;
+  --tinta-3: #6e6861;
+  --linea: #ddd8d0;
+
+  /* El plan (PMI) y el camino (Scrum). */
+  --plan: #16457a;
+  --plan-10: #e7edf6;
+  --camino: #1c6b4a;
+  --camino-10: #e2f0e8;
+
+  /* La casa de los ladrones: lo imprevisto. Nunca es error. */
+  --casa: #c8791a;
+  --casa-10: #fbeedc;
+
+  /* El lápiz rojo del revisor. Reservado a incumplimientos del motor. */
+  --lapiz: #b3261e;
+  --lapiz-10: #f9eceb;
+  --sello: #a8841f;
+
+  --rapido: 140ms;
+  --normal: 200ms;
+  --salida: 120ms;
+  --curva: cubic-bezier(0.2, 0, 0, 1);
 
   font-family: 'Iowan Old Style', Georgia, 'Times New Roman', serif;
   line-height: 1.6;
   color: var(--tinta);
-  background: var(--fondo);
+  background: var(--papel);
   -webkit-font-smoothing: antialiased;
 }
 
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  background: var(--fondo);
+@media (prefers-reduced-motion: reduce) {
+  :root { --rapido: 0.01ms; --normal: 0.01ms; --salida: 0.01ms; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--papel); }
+
+h1, h2, h3 { font-weight: 600; text-wrap: balance; }
+a { color: var(--plan); }
+
+/* 16px mínimo en todo campo: por debajo, iOS hace zoom al enfocarlo y el
+   layout salta en cada campo. */
+input, textarea, select, button {
+  font: inherit;
+  font-size: max(16px, 1rem);
+}
+
+input[type='text'], input[type='date'], textarea {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--linea);
+  border-radius: 2px;
+  background: var(--hoja);
+  color: var(--tinta);
+  transition: border-color var(--rapido) var(--curva);
+}
+
+input[type='text']:focus, input[type='date']:focus, textarea:focus {
+  border-color: var(--plan);
+  outline: 2px solid var(--plan-10);
+  outline-offset: 0;
+}
+
+textarea { resize: vertical; min-height: 4.4rem; }
 
 button {
-  font: inherit;
-  font-size: 0.95rem;
+  min-height: 44px;
   padding: 0.5rem 1rem;
-  border: 1px solid var(--pmi);
-  background: var(--papel);
-  color: var(--pmi);
+  border: 1px solid var(--plan);
+  background: var(--hoja);
+  color: var(--plan);
   border-radius: 2px;
   cursor: pointer;
+  transition: background var(--rapido) var(--curva);
 }
 
-button:hover { background: #eef3f9; }
-button:focus-visible { outline: 2px solid var(--pmi); outline-offset: 2px; }
+button:hover { background: var(--plan-10); }
+button:focus-visible { outline: 2px solid var(--plan); outline-offset: 2px; }
+button:disabled { opacity: 0.6; cursor: default; }
+
+button.primario { background: var(--plan); color: #fff; border-color: var(--plan); }
+button.primario:hover { background: #10365f; }
+button.peligro { border-color: var(--lapiz); color: var(--lapiz); }
+button.peligro:hover { background: var(--lapiz-10); }
