@@ -15,64 +15,6 @@ h1 a { color: inherit; text-decoration: none; }
 h2 { font-size: 1.35rem; margin: 2.2rem 0 0.8rem; }
 .bajada { margin: 0; color: var(--tinta-2); max-width: 34rem; }
 
-/* ------------------------------------------------------------- recorrido */
-.etapas { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
-
-.etapa {
-  position: relative;
-  display: grid;
-  grid-template-columns: 3.4rem 1fr auto;
-  grid-template-areas: 'med enfoque entrar' 'med titulo entrar' 'med cuento entrar' 'med estado entrar';
-  align-items: center;
-  gap: 0.12rem 1rem;
-  padding: 0.95rem 1.1rem;
-  background: var(--hoja);
-  border: 1px solid var(--linea);
-  border-left: 3px solid var(--plan);
-}
-
-.etapa.camino { border-left-color: var(--camino); border-left-style: dashed; }
-.etapa.bloqueada { opacity: 0.55; }
-.etapa.sellada { border-left-color: var(--sello); }
-
-.medallon {
-  grid-area: med;
-  justify-self: start;
-  display: grid;
-  place-items: center;
-  width: 2.6rem; height: 2.6rem;
-  font-size: 1.5rem;
-  font-variant-numeric: tabular-nums;
-  color: var(--plan);
-  background: var(--plan-10);
-  border-radius: 50%;
-}
-.etapa.camino .medallon { color: var(--camino); background: var(--camino-10); }
-.etapa.sellada .medallon { color: var(--sello); background: #f6efdb; }
-
-.etapa .enfoque { grid-area: enfoque; font-family: system-ui, sans-serif; font-size: 0.7rem;
-  letter-spacing: 0.06em; text-transform: uppercase; color: var(--tinta-3); }
-.etapa strong { grid-area: titulo; font-size: 1.05rem; }
-.cuento { grid-area: cuento; color: var(--tinta-2); font-style: italic; }
-.etapa .estado { grid-area: estado; font-family: system-ui, sans-serif; font-size: 0.75rem;
-  color: var(--tinta-3); margin-top: 0.15rem; }
-.entrar { grid-area: entrar; align-self: center; font-family: system-ui, sans-serif;
-  font-size: 0.85rem; text-decoration: none; white-space: nowrap; }
-.entrar:hover { text-decoration: underline; }
-
-/* -------------------------------------------------------------- ruptura */
-.ruptura {
-  margin: 1.4rem 0 1.5rem;
-  padding: 1.2rem 1.3rem;
-  background: var(--casa-10);
-  border-top: 2px solid var(--casa);
-  border-bottom: 2px solid var(--casa);
-}
-.ruptura .golpe { margin: 0 0 0.4rem; font-size: 1.25rem; font-weight: 600; color: var(--casa); }
-.ruptura .explica { margin: 0 0 0.7rem; color: var(--tinta-2); max-width: 34rem; }
-.ruptura .viraje { margin: 0; font-family: system-ui, sans-serif; font-size: 0.72rem;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--casa); }
-
 /* ------------------------------------------------------------ formulario */
 .cabecera-etapa { position: relative; border: 0; padding: 1.6rem 0 1.2rem; }
 .cabecera-etapa h2 { margin: 0.35rem 0 0.5rem; }
@@ -181,13 +123,6 @@ footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line
 @media (max-width: 34rem) {
   main { padding: 1.8rem 1rem 3rem; }
   h1 { font-size: 2rem; }
-  .etapa {
-    grid-template-columns: 2.8rem 1fr;
-    grid-template-areas: 'med enfoque' 'med titulo' 'cuento cuento' 'estado estado' 'entrar entrar';
-    align-items: start;
-  }
-  .etapa > * { min-width: 0; }
-  .entrar { justify-self: start; margin-top: 0.5rem; }
   .sello { position: static; justify-self: start; margin-top: 0.8rem; width: fit-content; }
   .acciones button, .acciones .como-boton { width: 100%; }
 }
