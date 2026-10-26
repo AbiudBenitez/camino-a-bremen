@@ -1,0 +1,63 @@
+/* La interacción común. Los colores salen de los tokens: la paleta de día y de
+   noche los cambia sin tocar este archivo. */
+
+.pieza {
+  min-height: 44px;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  background: var(--hoja);
+  color: var(--tinta);
+  text-align: left;
+  line-height: 1.35;
+  cursor: grab;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  box-shadow: 0 1px 0 var(--linea);
+  transition: transform var(--rapido) var(--curva), box-shadow var(--rapido) var(--curva),
+    opacity var(--rapido) var(--curva);
+}
+.pieza:hover { background: var(--hoja); box-shadow: 0 3px 8px rgb(27 26 23 / 0.1); }
+.pieza.elegida {
+  border-color: var(--plan);
+  box-shadow: 0 0 0 3px var(--plan-10), 0 4px 10px rgb(27 26 23 / 0.12);
+  transform: translateY(-2px);
+}
+.pieza.levantada { opacity: 0.35; }
+
+.ranura {
+  position: relative;
+  min-height: 3.2rem;
+  padding: 0.6rem;
+  border: 1px dashed var(--linea);
+  border-radius: 8px;
+  display: flex; flex-wrap: wrap; gap: 0.45rem; align-content: flex-start;
+  transition: background var(--rapido) var(--curva), border-color var(--rapido) var(--curva);
+}
+.ranura.disponible { border-color: var(--plan); cursor: pointer; }
+.ranura.sobre { background: var(--plan-10); border-style: solid; }
+.ranura-etiqueta { flex-basis: 100%; margin: 0 0 0.1rem; font-family: var(--ui, system-ui);
+  font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--tinta-3); }
+
+.poner-aqui { min-height: 36px; padding: 0.2rem 0.7rem; font-size: 0.85rem;
+  border-style: dashed; background: none; }
+
+/* El fantasma sigue al puntero por encima de todo y no estorba al soltar. */
+.fantasma {
+  position: fixed; left: 0; top: 0; z-index: 50;
+  pointer-events: none;
+}
+.fantasma span {
+  display: block;
+  translate: -50% -60%;
+  max-width: 16rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--plan);
+  border-radius: 6px;
+  background: var(--hoja);
+  rotate: -2deg;
+  box-shadow: 0 10px 24px rgb(27 26 23 / 0.2);
+}
+.mesa.arrastrando { cursor: grabbing; }
