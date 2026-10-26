@@ -21,7 +21,7 @@ export const NUEVE_ELEMENTOS = [
   { campo: 'riesgos', nombre: 'Riesgos, supuestos y restricciones', porque: 'Lo que puede descarrilar el proyecto se declara desde el acta, no después.' },
 ]
 
-const PMBOK_ACTA = fuente('PMBOK', 'Desarrollar el Acta de Constitución del Proyecto')
+const PMBOK_ACTA = fuente('PMBOK', '4.1 Desarrollar el Acta de Constitución del Proyecto')
 const PLANTILLA = fuente('Material del curso', 'Plantilla de carta constitutiva, guía de elaboración')
 
 const vacio = (v) => !v || String(v).trim().length === 0

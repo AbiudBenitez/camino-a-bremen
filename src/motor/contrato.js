@@ -6,7 +6,7 @@
  * sabe pintar hallazgos, no sabe de actas ni de EDT.
  *
  * @typedef {Object} Fuente
- * @property {'PMBOK'|'Guía de Scrum'|'Material del curso'} obra
+ * @property {'PMBOK'|'Guía de Scrum'|'Material del curso'|'Práctica complementaria'} obra
  * @property {string} apartado  Dónde buscarlo dentro de la obra.
  *
  * @typedef {Object} Hallazgo
@@ -26,9 +26,25 @@
 export const ERROR = 'error'
 export const AVISO = 'aviso'
 
+/**
+ * Las obras que se pueden citar, con el nombre que ve el estudiante. Lo que no
+ * dice el PMBOK ni la Guía de Scrum no se les atribuye: las historias de usuario
+ * o la regla del 100 % van como práctica complementaria, con su autor en el
+ * apartado. Una ingeniera en el salón nota una cita prestada.
+ */
+export const OBRAS = {
+  'PMBOK': 'PMBOK 6.ª ed.',
+  'Guía de Scrum': 'Guía de Scrum',
+  'Material del curso': 'Material del curso',
+  'Práctica complementaria': 'Práctica complementaria',
+}
+
+const conocida = (obra) => Object.hasOwn(OBRAS, obra)
+
 /** Construye una fuente. Existe para que nadie escriba el objeto a mano y se le olvide el apartado. */
 export function fuente(obra, apartado) {
   if (!obra || !apartado) throw new Error('Una fuente necesita obra y apartado')
+  if (!conocida(obra)) throw new Error(`Obra desconocida: ${obra}`)
   return { obra, apartado }
 }
 
@@ -52,10 +68,11 @@ export function validarRegla(r) {
   }
   if (typeof r.evaluar !== 'function') throw new Error(`La regla ${r.id} no trae función evaluar`)
   if (!r.fuente.obra || !r.fuente.apartado) throw new Error(`La regla ${r.id} tiene fuente incompleta`)
+  if (!conocida(r.fuente.obra)) throw new Error(`La regla ${r.id} cita una obra desconocida: ${r.fuente.obra}`)
   return r
 }
 
 /** Texto de la cita, tal como se muestra al estudiante. */
 export function cita(f) {
-  return `${f.obra} · ${f.apartado}`
+  return `${OBRAS[f.obra] ?? f.obra} · ${f.apartado}`
 }
