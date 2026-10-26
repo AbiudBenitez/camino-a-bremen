@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useTaller } from './useTaller.js'
 import { abierto, actual, deNoche, destino } from './destinos/catalogo.js'
 import { useMusica } from './sonido/useMusica.js'
-import FormularioActa from './etapas/acta/FormularioActa.jsx'
+import Molino from './destinos/molino/Molino.jsx'
 import Escena from './destinos/Escena.jsx'
 import Mapa from './mapa/Mapa.jsx'
 import Banda from './mapa/Banda.jsx'
@@ -50,7 +50,7 @@ export default function App() {
       )}
 
       <Red>
-        {aqui === 'molino' && <FormularioActa estado={estado} despachar={despachar} />}
+        {aqui === 'molino' && <Molino estado={estado} despachar={despachar} />}
         {aqui && aqui !== 'molino' && <Escena id={aqui} despachar={despachar} />}
         {!aqui && <PantallaMapa estado={estado} taller={taller} musica={musica} />}
       </Red>

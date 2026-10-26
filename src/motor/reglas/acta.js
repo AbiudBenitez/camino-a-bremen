@@ -75,7 +75,7 @@ const visionUnaOracion = {
 }
 
 /** Regla 3: al menos dos medidas de éxito, y que sean verificables. */
-const medidasDeExito = {
+export const medidasDeExito = {
   id: 'acta.medidas-de-exito',
   descripcion: 'Hay al menos dos medidas de éxito y cada una es verificable.',
   fuente: PMBOK_ACTA,

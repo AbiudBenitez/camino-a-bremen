@@ -4,12 +4,18 @@
  * diseño 8).
  */
 import { reglasActa } from './reglas/acta.js'
+import { reglasMolino } from './reglas/molino.js'
 
 export const CATALOGO = {
   acta: {
     nombre: 'Acta de constitución del proyecto',
     etapa: 1,
     reglas: reglasActa,
+  },
+  molino: {
+    nombre: 'El hatillo del burro: acta de constitución',
+    etapa: 1,
+    reglas: reglasMolino,
   },
   // etapa 2 · EDT        -> historia H-04
   // etapa 3 · ruta crítica -> historia H-06
