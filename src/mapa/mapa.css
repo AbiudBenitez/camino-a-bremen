@@ -1,0 +1,92 @@
+/* ================================================================ el mapa */
+main.en-mapa { max-width: 64rem; }
+
+.cabecera-mapa { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  flex-wrap: wrap; border: 0; padding: 0 0 1rem; }
+.cabecera-mapa h1 { margin: 0; font-size: 2.2rem; }
+.interruptor { font-family: var(--ui); font-size: 0.9rem; border-radius: 999px; padding: 0.35rem 1rem; }
+.interruptor[aria-pressed='true'] { background: var(--plan-10); }
+
+.pregunta-musica { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.2rem;
+  margin: 0 0 1.2rem; padding: 0.9rem 1.1rem; background: var(--hoja); border: 1px solid var(--linea);
+  border-radius: 10px; }
+.pregunta-musica p { margin: 0; max-width: 36rem; }
+.pregunta-musica .acciones { margin: 0; display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+.mesa-mapa { display: grid; grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: 2rem;
+  align-items: start; }
+
+.mapa { display: block; width: 100%; height: auto; max-height: 86dvh; border-radius: 14px;
+  box-shadow: 0 1px 2px rgb(27 26 23 / 0.06), 0 12px 32px rgb(27 26 23 / 0.1); }
+
+.camino-borde { fill: none; stroke: var(--tierra-2); stroke-width: 15; stroke-linecap: round; opacity: 0.35; }
+.camino-tramo { fill: none; stroke: var(--tierra); stroke-width: 10; stroke-linecap: round;
+  stroke-dasharray: 2 14; opacity: 0.8; }
+.camino-tramo.hecho { stroke-dasharray: none; opacity: 1; transition: opacity 600ms var(--curva); }
+
+.destino .parcela { fill: var(--pasto); stroke: var(--tierra-2); stroke-width: 1.5; opacity: 0.85; }
+.destino.cerrado { opacity: 0.5; }
+.destino .rotulo { font-family: var(--ui); font-size: 15px; font-weight: 600; fill: var(--tinta);
+  paint-order: stroke; stroke: var(--pasto); stroke-width: 4px; stroke-linejoin: round; }
+.destino a { cursor: pointer; }
+.destino a:focus { outline: none; }
+.destino a:focus-visible .parcela { stroke: var(--plan); stroke-width: 4; }
+.destino a:hover .parcela { fill: var(--pasto-2); }
+.destino.hecho .parcela { stroke: var(--camino); stroke-width: 2.5; }
+
+/* El siguiente destino respira. Movimiento con propósito: dice dónde sigue. */
+.destino .halo { fill: none; stroke: var(--luz); stroke-width: 4; transform-box: fill-box; transform-origin: center;
+  animation: respira 2.4s var(--curva) infinite; }
+@keyframes respira { 0%, 100% { opacity: 0.35; transform: scale(0.94); } 50% { opacity: 1; transform: scale(1.04); } }
+
+.aspas { transform-box: fill-box; transform-origin: center; }
+.aspas.girando { animation: gira 9s linear infinite; }
+@keyframes gira { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .destino .halo, .aspas.girando { animation: none; }
+  .destino .halo { opacity: 1; }
+}
+
+/* ---------------------------------------------------------- costado */
+.costado-mapa { display: grid; gap: 1.4rem; }
+.siguiente { padding: 1.1rem 1.2rem; background: var(--hoja); border: 1px solid var(--linea);
+  border-radius: 12px; }
+.siguiente .eyebrow { margin: 0; font-family: var(--ui); font-size: 0.72rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--tinta-3); }
+.siguiente h2 { margin: 0.2rem 0 0.8rem; font-size: 1.6rem; }
+
+.como-boton.primario { background: var(--plan); color: var(--sobre-plan); border-color: var(--plan);
+  text-decoration: none; }
+.como-boton.primario:hover { background: var(--plan-hondo); }
+
+.banda { margin: 0; }
+.banda-fila { display: flex; align-items: flex-end; gap: 0.2rem; min-height: 4.2rem; }
+.animal { width: 4.4rem; height: auto; animation: entra var(--normal) var(--curva); }
+.banda figcaption { font-size: 0.95rem; color: var(--tinta-2); font-style: italic; }
+
+.costado-mapa .expediente { margin: 0; padding-top: 1rem; }
+.expediente h2 { margin: 0 0 0.3rem; font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--tinta-2); }
+.expediente .ayuda { font-size: 0.85rem; }
+.expediente .acciones { margin-top: 0.6rem; }
+.no-oficial { margin: 0.9rem 0 0; font-size: 0.78rem; color: var(--tinta-3); }
+
+/* ------------------------------------------------------------- escena */
+.escena { max-width: 38rem; margin: 0 auto; }
+.escena-dibujo { display: block; width: 11rem; height: auto; margin: 1rem auto 0.5rem; }
+.escena h1 { font-size: 2rem; margin: 0.5rem 0 1rem; }
+.escena p { font-size: 1.12rem; line-height: 1.7; margin: 0 0 1rem; }
+.escena .primario { margin-top: 0.8rem; }
+.en-construccion { font-family: var(--ui); font-size: 0.9rem !important; color: var(--tinta-3);
+  padding: 0.6rem 0.8rem; border: 1px dashed var(--linea); border-radius: 8px; }
+
+@media (max-width: 52rem) {
+  .mesa-mapa { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+  .mapa { max-height: none; }
+  /* En teléfono lo que importa primero es a dónde sigues; el expediente, al final. */
+  .costado-mapa { display: contents; }
+  .siguiente { order: -2; }
+  .banda { order: -1; }
+  .costado-mapa .expediente { order: 1; }
+}

@@ -79,6 +79,8 @@ export default function FormularioActa({ estado, despachar }) {
       setResultado(r)
       setLeyendo(false)
       despachar({ tipo: 'entregar', artefacto: 'acta', resumen: r.resumen })
+      // Mientras llega el minijuego del molino, el acta aprobada abre el camino.
+      if (r.resumen.pasa) despachar({ tipo: 'llegar', destino: 'molino' })
       panel.current?.focus({ preventScroll: true })
     }, PESO)
   }, [datos, despachar])
@@ -96,7 +98,7 @@ export default function FormularioActa({ estado, despachar }) {
   return (
     <section className="etapa-activa">
       <div className="barra-etapa">
-        <a className="volver" href="#inicio">← El recorrido</a>
+        <a className="volver" href="#mapa">← Al mapa</a>
         <p className="eyebrow">Etapa 1 · El acta de constitución</p>
         {sellada && <Sello fecha={registro?.entregadoEn
           ? new Date(registro.entregadoEn).toLocaleDateString('es-MX') : null} />}

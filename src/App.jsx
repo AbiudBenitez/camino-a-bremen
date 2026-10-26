@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
-import { ETAPAS, EL_GIRO } from './etapas/catalogo-etapas.js'
-import { artefactos } from './motor/motor.js'
-import { estadoEtapa, puedeEntrar } from './estado/taller.js'
 import { useTaller } from './useTaller.js'
+import { abierto, actual, deNoche, destino } from './destinos/catalogo.js'
+import { useMusica } from './sonido/useMusica.js'
 import FormularioActa from './etapas/acta/FormularioActa.jsx'
+import Escena from './destinos/Escena.jsx'
+import Mapa from './mapa/Mapa.jsx'
+import Banda from './mapa/Banda.jsx'
 import Red from './componentes/Red.jsx'
 import './App.css'
-
-const CON_REGLAS = new Set(artefactos().map((a) => a.id))
+import './mapa/mapa.css'
 
 // Navegación por hash: en GitHub Pages una ruta real da 404 al recargar, y el
-// botón de atrás del teléfono tiene que volver a la lista en vez de salirse.
+// botón de atrás del teléfono tiene que volver al mapa en vez de salirse.
 function useHash() {
   const [hash, setHash] = useState(() => window.location.hash)
   useEffect(() => {
@@ -21,21 +22,26 @@ function useHash() {
   return hash
 }
 
-const ESTADOS = {
-  sellada: 'Sellada',
-  entregada: 'Entregada, con pendientes',
-  abierta: 'Te toca',
-  bloqueada: 'Aún no',
+/** `#etapa-1` es el enlace viejo del acta: sigue llevando al molino. */
+function destinoDelHash(hash) {
+  if (hash === '#etapa-1') return 'molino'
+  const m = /^#destino-([a-z]+)$/.exec(hash)
+  return m && destino(m[1]) ? m[1] : null
 }
 
 export default function App() {
   const taller = useTaller()
-  const { estado, despachar, aviso, descartarAviso, guardadoA } = taller
-  const hash = useHash()
-  const enEtapa1 = hash === '#etapa-1'
+  const { estado, despachar, aviso, descartarAviso } = taller
+  const musica = useMusica(estado, despachar)
+  const pedido = destinoDelHash(useHash())
+  // Un destino cerrado no se abre escribiendo su dirección: el giro no se adelanta.
+  const aqui = pedido && abierto(estado, pedido) ? pedido : null
+  const noche = deNoche(estado)
+
+  useEffect(() => { document.documentElement.dataset.hora = noche ? 'noche' : 'dia' }, [noche])
 
   return (
-    <main>
+    <main className={aqui ? 'en-destino' : 'en-mapa'}>
       {aviso && (
         <div className="banner" role="alert">
           <p>{aviso}</p>
@@ -43,103 +49,68 @@ export default function App() {
         </div>
       )}
 
-      {/* Dentro de una etapa no hay portada. El campo tiene que caber en la
-          primera pantalla: once bloques de preámbulo repetidos en cada paso
-          eran la causa de que ocho pasos se sintieran interminables. */}
-      {!enEtapa1 && (
-        <header>
-          <p className="curso">Administración de Proyectos de Software · Equipo 2 · India</p>
-          <h1><a href="#inicio">Camino a Bremen</a></h1>
-          <p className="bajada">
-            Gestiona el proyecto de los músicos de Bremen. Empiezas planificando como manda el PMI
-            y, cuando a media historia el objetivo cambie, terminas con Scrum.
-          </p>
-        </header>
-      )}
-
       <Red>
-        {enEtapa1
-          ? <FormularioActa estado={estado} despachar={despachar} />
-          : <Recorrido estado={estado} />}
+        {aqui === 'molino' && <FormularioActa estado={estado} despachar={despachar} />}
+        {aqui && aqui !== 'molino' && <Escena id={aqui} despachar={despachar} />}
+        {!aqui && <PantallaMapa estado={estado} taller={taller} musica={musica} />}
       </Red>
-
-      {!enEtapa1 && <Expediente taller={taller} guardadoA={guardadoA} />}
-
-      <footer>
-        <p>
-          Este taller no otorga una certificación oficial del PMI ni de Scrum.org. Es material de
-          práctica. Lo que escribes no sale de este navegador.
-        </p>
-      </footer>
     </main>
   )
 }
 
-function Recorrido({ estado }) {
+function PantallaMapa({ estado, taller, musica }) {
+  const siguiente = actual(estado)
   return (
-    <section id="inicio">
-      <h2>Las seis etapas</h2>
-      <ol className="etapas">
-        {ETAPAS.map((e) => {
-          const abierta = CON_REGLAS.has(e.id) && puedeEntrar(e.n, estado)
-          const marca = CON_REGLAS.has(e.id) ? estadoEtapa(e.n, estado, e.id) : 'bloqueada'
-          return (
-            <li key={e.n}>
-              {e.n === EL_GIRO && <Ruptura />}
-              <article className={`etapa ${e.n < EL_GIRO ? 'plan' : 'camino'} ${marca}`}>
-                <span className="medallon">{e.n}</span>
-                <span className="enfoque">{e.enfoque}</span>
-                <strong>{e.artefacto}</strong>
-                <span className="cuento">{e.cuento}</span>
-                <span className="estado">
-                  {CON_REGLAS.has(e.id) ? ESTADOS[marca] : 'Todavía no construida'}
-                </span>
-                {abierta && (
-                  <a className="entrar" href={`#etapa-${e.n}`}>
-                    {marca === 'abierta' ? 'Empezar' : 'Volver a abrir'} →
-                  </a>
-                )}
-              </article>
-            </li>
-          )
-        })}
-      </ol>
-    </section>
+    <div className="pantalla-mapa">
+      <header className="cabecera-mapa">
+        <h1>Camino a Bremen</h1>
+        {musica.sonido !== null && (
+          <button type="button" className="interruptor" aria-pressed={musica.sonido}
+            onClick={() => musica.elegir(!musica.sonido)}>
+            Música: {musica.sonido ? 'sí' : 'no'}
+          </button>
+        )}
+      </header>
+
+      {musica.sonido === null && (
+        <section className="pregunta-musica" aria-label="Música">
+          <p>La banda suena mientras juegas, y cada animal que se suma agrega su instrumento. ¿Con música?</p>
+          <div className="acciones">
+            <button type="button" className="primario" onClick={() => musica.elegir(true)}>Sí, con música</button>
+            <button type="button" onClick={() => musica.elegir(false)}>Sin música</button>
+          </div>
+        </section>
+      )}
+
+      <div className="mesa-mapa">
+        <Mapa estado={estado} />
+        <aside className="costado-mapa">
+          <section className="siguiente">
+            <p className="eyebrow">Siguiente parada</p>
+            <h2>{siguiente.nombre}</h2>
+            <a className="como-boton primario" href={`#destino-${siguiente.id}`}>Ir →</a>
+          </section>
+          <Banda estado={estado} />
+          <Expediente taller={taller} />
+        </aside>
+      </div>
+    </div>
   )
 }
 
-/** La ruptura. No es una etapa más: es donde el plan deja de servir. */
-function Ruptura() {
-  return (
-    <aside className="ruptura">
-      <p className="golpe">Aparece la casa de los ladrones.</p>
-      <p className="explica">
-        Nadie la planeó y no está en el alcance. A partir de aquí el plan deja de servir, y el
-        taller cambia de método.
-      </p>
-      <p className="viraje">Predictivo · PMI <span aria-hidden="true">→</span> Adaptativo · Scrum</p>
-    </aside>
-  )
-}
-
-function Expediente({ taller, guardadoA }) {
+function Expediente({ taller }) {
   const [confirmando, setConfirmando] = useState(false)
   return (
     <section className="expediente">
       <h2>Tu expediente</h2>
-      <p>
-        Todo lo que escribes se guarda solo, aquí en tu navegador.
-        {guardadoA && <span className="guardado"> Guardado · {guardadoA.toLocaleTimeString('es-MX',
-          { hour: '2-digit', minute: '2-digit' })}</span>}
-      </p>
       <p className="ayuda">
-        Si limpias el navegador o cambias de equipo, se pierde. Descárgalo para conservarlo: ese
-        archivo es también lo que entregas.
+        Se guarda solo en este navegador. Si lo limpias o cambias de equipo, se pierde:
+        descárgalo para conservarlo. Ese archivo es también lo que entregas.
       </p>
       <div className="acciones">
-        <button type="button" onClick={taller.descargar}>Descargar expediente</button>
+        <button type="button" onClick={taller.descargar}>Descargar</button>
         <label className="como-boton">
-          Cargar expediente
+          Cargar
           <input type="file" accept="application/json" hidden
             onChange={(e) => e.target.files[0] && taller.cargarArchivo(e.target.files[0])} />
         </label>
@@ -154,6 +125,10 @@ function Expediente({ taller, guardadoA }) {
           <button type="button" onClick={() => setConfirmando(true)}>Empezar de cero</button>
         )}
       </div>
+      <p className="no-oficial">
+        Este taller no otorga una certificación oficial del PMI ni de Scrum.org. Lo que escribes
+        no sale de este navegador.
+      </p>
     </section>
   )
 }

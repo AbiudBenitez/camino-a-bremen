@@ -39,6 +39,16 @@ export function reducir(estado, accion) {
         artefacto: accion.artefacto, ...accion.resumen }) }
     }
 
+    case 'llegar': {
+      if (estado.recorrido?.[accion.destino]) return estado
+      const siguiente = {
+        ...estado,
+        actualizado: new Date().toISOString(),
+        recorrido: { ...estado.recorrido, [accion.destino]: new Date().toISOString() },
+      }
+      return { ...siguiente, bitacora: anotar(siguiente, 'llegada', { destino: accion.destino }) }
+    }
+
     case 'reiniciar':
       return vacio()
 

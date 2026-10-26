@@ -1,26 +1,50 @@
 :root {
-  /* Papel y tinta: el mundo del expediente. */
-  --papel: #faf7f2;
-  --hoja: #ffffff;
-  --tinta: #1b1a17;
-  --tinta-2: #4a4742;
-  --tinta-3: #6e6861;
-  --linea: #ddd8d0;
+  /* Libro ilustrado, de día. Los destinos del plan (PMI) van con luz de día;
+     desde el bosque cae la noche y la casa trae luz de ventana. El cambio de
+     paleta marca el paso a Scrum sin decirlo. */
+  --papel: #fbf4e6;
+  --hoja: #fffaf0;
+  --tinta: #2b2620;
+  --tinta-2: #574d43;
+  --tinta-3: #776b5f;
+  --linea: #e4d8c4;
 
-  /* El plan (PMI) y el camino (Scrum). */
-  --plan: #16457a;
-  --plan-10: #e7edf6;
-  --camino: #1c6b4a;
-  --camino-10: #e2f0e8;
+  /* El acento de interfaz y el texto que va encima de él. */
+  --plan: #2f6690;
+  --plan-10: #e3eef6;
+  --plan-hondo: #234d6d;
+  --sobre-plan: #ffffff;
+  --camino: #3d7a4f;
+  --camino-10: #e3f0e4;
 
-  /* La casa de los ladrones: lo imprevisto. Nunca es error. */
-  --casa: #c8791a;
-  --casa-10: #fbeedc;
+  /* Lo imprevisto. Nunca es error. */
+  --casa: #9e5714;
+  --casa-10: #fbecd8;
 
   /* El lápiz rojo del revisor. Reservado a incumplimientos del motor. */
   --lapiz: #b3261e;
   --lapiz-10: #f9eceb;
   --sello: #a8841f;
+
+  /* El paisaje del mapa. */
+  --cielo: #cfe5f0;
+  --pasto: #b9d48f;
+  --pasto-2: #9cc272;
+  --tierra: #d8b47a;
+  --tierra-2: #b98f55;
+  --madera: #8a5a3b;
+  --techo: #c2553b;
+  --muro: #f1e3c6;
+  --bosque: #4f7a4a;
+  --bosque-2: #3c6239;
+  --luz: #f2c14e;
+  --niebla: #fbf4e6;
+  --pelaje-burro: #8f8a86;
+  --pelaje-perro: #b07a46;
+  --pelaje-gato: #4a4a52;
+  --pluma-gallo: #c8452e;
+
+  --ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --rapido: 140ms;
   --normal: 200ms;
@@ -34,13 +58,47 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* La noche. Se activa al llegar al bosque, no por preferencia del sistema:
+   es parte del cuento. */
+:root[data-hora='noche'] {
+  --papel: #1b2032;
+  --hoja: #242a3f;
+  --tinta: #ede6d6;
+  --tinta-2: #c9c0ae;
+  --tinta-3: #a39b88;
+  --linea: #3a4159;
+  --plan: #9cc0e8;
+  --plan-10: #2b3552;
+  --plan-hondo: #c3dbf5;
+  --sobre-plan: #141a2b;
+  --camino: #8cc79c;
+  --camino-10: #22362c;
+  --casa: #f0a54a;
+  --casa-10: #3a2f22;
+  --lapiz: #f08a80;
+  --lapiz-10: #3a2427;
+  --sello: #e0c060;
+  --cielo: #18213b;
+  --pasto: #2b3b39;
+  --pasto-2: #24322f;
+  --tierra: #4d4436;
+  --tierra-2: #3d362b;
+  --madera: #3f2d22;
+  --techo: #5c2e27;
+  --muro: #3a3a45;
+  --bosque: #1f3529;
+  --bosque-2: #172a20;
+  --luz: #ffcf6b;
+  --niebla: #1b2032;
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root { --rapido: 0.01ms; --normal: 0.01ms; --salida: 0.01ms; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--papel); }
+body { margin: 0; background: var(--papel); transition: background 600ms var(--curva); }
 
 h1, h2, h3 { font-weight: 600; text-wrap: balance; }
 a { color: var(--plan); }
@@ -85,7 +143,7 @@ button:hover { background: var(--plan-10); }
 button:focus-visible { outline: 2px solid var(--plan); outline-offset: 2px; }
 button:disabled { opacity: 0.6; cursor: default; }
 
-button.primario { background: var(--plan); color: #fff; border-color: var(--plan); }
-button.primario:hover { background: #10365f; }
+button.primario { background: var(--plan); color: var(--sobre-plan); border-color: var(--plan); }
+button.primario:hover { background: var(--plan-hondo); }
 button.peligro { border-color: var(--lapiz); color: var(--lapiz); }
 button.peligro:hover { background: var(--lapiz-10); }
