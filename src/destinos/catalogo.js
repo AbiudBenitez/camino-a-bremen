@@ -1,3 +1,5 @@
+import { fuente } from '../motor/contrato.js'
+
 /**
  * Los siete destinos, en el orden del cuento de los Grimm. El orden es también
  * la puerta: un destino se abre cuando el anterior quedó recorrido.
@@ -20,6 +22,56 @@ export const DESTINOS = [
 ]
 
 export const ANIMALES = ['burro', 'perro', 'gato', 'gallo']
+
+/**
+ * Lo que se aprende en cada destino, dicho en pocas palabras. Se ve en el mapa
+ * debajo del nombre y se explica con el botón «!»: el taller es para aprender,
+ * y el cuento no debe tapar el concepto. Cada explicación cita su fuente.
+ */
+export const CONCEPTOS = {
+  molino: {
+    concepto: 'Acta de constitución',
+    explicacion: 'El documento que autoriza formalmente el proyecto: qué se busca, qué entra y qué no, '
+      + 'los riesgos y quién está involucrado. Sin acta, el proyecto todavía no existe.',
+    fuente: fuente('PMBOK', '4.1 Desarrollar el Acta de Constitución del Proyecto'),
+  },
+  perro: {
+    concepto: 'Interesados',
+    explicacion: 'Las personas a las que el proyecto afecta o que pueden afectarlo, a favor o en contra. '
+      + 'Se identifican desde el inicio para saber a quién hay que tomar en cuenta.',
+    fuente: fuente('PMBOK', '13.1 Identificar a los Interesados'),
+  },
+  gato: {
+    concepto: 'Estructura de desglose del trabajo',
+    explicacion: 'Divide todo el trabajo del proyecto en entregables más pequeños y manejables. '
+      + 'La suma de las partes tiene que ser exactamente el todo: ni falta ni sobra.',
+    fuente: fuente('PMBOK', '5.4 Crear la EDT/WBS'),
+  },
+  gallo: {
+    concepto: 'Cronograma y ruta crítica',
+    explicacion: 'Ordena las actividades y calcula cuánto dura el proyecto. La ruta crítica es la '
+      + 'secuencia sin holgura: si una de sus actividades se atrasa, se atrasa todo.',
+    fuente: fuente('PMBOK', '6.5 Desarrollar el Cronograma'),
+  },
+  bosque: {
+    concepto: 'Riesgos',
+    explicacion: 'Lo incierto que, si pasa, afecta al proyecto. Se identifica, se evalúa por '
+      + 'probabilidad e impacto y se planea qué hacer si ocurre.',
+    fuente: fuente('PMBOK', '11.2 Identificar los Riesgos'),
+  },
+  casa: {
+    concepto: 'Product backlog',
+    explicacion: 'La lista ordenada de todo lo que podría necesitar el producto. En Scrum el plan no '
+      + 'se fija al inicio: se reordena cuando aparece algo que nadie previó.',
+    fuente: fuente('Guía de Scrum', 'Product Backlog'),
+  },
+  final: {
+    concepto: 'Sprint y retrospectiva',
+    explicacion: 'Un sprint es un ciclo corto con un solo objetivo. La retrospectiva lo cierra y '
+      + 'decide qué mejorar en el siguiente.',
+    fuente: fuente('Guía de Scrum', 'El Sprint y la Retrospectiva del Sprint'),
+  },
+}
 
 /** Desde aquí es de noche: la paleta y la música cambian sin anunciarlo. */
 export const ANOCHECE = 'bosque'

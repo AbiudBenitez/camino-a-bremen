@@ -1,7 +1,7 @@
-import { DESTINOS, abierto, actual, recorrido } from '../destinos/catalogo.js'
+import { CONCEPTOS, DESTINOS, abierto, actual, recorrido } from '../destinos/catalogo.js'
 import { DIBUJO } from './indice.js'
 import { Arbol, Candado, Nube } from './paisaje.jsx'
-import { LIENZO, NIEBLA, PUNTOS, tramo } from './trazo.js'
+import { LIENZO, NIEBLA, PUNTOS, tramo, visibles } from './trazo.js'
 
 const PUNTOS_EN_ORDEN = DESTINOS.map((d) => PUNTOS[d.id])
 
@@ -10,7 +10,7 @@ const ISLA = 'M120 330 C160 200 420 170 640 200 C860 160 1100 180 1300 210 C1480
 const RIO = 'M1175 205 C1140 330 1230 420 1180 520 C1130 620 1220 700 1185 805'
 
 const ARBOLES = [
-  [130, 450], [165, 485], [300, 250], [250, 290], [560, 260], [520, 740], [760, 735], [800, 250],
+  [130, 450], [165, 485], [300, 250], [250, 290], [560, 260], [495, 795], [790, 792], [800, 250],
   [990, 250], [935, 770], [1000, 788], [1060, 780], [1120, 792], [1400, 250], [1480, 470], [330, 760],
 ]
 // El borde del banco de nubes: círculos de varios tamaños para que no parezca un corte.
@@ -32,7 +32,8 @@ const NUBES = [[80, 90, 1.3], [520, 60, 1], [1000, 80, 1.2], [1500, 110, 1], [60
 export default function Mapa({ estado }) {
   const siguiente = actual(estado).id
   const despejado = abierto(estado, 'casa')
-  const visible = (id) => despejado || PUNTOS[id][0] < NIEBLA
+  const aLaVista = visibles(estado)
+  const visible = (id) => aLaVista.some((d) => d.id === id)
 
   return (
     <svg className="mapa" viewBox={`0 0 ${LIENZO.ancho} ${LIENZO.alto}`} role="group"
@@ -66,7 +67,7 @@ export default function Mapa({ estado }) {
         )}
       </g>
 
-      {DESTINOS.filter((d) => visible(d.id)).map((d) => {
+      {aLaVista.map((d) => {
         const [x, y] = PUNTOS[d.id]
         const Dibujo = DIBUJO[d.id]
         const puede = abierto(estado, d.id)
@@ -79,10 +80,7 @@ export default function Mapa({ estado }) {
             <ellipse cy="30" rx="86" ry="40" className="plataforma" />
             {aqui && <ellipse cy="30" rx="100" ry="50" className="halo" />}
             <g transform="translate(0 -6) scale(1.7)"><Dibujo girando={aqui} /></g>
-            <g transform="translate(0 100)" className="rotulo">
-              <rect x={-d.nombre.length * 6.5 - 16} y="-20" width={d.nombre.length * 13 + 32} height="36" rx="18" />
-              <text y="5" textAnchor="middle">{d.nombre}</text>
-            </g>
+            <Rotulo nombre={d.nombre} concepto={CONCEPTOS[d.id]?.concepto} />
             {!puede && <Candado x={58} y={-48} />}
           </>
         )
@@ -108,5 +106,17 @@ export default function Mapa({ estado }) {
         </g>
       )}
     </svg>
+  )
+}
+
+/** Nombre del destino y, debajo, lo que se aprende ahí: el cuento no tapa el concepto. */
+function Rotulo({ nombre, concepto }) {
+  const ancho = Math.max(nombre.length * 13, (concepto?.length ?? 0) * 9.6) + 36
+  return (
+    <g transform="translate(0 106)" className="rotulo">
+      <rect x={-ancho / 2} y="-24" width={ancho} height={concepto ? 56 : 36} rx="18" />
+      <text y="0" textAnchor="middle">{nombre}</text>
+      {concepto && <text y="22" textAnchor="middle" className="concepto">{concepto}</text>}
+    </g>
   )
 }

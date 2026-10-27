@@ -2,6 +2,8 @@
  * Geometría del mapa. Horizontal, en 16:9: el camino va de izquierda a derecha
  * como se lee el cuento. En teléfono el mapa no se encoge: se desliza de lado.
  */
+import { DESTINOS, abierto } from '../destinos/catalogo.js'
+
 export const LIENZO = { ancho: 1600, alto: 900 }
 
 /** Dónde queda cada destino, en el orden del catálogo. Sube y baja como un sendero. */
@@ -17,6 +19,12 @@ export const PUNTOS = {
 
 /** Desde aquí hacia la derecha hay nubes hasta que la casa se abre. */
 export const NIEBLA = 1180
+
+/** Lo que está bajo las nubes no existe todavía: ni en el mapa ni en sus controles. */
+export function visibles(estado) {
+  const despejado = abierto(estado, 'casa')
+  return DESTINOS.filter((d) => despejado || PUNTOS[d.id][0] < NIEBLA)
+}
 
 /**
  * Tramo curvo entre dos puntos, con tangentes de Catmull-Rom para que el

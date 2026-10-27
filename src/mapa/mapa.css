@@ -46,9 +46,11 @@ main > .cabecera { max-width: none; }
 .destino .plataforma-borde { fill: var(--tierra-2); }
 .destino .plataforma { fill: var(--pasto-2); stroke: var(--tierra-2); stroke-width: 3; }
 .destino.hecho .plataforma { stroke: var(--camino); stroke-width: 5; }
-.destino.cerrado > g > :not(.candado) { opacity: 0.55; }
+/* Cerrado se nota en el dibujo, no en el rótulo: el concepto se tiene que leer siempre. */
+.destino.cerrado > g > :not(.candado):not(.rotulo) { opacity: 0.55; }
 .destino .rotulo rect { fill: var(--hoja); stroke: var(--linea); stroke-width: 2; }
 .destino .rotulo text { font-family: var(--ui); font-size: 22px; font-weight: 600; fill: var(--tinta); }
+.destino .rotulo .concepto { font-size: 16px; font-weight: 500; fill: var(--tinta-2); }
 .destino.aqui .rotulo rect { stroke: var(--luz); stroke-width: 3; }
 .candado circle { fill: var(--hoja); stroke: var(--linea); stroke-width: 2; }
 .candado path { stroke: var(--tinta-3); }
@@ -74,6 +76,31 @@ main > .cabecera { max-width: none; }
 }
 
 /* ------------------------------------------------- sobre el mapa */
+/* El «!» de cada destino: qué se aprende ahí, con su fuente. */
+.concepto-ancla { position: absolute; translate: -50% -50%; z-index: 2; }
+.concepto-boton { display: grid; place-items: center; width: 34px; height: 34px; min-height: 0; padding: 0;
+  border-radius: 50%; background: var(--luz); color: var(--contorno); border: 2px solid var(--contorno);
+  box-shadow: 0 2px 0 var(--contorno); font-family: var(--ui); font-size: 1.05rem; font-weight: 800; }
+/* El área de toque llega a 44 px aunque el círculo se vea de 34. */
+.concepto-boton::before { content: ''; position: absolute; inset: -5px; }
+.concepto-boton { position: relative; }
+.concepto-boton:hover { background: var(--hoja); }
+.concepto-boton[aria-expanded='true'] { background: var(--hoja); }
+.concepto-tarjeta { position: absolute; width: 17rem; padding: 0.9rem 1rem;
+  background: var(--hoja); border: 1px solid var(--linea); border-radius: 14px; z-index: 3;
+  box-shadow: 0 14px 32px rgb(27 26 23 / 0.2); animation: entra var(--normal) var(--curva); }
+.concepto-tarjeta.abajo { top: calc(100% + 0.5rem); }
+.concepto-tarjeta.arriba { bottom: calc(100% + 0.5rem); }
+.concepto-tarjeta.izq { left: -0.5rem; }
+.concepto-tarjeta.centro { left: 50%; translate: -50% 0; }
+.concepto-tarjeta.der { right: -0.5rem; }
+.concepto-tarjeta h2 { margin: 0 0 0.4rem; font-size: 1.15rem; }
+.concepto-tarjeta p { margin: 0 0 0.5rem; font-size: 0.95rem; line-height: 1.5; }
+.concepto-metodo { margin: 0 !important; font-family: var(--ui); font-size: 0.68rem !important;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--plan); font-weight: 700; }
+.concepto-tarjeta .fuente { margin: 0; font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.74rem !important; color: var(--tinta-3); }
+
 .lienzo { position: relative; }
 .burbuja { position: absolute; translate: -50% -100%; display: grid; justify-items: center;
   padding: 0.45rem 1rem 0.55rem; background: var(--plan); color: var(--sobre-plan); border-radius: 14px;

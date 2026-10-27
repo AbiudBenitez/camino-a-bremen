@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 import Mapa from './Mapa.jsx'
+import Conceptos from './Conceptos.jsx'
 import Banda from './Banda.jsx'
 import Escena from '../destinos/Escena.jsx'
 import { DESTINOS } from '../destinos/catalogo.js'
@@ -46,5 +47,20 @@ describe('Escena', () => {
     for (const d of DESTINOS.filter((x) => x.id !== 'molino')) {
       expect(() => renderToStaticMarkup(<Escena id={d.id} despachar={() => {}} />)).not.toThrow()
     }
+  })
+})
+
+describe('Conceptos', () => {
+  it('cada destino visible dice lo que enseña y tiene su botón «!»', () => {
+    const mapa = renderToStaticMarkup(<Mapa estado={vacio()} />)
+    expect(mapa).toContain('Acta de constitución')
+    const html = renderToStaticMarkup(<Conceptos estado={vacio()} />)
+    expect(html.match(/class="concepto-boton"/g)).toHaveLength(5)
+  })
+
+  it('lo que sigue bajo las nubes no tiene concepto ni botón', () => {
+    const html = renderToStaticMarkup(<Conceptos estado={hasta(4)} />) + renderToStaticMarkup(<Mapa estado={hasta(4)} />)
+    expect(html).not.toContain('Product backlog')
+    expect(html).not.toContain('concepto-casa')
   })
 })
