@@ -11,11 +11,18 @@ const con = (valores) => Object.entries(valores).reduce(
 const pinta = (estado) => renderToStaticMarkup(<Molino estado={estado} despachar={() => {}} />)
 
 describe('Molino', () => {
-  it('al llegar, todas las tarjetas están en la mesa y en el orden de autoría', () => {
+  it('al llegar, las tarjetas salen como mazo: seis a la vista y en el orden de autoría', () => {
     const html = pinta(vacio())
-    const posiciones = TARJETAS.map((t) => html.indexOf(`data-pieza="${t.id}" data-en="${MESA}"`))
+    const posiciones = TARJETAS.slice(0, 6).map((t) => html.indexOf(`data-pieza="${t.id}" data-en="${MESA}"`))
     expect(posiciones.every((p) => p > -1)).toBe(true)
     expect([...posiciones].sort((a, b) => a - b)).toEqual(posiciones)
+    expect(html).not.toContain(`data-pieza="${TARJETAS[6].id}"`)
+    expect(html).toContain(`Y ${TARJETAS.length - 6} más en el costal.`)
+  })
+
+  it('al colocar una, sale la siguiente del mazo', () => {
+    const html = pinta(con({ colocaciones: colocar({}, TARJETAS[0].id, TARJETAS[0].va) }))
+    expect(html).toContain(`data-pieza="${TARJETAS[6].id}" data-en="${MESA}"`)
   })
 
   it('una tarjeta colocada aparece en su compartimento y no en la mesa', () => {

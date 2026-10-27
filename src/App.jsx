@@ -5,6 +5,7 @@ import { useMusica } from './sonido/useMusica.js'
 import Molino from './destinos/molino/Molino.jsx'
 import Escena from './destinos/Escena.jsx'
 import PantallaMapa from './mapa/PantallaMapa.jsx'
+import Cabecera from './mapa/Cabecera.jsx'
 import Red from './componentes/Red.jsx'
 import './App.css'
 import './mapa/mapa.css'
@@ -48,10 +49,12 @@ export default function App() {
         </div>
       )}
 
+      <Cabecera estado={estado} taller={taller} musica={musica} />
+
       <Red>
         {aqui === 'molino' && <Molino estado={estado} despachar={despachar} />}
         {aqui && aqui !== 'molino' && <Escena id={aqui} despachar={despachar} />}
-        {!aqui && <PantallaMapa estado={estado} taller={taller} musica={musica} />}
+        {!aqui && <PantallaMapa estado={estado} />}
       </Red>
     </main>
   )

@@ -1,13 +1,15 @@
 /* ================================================================ el mapa
    A pantalla completa, en 16:9. Los controles son botones redondos arriba y la
    siguiente parada flota sobre el mapa. */
-main.en-mapa { max-width: none; padding: 1rem 1.5rem 1.5rem; }
 
-.pantalla-mapa { display: grid; gap: 1rem; }
+/* La cabecera es la misma en todas las pantallas. */
+main { max-width: none; padding: 1rem 1.5rem 1.5rem; }
+main > .cabecera { max-width: none; }
 
-.cabecera-mapa { position: relative; z-index: 5; display: flex; align-items: center;
-  justify-content: space-between; gap: 1rem; border: 0; padding: 0; }
-.cabecera-mapa h1 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.2rem); }
+.cabecera { position: relative; z-index: 5; display: flex; align-items: center;
+  justify-content: space-between; gap: 1rem; margin-bottom: 1rem; border: 0; padding: 0; }
+.cabecera .marca { font-size: clamp(1.4rem, 3vw, 2.1rem); font-weight: 600; color: var(--tinta);
+  text-decoration: none; }
 
 .botones-redondos { display: flex; gap: 0.6rem; }
 .redondo { display: grid; place-items: center; width: 52px; height: 52px; min-height: 0; padding: 0;
@@ -75,12 +77,6 @@ main.en-mapa { max-width: none; padding: 1rem 1.5rem 1.5rem; }
   text-transform: uppercase; color: var(--tinta-3); flex-basis: 100%; }
 .siguiente .nombre { margin: 0; font-size: 1.35rem; font-weight: 600; }
 
-.pregunta-musica { position: absolute; top: 1rem; left: 50%; translate: -50% 0; width: min(34rem, calc(100% - 2rem));
-  display: grid; gap: 0.7rem; padding: 1rem 1.1rem; background: var(--hoja); border: 1px solid var(--linea);
-  border-radius: 16px; box-shadow: 0 10px 28px rgb(27 26 23 / 0.16); }
-.pregunta-musica p { margin: 0; }
-.pregunta-musica .acciones { margin: 0; display: flex; gap: 0.6rem; flex-wrap: wrap; }
-
 .como-boton.primario { background: var(--plan); color: var(--sobre-plan); border-color: var(--plan);
   text-decoration: none; }
 .como-boton.primario:hover { background: var(--plan-hondo); }
@@ -107,7 +103,7 @@ main.en-mapa { max-width: none; padding: 1rem 1.5rem 1.5rem; }
 
 /* En teléfono el mapa no se encoge: se desliza de lado, como un mapa de juego. */
 @media (max-width: 52rem) {
-  main.en-mapa { padding: 0.8rem 0.8rem 1rem; }
+  main { padding: 0.8rem 0.8rem 1rem; }
   .redondo { width: 46px; height: 46px; }
   .mapa { width: 1100px; max-width: none; max-height: none; }
   .siguiente { left: 0.6rem; right: 0.6rem; bottom: 0.6rem; }

@@ -43,6 +43,8 @@
   --agua-2: #6aaed0;
   --nube: #ffffff;
   --contorno: #2b2620;
+  --piso: #9c5a22;
+  --sobre-piso: #fff6e6;
   --pelaje-burro: #8f8a86;
   --pelaje-perro: #b07a46;
   --pelaje-gato: #4a4a52;
@@ -98,6 +100,8 @@
   --agua-2: #1b3350;
   --nube: #39425f;
   --contorno: #0e1220;
+  --piso: #4a3222;
+  --sobre-piso: #ede6d6;
 }
 
 @media (prefers-reduced-motion: reduce) {
