@@ -39,6 +39,10 @@
   --bosque-2: #3c6239;
   --luz: #f2c14e;
   --niebla: #fbf4e6;
+  --agua: #8cc6e3;
+  --agua-2: #6aaed0;
+  --nube: #ffffff;
+  --contorno: #2b2620;
   --pelaje-burro: #8f8a86;
   --pelaje-perro: #b07a46;
   --pelaje-gato: #4a4a52;
@@ -90,6 +94,10 @@
   --bosque-2: #172a20;
   --luz: #ffcf6b;
   --niebla: #1b2032;
+  --agua: #23405f;
+  --agua-2: #1b3350;
+  --nube: #39425f;
+  --contorno: #0e1220;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,22 +1,22 @@
 /**
- * Geometría del mapa. Vertical a propósito: en teléfono el camino se recorre
- * bajando, que es el gesto natural, y en escritorio cabe en una columna.
+ * Geometría del mapa. Horizontal, en 16:9: el camino va de izquierda a derecha
+ * como se lee el cuento. En teléfono el mapa no se encoge: se desliza de lado.
  */
-export const LIENZO = { ancho: 400, alto: 780 }
+export const LIENZO = { ancho: 1600, alto: 900 }
 
-/** Dónde queda cada destino, en el orden del catálogo. */
+/** Dónde queda cada destino, en el orden del catálogo. Sube y baja como un sendero. */
 export const PUNTOS = {
-  molino: [290, 95],
-  perro: [110, 200],
-  gato: [285, 310],
-  gallo: [115, 420],
-  bosque: [285, 530],
-  casa: [120, 640],
-  final: [285, 720],
+  molino: [200, 600],
+  perro: [420, 360],
+  gato: [640, 590],
+  gallo: [860, 350],
+  bosque: [1075, 590],
+  casa: [1300, 380],
+  final: [1460, 620],
 }
 
-/** Desde aquí hacia abajo hay niebla hasta que la casa se abre. */
-export const NIEBLA = 585
+/** Desde aquí hacia la derecha hay nubes hasta que la casa se abre. */
+export const NIEBLA = 1180
 
 /**
  * Tramo curvo entre dos puntos, con tangentes de Catmull-Rom para que el

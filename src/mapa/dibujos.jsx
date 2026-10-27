@@ -7,7 +7,7 @@
  */
 
 const c = (token) => `var(--${token})`
-const TRAZO = { stroke: c('tinta'), strokeWidth: 1.4, strokeLinejoin: 'round' }
+const TRAZO = { stroke: c('contorno'), strokeWidth: 1.4, strokeLinejoin: 'round' }
 
 export function Molino({ girando }) {
   return (
@@ -107,7 +107,7 @@ export function Final() {
 
 /* ------------------------------------------------------------ la banda */
 
-const OJO = (x, y) => <circle cx={x} cy={y} r="1.3" fill={c('tinta')} />
+const OJO = (x, y) => <circle cx={x} cy={y} r="1.3" fill={c('contorno')} />
 
 export function Burro() {
   return (

@@ -1,43 +1,62 @@
-/* ================================================================ el mapa */
-main.en-mapa { max-width: 64rem; }
+/* ================================================================ el mapa
+   A pantalla completa, en 16:9. Los controles son botones redondos arriba y la
+   siguiente parada flota sobre el mapa. */
+main.en-mapa { max-width: none; padding: 1rem 1.5rem 1.5rem; }
 
-.cabecera-mapa { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  flex-wrap: wrap; border: 0; padding: 0 0 1rem; }
-.cabecera-mapa h1 { margin: 0; font-size: 2.2rem; }
-.interruptor { font-family: var(--ui); font-size: 0.9rem; border-radius: 999px; padding: 0.35rem 1rem; }
-.interruptor[aria-pressed='true'] { background: var(--plan-10); }
+.pantalla-mapa { display: grid; gap: 1rem; }
 
-.pregunta-musica { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.2rem;
-  margin: 0 0 1.2rem; padding: 0.9rem 1.1rem; background: var(--hoja); border: 1px solid var(--linea);
-  border-radius: 10px; }
-.pregunta-musica p { margin: 0; max-width: 36rem; }
-.pregunta-musica .acciones { margin: 0; display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.cabecera-mapa { position: relative; z-index: 5; display: flex; align-items: center;
+  justify-content: space-between; gap: 1rem; border: 0; padding: 0; }
+.cabecera-mapa h1 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.2rem); }
 
-.mesa-mapa { display: grid; grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: 2rem;
-  align-items: start; }
+.botones-redondos { display: flex; gap: 0.6rem; }
+.redondo { display: grid; place-items: center; width: 52px; height: 52px; min-height: 0; padding: 0;
+  border-radius: 50%; border: 2px solid var(--linea); background: var(--hoja); color: var(--tinta-2);
+  box-shadow: 0 2px 0 var(--linea); transition: transform var(--rapido) var(--curva),
+    background var(--rapido) var(--curva); }
+.redondo:hover { background: var(--plan-10); transform: translateY(-1px); }
+.redondo[aria-pressed='true'], .redondo[aria-expanded='true'] { color: var(--plan); border-color: var(--plan); }
 
-.mapa { display: block; width: 100%; height: auto; max-height: 86dvh; border-radius: 14px;
-  box-shadow: 0 1px 2px rgb(27 26 23 / 0.06), 0 12px 32px rgb(27 26 23 / 0.1); }
+.panel-flotante { position: absolute; right: 0; top: calc(100% + 0.6rem); width: min(24rem, calc(100vw - 2rem));
+  padding: 1.1rem 1.2rem; background: var(--hoja); border: 1px solid var(--linea); border-radius: 16px;
+  box-shadow: 0 16px 40px rgb(27 26 23 / 0.18); animation: entra var(--normal) var(--curva); }
+.panel-flotante .expediente { margin: 0; padding: 0; border: 0; }
 
-.camino-borde { fill: none; stroke: var(--tierra-2); stroke-width: 15; stroke-linecap: round; opacity: 0.35; }
-.camino-tramo { fill: none; stroke: var(--tierra); stroke-width: 10; stroke-linecap: round;
-  stroke-dasharray: 2 14; opacity: 0.8; }
-.camino-tramo.hecho { stroke-dasharray: none; opacity: 1; transition: opacity 600ms var(--curva); }
+.marco-mapa { position: relative; border-radius: 22px; overflow: hidden;
+  box-shadow: 0 1px 2px rgb(27 26 23 / 0.06), 0 14px 36px rgb(27 26 23 / 0.12); }
+.lienzo-mapa { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.mapa { display: block; width: 100%; height: auto; max-height: calc(100dvh - 8rem); }
 
-.destino .parcela { fill: var(--pasto); stroke: var(--tierra-2); stroke-width: 1.5; opacity: 0.85; }
-.destino.cerrado { opacity: 0.5; }
-.destino .rotulo { font-family: var(--ui); font-size: 15px; font-weight: 600; fill: var(--tinta);
-  paint-order: stroke; stroke: var(--pasto); stroke-width: 4px; stroke-linejoin: round; }
+.sendero-orilla { fill: none; stroke: var(--tierra-2); stroke-width: 34; stroke-linecap: round; }
+.sendero { fill: none; stroke: var(--muro); stroke-width: 22; stroke-linecap: round;
+  stroke-dasharray: 2 20; }
+.sendero.hecho { stroke: var(--tierra); stroke-dasharray: none; }
+.rio { fill: none; stroke: var(--agua-2); stroke-width: 40; stroke-linecap: round; }
+.rio-brillo { fill: none; stroke: var(--agua); stroke-width: 26; stroke-linecap: round; }
+.puente rect { fill: var(--madera); stroke: var(--contorno); stroke-width: 2; }
+.puente line { stroke: var(--tierra-2); stroke-width: 3; }
+.nubes-cerradas { fill: var(--nube); }
+
+.destino .plataforma-borde { fill: var(--tierra-2); }
+.destino .plataforma { fill: var(--pasto-2); stroke: var(--tierra-2); stroke-width: 3; }
+.destino.hecho .plataforma { stroke: var(--camino); stroke-width: 5; }
+.destino.cerrado > g > :not(.candado) { opacity: 0.55; }
+.destino .rotulo rect { fill: var(--hoja); stroke: var(--linea); stroke-width: 2; }
+.destino .rotulo text { font-family: var(--ui); font-size: 22px; font-weight: 600; fill: var(--tinta); }
+.destino.aqui .rotulo rect { stroke: var(--luz); stroke-width: 3; }
+.candado circle { fill: var(--hoja); stroke: var(--linea); stroke-width: 2; }
+.candado path { stroke: var(--tinta-3); }
+.candado rect { fill: var(--tinta-3); }
+
 .destino a { cursor: pointer; }
 .destino a:focus { outline: none; }
-.destino a:focus-visible .parcela { stroke: var(--plan); stroke-width: 4; }
-.destino a:hover .parcela { fill: var(--pasto-2); }
-.destino.hecho .parcela { stroke: var(--camino); stroke-width: 2.5; }
+.destino a:focus-visible .plataforma { stroke: var(--plan); stroke-width: 6; }
+.destino a:hover .plataforma { fill: var(--pasto); }
 
 /* El siguiente destino respira. Movimiento con propósito: dice dónde sigue. */
-.destino .halo { fill: none; stroke: var(--luz); stroke-width: 4; transform-box: fill-box; transform-origin: center;
-  animation: respira 2.4s var(--curva) infinite; }
-@keyframes respira { 0%, 100% { opacity: 0.35; transform: scale(0.94); } 50% { opacity: 1; transform: scale(1.04); } }
+.destino .halo { fill: none; stroke: var(--luz); stroke-width: 6; transform-box: fill-box;
+  transform-origin: center; animation: respira 2.4s var(--curva) infinite; }
+@keyframes respira { 0%, 100% { opacity: 0.35; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.04); } }
 
 .aspas { transform-box: fill-box; transform-origin: center; }
 .aspas.girando { animation: gira 9s linear infinite; }
@@ -48,13 +67,19 @@ main.en-mapa { max-width: 64rem; }
   .destino .halo { opacity: 1; }
 }
 
-/* ---------------------------------------------------------- costado */
-.costado-mapa { display: grid; gap: 1.4rem; }
-.siguiente { padding: 1.1rem 1.2rem; background: var(--hoja); border: 1px solid var(--linea);
-  border-radius: 12px; }
-.siguiente .eyebrow { margin: 0; font-family: var(--ui); font-size: 0.72rem; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--tinta-3); }
-.siguiente h2 { margin: 0.2rem 0 0.8rem; font-size: 1.6rem; }
+/* ------------------------------------------------- sobre el mapa */
+.siguiente { position: absolute; left: 1rem; bottom: 1rem; display: flex; align-items: center;
+  gap: 0.4rem 1rem; flex-wrap: wrap; padding: 0.7rem 0.8rem 0.7rem 1.1rem; background: var(--hoja);
+  border: 1px solid var(--linea); border-radius: 16px; box-shadow: 0 8px 22px rgb(27 26 23 / 0.15); }
+.siguiente .eyebrow { margin: 0; font-family: var(--ui); font-size: 0.7rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--tinta-3); flex-basis: 100%; }
+.siguiente .nombre { margin: 0; font-size: 1.35rem; font-weight: 600; }
+
+.pregunta-musica { position: absolute; top: 1rem; left: 50%; translate: -50% 0; width: min(34rem, calc(100% - 2rem));
+  display: grid; gap: 0.7rem; padding: 1rem 1.1rem; background: var(--hoja); border: 1px solid var(--linea);
+  border-radius: 16px; box-shadow: 0 10px 28px rgb(27 26 23 / 0.16); }
+.pregunta-musica p { margin: 0; }
+.pregunta-musica .acciones { margin: 0; display: flex; gap: 0.6rem; flex-wrap: wrap; }
 
 .como-boton.primario { background: var(--plan); color: var(--sobre-plan); border-color: var(--plan);
   text-decoration: none; }
@@ -65,7 +90,6 @@ main.en-mapa { max-width: 64rem; }
 .animal { width: 4.4rem; height: auto; animation: entra var(--normal) var(--curva); }
 .banda figcaption { font-size: 0.95rem; color: var(--tinta-2); font-style: italic; }
 
-.costado-mapa .expediente { margin: 0; padding-top: 1rem; }
 .expediente h2 { margin: 0 0 0.3rem; font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.06em;
   text-transform: uppercase; color: var(--tinta-2); }
 .expediente .ayuda { font-size: 0.85rem; }
@@ -81,12 +105,11 @@ main.en-mapa { max-width: 64rem; }
 .en-construccion { font-family: var(--ui); font-size: 0.9rem !important; color: var(--tinta-3);
   padding: 0.6rem 0.8rem; border: 1px dashed var(--linea); border-radius: 8px; }
 
+/* En teléfono el mapa no se encoge: se desliza de lado, como un mapa de juego. */
 @media (max-width: 52rem) {
-  .mesa-mapa { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
-  .mapa { max-height: none; }
-  /* En teléfono lo que importa primero es a dónde sigues; el expediente, al final. */
-  .costado-mapa { display: contents; }
-  .siguiente { order: -2; }
-  .banda { order: -1; }
-  .costado-mapa .expediente { order: 1; }
+  main.en-mapa { padding: 0.8rem 0.8rem 1rem; }
+  .redondo { width: 46px; height: 46px; }
+  .mapa { width: 1100px; max-width: none; max-height: none; }
+  .siguiente { left: 0.6rem; right: 0.6rem; bottom: 0.6rem; }
+  .siguiente .como-boton { margin-left: auto; }
 }
