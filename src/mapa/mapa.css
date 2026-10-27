@@ -1,6 +1,6 @@
 /* ================================================================ el mapa
-   A pantalla completa, en 16:9. Los controles son botones redondos arriba y la
-   siguiente parada flota sobre el mapa. */
+   A pantalla completa, en 16:9. Los controles son botones redondos arriba y una
+   burbuja señala la siguiente parada sobre el mapa mismo. */
 
 /* La cabecera es la misma en todas las pantallas. */
 main { max-width: none; padding: 1rem 1.5rem 1.5rem; }
@@ -24,10 +24,13 @@ main > .cabecera { max-width: none; }
   box-shadow: 0 16px 40px rgb(27 26 23 / 0.18); animation: entra var(--normal) var(--curva); }
 .panel-flotante .expediente { margin: 0; padding: 0; border: 0; }
 
-.marco-mapa { position: relative; border-radius: 22px; overflow: hidden;
+/* El marco toma el ancho que le toca a 16:9 en la altura disponible: así el SVG
+   nunca deja márgenes y la burbuja cae justo sobre su destino. */
+.marco-mapa { position: relative; width: min(100%, calc((100dvh - 7rem) * 16 / 9)); margin-inline: auto;
+  border-radius: 22px; overflow: hidden;
   box-shadow: 0 1px 2px rgb(27 26 23 / 0.06), 0 14px 36px rgb(27 26 23 / 0.12); }
 .lienzo-mapa { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
-.mapa { display: block; width: 100%; height: auto; max-height: calc(100dvh - 8rem); }
+.mapa { display: block; width: 100%; height: auto; }
 
 .sendero-orilla { fill: none; stroke: var(--tierra-2); stroke-width: 34; stroke-linecap: round; }
 .sendero { fill: none; stroke: var(--muro); stroke-width: 22; stroke-linecap: round;
@@ -38,6 +41,7 @@ main > .cabecera { max-width: none; }
 .puente rect { fill: var(--madera); stroke: var(--contorno); stroke-width: 2; }
 .puente line { stroke: var(--tierra-2); stroke-width: 3; }
 .nubes-cerradas { fill: var(--nube); }
+.nubes-cerradas .sombra { fill: var(--agua-2); opacity: 0.25; }
 
 .destino .plataforma-borde { fill: var(--tierra-2); }
 .destino .plataforma { fill: var(--pasto-2); stroke: var(--tierra-2); stroke-width: 3; }
@@ -70,15 +74,22 @@ main > .cabecera { max-width: none; }
 }
 
 /* ------------------------------------------------- sobre el mapa */
-.siguiente { position: absolute; left: 1rem; bottom: 1rem; display: flex; align-items: center;
-  gap: 0.4rem 1rem; flex-wrap: wrap; padding: 0.7rem 0.8rem 0.7rem 1.1rem; background: var(--hoja);
-  border: 1px solid var(--linea); border-radius: 16px; box-shadow: 0 8px 22px rgb(27 26 23 / 0.15); }
-.siguiente .eyebrow { margin: 0; font-family: var(--ui); font-size: 0.7rem; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--tinta-3); flex-basis: 100%; }
-.siguiente .nombre { margin: 0; font-size: 1.35rem; font-weight: 600; }
+.lienzo { position: relative; }
+.burbuja { position: absolute; translate: -50% -100%; display: grid; justify-items: center;
+  padding: 0.45rem 1rem 0.55rem; background: var(--plan); color: var(--sobre-plan); border-radius: 14px;
+  box-shadow: 0 3px 0 var(--plan-hondo), 0 10px 22px rgb(27 26 23 / 0.2); text-decoration: none;
+  font-family: var(--ui); white-space: nowrap; animation: flota 2.4s var(--curva) infinite; }
+.burbuja::after { content: ''; position: absolute; bottom: -9px; left: 50%; translate: -50% 0;
+  border: 9px solid transparent; border-bottom: 0; border-top-color: var(--plan); }
+.burbuja .eyebrow { margin: 0; color: inherit; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; }
+.burbuja .nombre { font-size: 1.05rem; font-weight: 700; }
+.burbuja:hover { background: var(--plan-hondo); }
+.burbuja:focus-visible { outline: 3px solid var(--luz); outline-offset: 3px; }
+@keyframes flota { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@media (prefers-reduced-motion: reduce) { .burbuja { animation: none; } }
 
-.como-boton.primario { background: var(--plan); color: var(--sobre-plan); border-color: var(--plan);
-  text-decoration: none; }
+.como-boton.primario { background: var(--plan); color: var(--sobre-plan); border-color: var(--plan-hondo);
+  box-shadow: 0 3px 0 var(--plan-hondo); text-decoration: none; }
 .como-boton.primario:hover { background: var(--plan-hondo); }
 
 .banda { margin: 0; }
@@ -92,20 +103,32 @@ main > .cabecera { max-width: none; }
 .expediente .acciones { margin-top: 0.6rem; }
 .no-oficial { margin: 0.9rem 0 0; font-size: 0.78rem; color: var(--tinta-3); }
 
-/* ------------------------------------------------------------- escena */
-.escena { max-width: 38rem; margin: 0 auto; }
-.escena-dibujo { display: block; width: 11rem; height: auto; margin: 1rem auto 0.5rem; }
-.escena h1 { font-size: 2rem; margin: 0.5rem 0 1rem; }
-.escena p { font-size: 1.12rem; line-height: 1.7; margin: 0 0 1rem; }
-.escena .primario { margin-top: 0.8rem; }
+/* ------------------------------------------------------------- escena
+   Una lámina de libro ilustrado: el dibujo arriba, la página de texto abajo. */
+.escena { max-width: 48rem; margin: 0 auto; }
+.lamina { margin-top: 0.6rem; border-radius: 22px; overflow: hidden; background: var(--hoja);
+  box-shadow: 0 1px 2px rgb(27 26 23 / 0.06), 0 14px 36px rgb(27 26 23 / 0.12); }
+.escena-dibujo { display: block; width: 100%; height: auto; }
+.escena-dibujo [stroke] { vector-effect: non-scaling-stroke; stroke-width: 2px; }
+.pagina { padding: 1.6rem 2rem 2rem; }
+.pagina h1 { font-size: 2rem; margin: 0 0 0.9rem; }
+.pagina p { font-size: 1.12rem; line-height: 1.7; margin: 0 0 1rem; max-width: 40rem; }
+.pagina .primario { margin-top: 0.6rem; }
 .en-construccion { font-family: var(--ui); font-size: 0.9rem !important; color: var(--tinta-3);
   padding: 0.6rem 0.8rem; border: 1px dashed var(--linea); border-radius: 8px; }
+
+/* «Volver» es un control, no un vínculo de documento. */
+.volver { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.8rem;
+  border: 2px solid var(--linea); border-radius: 999px; background: var(--hoja); color: var(--tinta-2);
+  font-family: var(--ui); font-size: 0.88rem; font-weight: 600; text-decoration: none; }
+.volver:hover { background: var(--plan-10); color: var(--tinta); text-decoration: none; }
 
 /* En teléfono el mapa no se encoge: se desliza de lado, como un mapa de juego. */
 @media (max-width: 52rem) {
   main { padding: 0.8rem 0.8rem 1rem; }
+  .pagina { padding: 1.2rem 1.1rem 1.4rem; }
+  .pagina h1 { font-size: 1.6rem; }
   .redondo { width: 46px; height: 46px; }
-  .mapa { width: 1100px; max-width: none; max-height: none; }
-  .siguiente { left: 0.6rem; right: 0.6rem; bottom: 0.6rem; }
-  .siguiente .como-boton { margin-left: auto; }
+  .marco-mapa { width: 100%; }
+  .lienzo { width: 1100px; }
 }

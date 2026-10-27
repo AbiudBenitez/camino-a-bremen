@@ -3,7 +3,7 @@ import { actual } from '../destinos/catalogo.js'
 import Mapa from './Mapa.jsx'
 import { LIENZO, PUNTOS } from './trazo.js'
 
-/** El mapa a pantalla completa, con la siguiente parada flotando encima. */
+/** El mapa a pantalla completa, con una burbuja sobre la siguiente parada. */
 export default function PantallaMapa({ estado }) {
   const siguiente = actual(estado)
   const marco = useRef(null)
@@ -16,16 +16,21 @@ export default function PantallaMapa({ estado }) {
     m.scrollLeft = x - m.clientWidth / 2
   }, [siguiente.id])
 
+  const [x, y] = PUNTOS[siguiente.id]
+
   return (
     <div className="marco-mapa">
       <div className="lienzo-mapa" ref={marco}>
-        <Mapa estado={estado} />
+        <div className="lienzo">
+          <Mapa estado={estado} />
+          {/* La siguiente parada se señala donde está, no en un cuadro aparte que tape la isla. */}
+          <a className="burbuja" href={`#destino-${siguiente.id}`}
+            style={{ left: `${(x / LIENZO.ancho) * 100}%`, top: `${((y - 78) / LIENZO.alto) * 100}%` }}>
+            <span className="eyebrow">Sigue</span>
+            <span className="nombre">{siguiente.nombre} →</span>
+          </a>
+        </div>
       </div>
-      <section className="siguiente">
-        <p className="eyebrow">Siguiente parada</p>
-        <p className="nombre">{siguiente.nombre}</p>
-        <a className="como-boton primario" href={`#destino-${siguiente.id}`}>Ir →</a>
-      </section>
     </div>
   )
 }

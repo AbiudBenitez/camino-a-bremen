@@ -10,9 +10,10 @@
   --linea: #e4d8c4;
 
   /* El acento de interfaz y el texto que va encima de él. */
-  --plan: #2f6690;
-  --plan-10: #e3eef6;
-  --plan-hondo: #234d6d;
+  /* Azul petróleo, de la familia del río: el acento pertenece al mapa. */
+  --plan: #1d6a86;
+  --plan-10: #e1eff4;
+  --plan-hondo: #155069;
   --sobre-plan: #ffffff;
   --camino: #3d7a4f;
   --camino-10: #e3f0e4;
@@ -51,13 +52,14 @@
   --pluma-gallo: #c8452e;
 
   --ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --cuento: 'Iowan Old Style', Georgia, 'Times New Roman', serif;
 
   --rapido: 140ms;
   --normal: 200ms;
   --salida: 120ms;
   --curva: cubic-bezier(0.2, 0, 0, 1);
 
-  font-family: 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  font-family: var(--cuento);
   line-height: 1.6;
   color: var(--tinta);
   background: var(--papel);
@@ -140,22 +142,32 @@ input[type='text']:focus, input[type='date']:focus, textarea:focus {
 
 textarea { resize: vertical; min-height: 4.4rem; }
 
+/* Una sola regla tipográfica: serif para lo que se lee como cuento, letra de
+   interfaz para todo lo que se toca. Los botones tienen pestaña inferior para
+   que se sientan presionables, como en un juego; al presionarlos, bajan. */
 button {
   min-height: 44px;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--plan);
+  padding: 0.55rem 1.1rem;
+  border: 2px solid var(--linea);
+  border-radius: 12px;
   background: var(--hoja);
-  color: var(--plan);
-  border-radius: 2px;
+  color: var(--tinta);
+  font-family: var(--ui);
+  font-weight: 600;
+  box-shadow: 0 3px 0 var(--linea);
   cursor: pointer;
-  transition: background var(--rapido) var(--curva);
+  transition: background var(--rapido) var(--curva), transform var(--rapido) var(--curva),
+    box-shadow var(--rapido) var(--curva);
 }
 
 button:hover { background: var(--plan-10); }
-button:focus-visible { outline: 2px solid var(--plan); outline-offset: 2px; }
+button:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--linea); }
+button:focus-visible { outline: 3px solid var(--plan); outline-offset: 2px; }
 button:disabled { opacity: 0.6; cursor: default; }
 
-button.primario { background: var(--plan); color: var(--sobre-plan); border-color: var(--plan); }
+button.primario { background: var(--plan); color: var(--sobre-plan); border-color: var(--plan-hondo);
+  box-shadow: 0 3px 0 var(--plan-hondo); }
 button.primario:hover { background: var(--plan-hondo); }
+button.primario:active:not(:disabled) { box-shadow: 0 1px 0 var(--plan-hondo); }
 button.peligro { border-color: var(--lapiz); color: var(--lapiz); }
 button.peligro:hover { background: var(--lapiz-10); }

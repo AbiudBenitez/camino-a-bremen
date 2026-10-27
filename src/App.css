@@ -105,9 +105,10 @@ h2 { font-size: 1.35rem; margin: 2.2rem 0 0.8rem; }
 .expediente { margin-top: 3rem; padding-top: 1.4rem; border-top: 1px solid var(--linea); }
 .expediente p { margin: 0 0 0.4rem; }
 .guardado { font-family: system-ui, sans-serif; font-size: 0.8rem; color: var(--camino); }
-.como-boton { display: inline-grid; place-items: center; min-height: 44px; padding: 0.5rem 1rem;
-  border: 1px solid var(--plan); color: var(--plan); border-radius: 2px; cursor: pointer;
-  font-size: max(16px, 1rem); }
+.como-boton { display: inline-grid; place-items: center; min-height: 44px; padding: 0.55rem 1.1rem;
+  border: 2px solid var(--linea); color: var(--tinta); background: var(--hoja); border-radius: 12px;
+  box-shadow: 0 3px 0 var(--linea); cursor: pointer; font-family: var(--ui); font-weight: 600;
+  font-size: max(16px, 1rem); text-decoration: none; }
 .como-boton:hover { background: var(--plan-10); }
 .confirmar { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
   font-size: 0.9rem; }

@@ -13,6 +13,12 @@ const ARBOLES = [
   [130, 450], [165, 485], [300, 250], [250, 290], [560, 260], [520, 740], [760, 735], [800, 250],
   [990, 250], [935, 770], [1000, 788], [1060, 780], [1120, 792], [1400, 250], [1480, 470], [330, 760],
 ]
+// El borde del banco de nubes: círculos de varios tamaños para que no parezca un corte.
+const BORDE_NUBES = [
+  [118, 40, 70], [80, 120, 60], [100, 200, 78], [60, 280, 55], [95, 350, 72], [70, 440, 62],
+  [105, 520, 80], [62, 600, 56], [92, 680, 74], [70, 770, 64], [110, 860, 80],
+  [150, 90, 70], [140, 300, 80], [150, 560, 76], [140, 800, 70],
+]
 const NUBES = [[80, 90, 1.3], [520, 60, 1], [1000, 80, 1.2], [1500, 110, 1], [60, 860, 1.1], [1560, 860, 1.2]]
 
 /**
@@ -94,10 +100,11 @@ export default function Mapa({ estado }) {
 
       {!despejado && (
         <g aria-hidden="true" className="nubes-cerradas">
-          <rect x={NIEBLA + 60} y="0" width={LIENZO.ancho - NIEBLA} height={LIENZO.alto} />
-          {[60, 170, 290, 400, 520, 640, 760, 870].map((y, i) => (
-            <circle key={y} cx={NIEBLA + (i % 2 ? 90 : 70)} cy={y} r={i % 2 ? 70 : 85} />
-          ))}
+          <g className="sombra" transform="translate(-10 12)">
+            {BORDE_NUBES.map(([dx, y, r], i) => <circle key={i} cx={NIEBLA + dx} cy={y} r={r} />)}
+          </g>
+          <rect x={NIEBLA + 110} y="0" width={LIENZO.ancho - NIEBLA} height={LIENZO.alto} />
+          {BORDE_NUBES.map(([dx, y, r], i) => <circle key={i} cx={NIEBLA + dx} cy={y} r={r} />)}
         </g>
       )}
     </svg>

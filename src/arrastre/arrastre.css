@@ -1,11 +1,14 @@
 /* La interacción común. Los colores salen de los tokens: la paleta de día y de
    noche los cambia sin tocar este archivo. */
 
+/* Una tarjeta es un hecho del cuento: se lee en serif aunque se toque. */
 .pieza {
   min-height: 44px;
   padding: 0.5rem 0.85rem;
   border: 1px solid var(--linea);
-  border-radius: 6px;
+  border-radius: 8px;
+  font-family: var(--cuento);
+  font-weight: 400;
   background: var(--hoja);
   color: var(--tinta);
   text-align: left;
