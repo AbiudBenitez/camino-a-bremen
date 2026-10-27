@@ -45,6 +45,7 @@
   --nube: #ffffff;
   --contorno: #2b2620;
   --piso: #9c5a22;
+  --paja: #f2dc9b;
   --sobre-piso: #fff6e6;
   --pelaje-burro: #8f8a86;
   --pelaje-perro: #b07a46;
@@ -103,6 +104,7 @@
   --nube: #39425f;
   --contorno: #0e1220;
   --piso: #4a3222;
+  --paja: #807048;
   --sobre-piso: #ede6d6;
 }
 
@@ -141,6 +143,9 @@ input[type='text']:focus, input[type='date']:focus, textarea:focus {
 }
 
 textarea { resize: vertical; min-height: 4.4rem; }
+
+/* El ejemplo de un campo nunca debe pasar por algo ya escrito. */
+::placeholder { color: var(--tinta-3); opacity: 0.7; font-style: italic; }
 
 /* Una sola regla tipográfica: serif para lo que se lee como cuento, letra de
    interfaz para todo lo que se toca. Los botones tienen pestaña inferior para

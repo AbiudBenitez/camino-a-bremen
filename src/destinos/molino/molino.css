@@ -28,6 +28,8 @@
 .centro-molino { display: grid; gap: 0.9rem; justify-items: center; text-align: left; }
 .burro-carga { width: min(100%, 17rem); height: auto; overflow: visible; }
 .burro-carga g { transition: transform 500ms var(--curva); }
+.paja { fill: var(--paja); }
+.hatillo-lomo path { fill: var(--tierra); stroke: var(--contorno); stroke-width: 2.5px; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
 /* Al agrandar el dibujo, el contorno no debe engordar con él. */
 .burro-carga [stroke] { stroke-width: 2.5px; vector-effect: non-scaling-stroke; }
 /* El burro se ladea cuando una tarjeta no va ahí. Movimiento con propósito: es la consecuencia. */
@@ -54,27 +56,34 @@
   text-transform: uppercase; color: var(--tinta-2); }
 .decidido p { margin: 0.4rem 0 0; }
 
-.escribir-medidas { width: 100%; padding: 0.9rem 1rem; background: var(--hoja); border-radius: 14px; }
-.escribir-medidas .campo { margin: 0; }
-.salir { width: 100%; }
-.centro-molino .hallazgos { width: 100%; margin: 0; padding: 0.9rem 1rem; background: var(--hoja);
+/* Al pie, la salida: separada del juego para no confundir colocar con terminar. */
+.pie-molino { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1.2rem;
+  padding-top: 1rem; border-top: 2px dashed rgb(255 255 255 / 0.25); }
+.pie-molino p { margin: 0; color: var(--sobre-piso); font-style: italic; flex: 1 1 18rem; }
+.salir { min-width: 14rem; }
+.salir.listo { outline: 3px solid var(--luz); outline-offset: 3px; }
+.pie-molino .hallazgos { flex-basis: 100%; margin: 0; padding: 0.9rem 1rem; background: var(--hoja);
   border-radius: 14px; }
 
 /* El hatillo en mosaico, como el boceto: objetivo arriba, dentro grande, fuera y riesgos al lado. */
 .hatillo {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  grid-template-areas: 'objetivo objetivo' 'dentro fuera' 'dentro riesgos' 'interesados interesados';
+  grid-template-areas: 'objetivo objetivo' 'dentro fuera' 'dentro riesgos' 'interesados interesados'
+    'medidas medidas';
   gap: 0.8rem;
 }
-.compartimento { background: var(--hoja); border: 2px dashed var(--tierra-2); border-radius: 12px; min-height: 6rem; }
+.compartimento { background: var(--hoja); border: 2px dashed var(--tierra-2); border-radius: 12px; min-height: 5rem; }
 .compartimento .ranura-etiqueta { color: var(--tinta-3); }
 .compartimento.objetivo { grid-area: objetivo; }
-.compartimento.dentro { grid-area: dentro; min-height: 13rem; }
+.compartimento.dentro { grid-area: dentro; }
 .compartimento.fuera { grid-area: fuera; }
 .compartimento.riesgos { grid-area: riesgos; }
 .compartimento.interesados { grid-area: interesados; }
 .compartimento.disponible { border-style: solid; border-color: var(--plan); }
+/* Las medidas se escriben, no se sueltan: caja sólida, no punteada. */
+.compartimento.medidas { grid-area: medidas; padding: 0.8rem 0.9rem; border-style: solid; border-color: var(--hoja); }
+.compartimento.medidas .campo { margin: 0; }
 
 .salida { padding: 1.4rem 1.5rem; background: var(--hoja); border: 1px solid var(--camino);
   border-radius: 14px; animation: entra var(--normal) var(--curva); }
@@ -92,6 +101,5 @@
 }
 @media (max-width: 34rem) {
   .hatillo { grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'objetivo' 'dentro' 'fuera' 'riesgos' 'interesados'; }
-  .compartimento.dentro { min-height: 6rem; }
+    grid-template-areas: 'objetivo' 'dentro' 'fuera' 'riesgos' 'interesados' 'medidas'; }
 }
