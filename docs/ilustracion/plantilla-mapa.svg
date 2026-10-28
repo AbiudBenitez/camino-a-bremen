@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3200 2060" width="3200" height="2060">
+<rect width="3200" height="2060" fill="#ffffff"/>
+<g transform="scale(2)">
+<rect width="1600" height="350" fill="#e6f0f8"/><rect y="350" width="1600" height="220" fill="#eef3e2"/><rect y="570" width="1600" height="330" fill="#f6ecdd"/>
+<line x1="0" y1="350" x2="1600" y2="350" stroke="#7c9cbf" stroke-dasharray="8 6"/><line x1="0" y1="570" x2="1600" y2="570" stroke="#b9925e" stroke-dasharray="8 6"/>
+<rect x="0" y="0" width="1600" height="100" fill="#d23a2a" opacity="0.08"/>
+<path d="M1150 290 C1300 270 1600 280 1600 300 L1600 490 C1450 500 1250 480 1150 450 Z" fill="#9a8fc7" opacity="0.18" stroke="#6d5fb0" stroke-dasharray="10 6"/>
+<path d="M330 900 C380 830 440 795 520 780" fill="none" stroke="#c9b48a" stroke-width="70" stroke-linecap="round" opacity="0.55"/>
+<path d="M330 900 C380 830 440 795 520 780" fill="none" stroke="#7a5a2a" stroke-width="1.5" stroke-dasharray="6 5"/>
+<path d="M520 780 C640 758 840 760 930 720" fill="none" stroke="#c9b48a" stroke-width="55" stroke-linecap="round" opacity="0.55"/>
+<path d="M520 780 C640 758 840 760 930 720" fill="none" stroke="#7a5a2a" stroke-width="1.5" stroke-dasharray="6 5"/>
+<path d="M930 720 C1010 684 1100 640 1070 600" fill="none" stroke="#c9b48a" stroke-width="40" stroke-linecap="round" opacity="0.55"/>
+<path d="M930 720 C1010 684 1100 640 1070 600" fill="none" stroke="#7a5a2a" stroke-width="1.5" stroke-dasharray="6 5"/>
+<path d="M1070 600 C1040 562 900 556 820 540" fill="none" stroke="#c9b48a" stroke-width="27" stroke-linecap="round" opacity="0.55"/>
+<path d="M1070 600 C1040 562 900 556 820 540" fill="none" stroke="#7a5a2a" stroke-width="1.5" stroke-dasharray="6 5"/>
+<path d="M820 540 C730 522 640 500 660 470" fill="none" stroke="#c9b48a" stroke-width="17" stroke-linecap="round" opacity="0.55"/>
+<path d="M820 540 C730 522 640 500 660 470" fill="none" stroke="#7a5a2a" stroke-width="1.5" stroke-dasharray="6 5"/>
+<path d="M660 470 C680 440 820 420 940 404" fill="none" stroke="#c9b48a" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+<path d="M660 470 C680 440 820 420 940 404" fill="none" stroke="#7a5a2a" stroke-width="1.5" stroke-dasharray="6 5"/>
+<path d="M940 404 C1050 390 1180 386 1290 394" fill="none" stroke="#c9b48a" stroke-width="8" stroke-linecap="round" opacity="0.55"/>
+<path d="M940 404 C1050 390 1180 386 1290 394" fill="none" stroke="#7a5a2a" stroke-width="1.5" stroke-dasharray="6 5"/>
+<path d="M1300 396 C1350 404 1400 412 1440 418" fill="none" stroke="#c9b48a" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
+<path d="M1300 396 C1350 404 1400 412 1440 418" fill="none" stroke="#7a5a2a" stroke-width="1.5" stroke-dasharray="6 5"/>
+<path d="M488 772 C460 762 432 752 410 744" fill="none" stroke="#c9b48a" stroke-width="16" stroke-linecap="round" opacity="0.55"/>
+<path d="M960 712 C1000 735 1040 752 1070 764" fill="none" stroke="#c9b48a" stroke-width="13" stroke-linecap="round" opacity="0.55"/>
+<path d="M1084 612 C1130 614 1180 614 1218 614" fill="none" stroke="#c9b48a" stroke-width="9" stroke-linecap="round" opacity="0.55"/>
+<path d="M800 545 C780 556 760 568 742 576" fill="none" stroke="#c9b48a" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
+<path d="M654 470 C620 470 590 471 560 472" fill="none" stroke="#c9b48a" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+<rect x="220" y="414" width="320" height="328" fill="#1d6a86" opacity="0.08" stroke="#1d6a86" stroke-dasharray="6 4"/>
+<rect x="268" y="765.6" width="224" height="54.400000000000006" rx="10" fill="#f2c14e" opacity="0.25"/>
+<circle cx="380" cy="742" r="6" fill="#d23a2a"/><line x1="362" y1="742" x2="398" y2="742" stroke="#d23a2a" stroke-width="2"/>
+<text x="380" y="404" font-family="Helvetica, Arial" font-size="18" fill="#1d6a86" text-anchor="middle">El molino</text><rect x="950" y="690" width="260" height="78" fill="#1d6a86" opacity="0.08" stroke="#1d6a86" stroke-dasharray="6 4"/>
+<rect x="989" y="789.8" width="182" height="44.2" rx="10" fill="#f2c14e" opacity="0.25"/>
+<circle cx="1080" cy="768" r="6" fill="#d23a2a"/><line x1="1062" y1="768" x2="1098" y2="768" stroke="#d23a2a" stroke-width="2"/>
+<text x="1080" y="680" font-family="Helvetica, Arial" font-size="18" fill="#1d6a86" text-anchor="middle">El perro</text><rect x="1140" y="504" width="200" height="110" fill="#1d6a86" opacity="0.08" stroke="#1d6a86" stroke-dasharray="6 4"/>
+<rect x="1170" y="634" width="140" height="34" rx="10" fill="#f2c14e" opacity="0.25"/>
+<circle cx="1240" cy="614" r="6" fill="#d23a2a"/><line x1="1222" y1="614" x2="1258" y2="614" stroke="#d23a2a" stroke-width="2"/>
+<text x="1240" y="494" font-family="Helvetica, Arial" font-size="18" fill="#1d6a86" text-anchor="middle">El gato</text><rect x="635" y="529" width="170" height="51" fill="#1d6a86" opacity="0.08" stroke="#1d6a86" stroke-dasharray="6 4"/>
+<rect x="660.5" y="599.1" width="119" height="28.9" rx="10" fill="#f2c14e" opacity="0.25"/>
+<circle cx="720" cy="580" r="6" fill="#d23a2a"/><line x1="702" y1="580" x2="738" y2="580" stroke="#d23a2a" stroke-width="2"/>
+<text x="720" y="519" font-family="Helvetica, Arial" font-size="18" fill="#1d6a86" text-anchor="middle">El gallo</text><rect x="396" y="335" width="200" height="135" fill="#1d6a86" opacity="0.08" stroke="#1d6a86" stroke-dasharray="6 4"/>
+<rect x="426" y="490" width="140" height="34" rx="10" fill="#f2c14e" opacity="0.25"/>
+<circle cx="496" cy="470" r="6" fill="#d23a2a"/><line x1="478" y1="470" x2="514" y2="470" stroke="#d23a2a" stroke-width="2"/>
+<text x="496" y="325" font-family="Helvetica, Arial" font-size="18" fill="#1d6a86" text-anchor="middle">El bosque</text><rect x="1220" y="308" width="160" height="84" fill="#1d6a86" opacity="0.08" stroke="#1d6a86" stroke-dasharray="6 4"/>
+<rect x="1244" y="410.8" width="112" height="27.200000000000003" rx="10" fill="#f2c14e" opacity="0.25"/>
+<circle cx="1300" cy="392" r="6" fill="#d23a2a"/><line x1="1282" y1="392" x2="1318" y2="392" stroke="#d23a2a" stroke-width="2"/>
+<text x="1300" y="298" font-family="Helvetica, Arial" font-size="18" fill="#1d6a86" text-anchor="middle">La casa</text><rect x="1380" y="360.5" width="140" height="59.49999999999999" fill="#1d6a86" opacity="0.08" stroke="#1d6a86" stroke-dasharray="6 4"/>
+<rect x="1401" y="438.2" width="98" height="23.799999999999997" rx="10" fill="#f2c14e" opacity="0.25"/>
+<circle cx="1450" cy="420" r="6" fill="#d23a2a"/><line x1="1432" y1="420" x2="1468" y2="420" stroke="#d23a2a" stroke-width="2"/>
+<text x="1450" y="350.5" font-family="Helvetica, Arial" font-size="18" fill="#1d6a86" text-anchor="middle">El acto final</text><text x="20" y="330" font-family="Helvetica, Arial" font-size="16" fill="#4b6b8f" text-anchor="start">CIELO Y MONTAÑAS</text><text x="20" y="556" font-family="Helvetica, Arial" font-size="16" fill="#5d7a3a" text-anchor="start">VALLE</text><text x="20" y="886" font-family="Helvetica, Arial" font-size="16" fill="#8a6a3a" text-anchor="start">TIERRA CERCANA</text><text x="800" y="60" font-family="Helvetica, Arial" font-size="16" fill="#a33" text-anchor="middle">Zona del cabezal: sin detalles importantes</text><text x="1380" y="300" font-family="Helvetica, Arial" font-size="15" fill="#5a4c9a" text-anchor="middle">Bruma: tapa la casa y el acto final</text></g>
+<g transform="translate(40 1830)"><rect width="1080" height="200" rx="16" fill="#ffffff" stroke="#999"/><text x="24" y="46" font-family="Helvetica, Arial" font-size="30" fill="#222" text-anchor="start">Plantilla del mapa · Camino a Bremen · 3200 × 1800 px</text><text x="24" y="92" font-family="Helvetica, Arial" font-size="21" fill="#333" text-anchor="start">Punto rojo: donde el destino toca el suelo. Caja azul punteada: tamaño del destino. Franja amarilla: ahí va el rótulo, sin detalle.</text><text x="24" y="128" font-family="Helvetica, Arial" font-size="21" fill="#333" text-anchor="start">Camino: ancho marcado en beige y centro punteado. El taller dibuja el camino encima: en el fondo dejar tierra lisa por donde pasa.</text><text x="24" y="168" font-family="Helvetica, Arial" font-size="21" fill="#a33" text-anchor="start">Esta capa NO se entrega: es solo guía. Se borra antes de exportar.</text></g>
+</svg>

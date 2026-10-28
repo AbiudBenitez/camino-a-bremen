@@ -8,6 +8,7 @@ import { borrador } from '../../estado/taller.js'
 import Campo from '../../componentes/Campo.jsx'
 import Hallazgos from '../../componentes/Hallazgos.jsx'
 import { Burro } from '../../mapa/dibujos.jsx'
+import Ilustracion from '../../ilustraciones/Ilustracion.jsx'
 import './molino.css'
 
 // Espera deliberada antes del veredicto: un resultado instantáneo se siente a
@@ -118,7 +119,7 @@ export default function Molino({ estado, despachar }) {
               {/* La paja separa al burro del piso: es el indicador de avance y tiene que verse. */}
               <ellipse cx="35" cy="50" rx="33" ry="7" className="paja" />
               <g transform={`translate(5 2) rotate(${inclinacion} 30 44)`}>
-                <Burro />
+                <Ilustracion clave="animal-burro" x={30} y={45} ancho={60}><Burro /></Ilustracion>
                 <g transform={`translate(27 21) scale(${0.45 + 0.55 * carga})`} className="hatillo-lomo">
                   <path d="M-10 0 Q-12 -11 0 -13 Q12 -11 10 0 Z" />
                   <path d="M-3 -13 L0 -17 L3 -13" fill="none" />

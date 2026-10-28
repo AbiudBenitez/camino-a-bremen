@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Alegreya';
+  src: url('./assets/fuentes/alegreya-latin.woff2') format('woff2');
+  font-weight: 400 900;
+  font-display: swap;
+}
+
 :root {
   /* Libro ilustrado, de día. Los destinos del plan (PMI) van con luz de día;
      desde el bosque cae la noche y la casa trae luz de ventana. El cambio de
@@ -54,6 +61,17 @@
 
   --ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --cuento: 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  /* Títulos y nombres: Alegreya, incluida en el proyecto (licencia OFL al lado del archivo). */
+  --titulo: 'Alegreya', 'Iowan Old Style', Georgia, serif;
+
+  /* El cielo del mapa. */
+  --cielo-alto: #1f5fa8;
+  --cielo-medio: #5f9bd0;
+  --cielo-bajo: #bcd6e6;
+  --horizonte: #f4e2bd;
+  --sol: #fffaf0;
+  --sol-halo: #fff3d0;
+  --nube-sombra: #d5e0ea;
 
   --rapido: 140ms;
   --normal: 200ms;
@@ -99,6 +117,13 @@
   --bosque-2: #172a20;
   --luz: #ffcf6b;
   --niebla: #1b2032;
+  --cielo-alto: #0b1430;
+  --cielo-medio: #18264a;
+  --cielo-bajo: #2c3a5e;
+  --horizonte: #4a4560;
+  --sol: #f3ecd2;
+  --sol-halo: #c9c3e0;
+  --nube-sombra: #2a3150;
   --agua: #23405f;
   --agua-2: #1b3350;
   --nube: #39425f;

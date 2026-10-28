@@ -1,6 +1,7 @@
 import { destino } from './catalogo.js'
 import { ESCENAS } from './escenas.js'
 import { ANIMAL, DIBUJO } from '../mapa/indice.js'
+import Ilustracion from '../ilustraciones/Ilustracion.jsx'
 
 /**
  * Un tramo de cuento entre minijuegos. Llegar es leer y seguir: no hay nada que
@@ -32,9 +33,17 @@ export default function Escena({ id, despachar }) {
           <rect width="600" height="230" fill="var(--cielo)" />
           <ellipse cx="300" cy="250" rx="420" ry="90" fill="var(--pasto)" />
           <ellipse cx="300" cy="262" rx="420" ry="90" fill="var(--pasto-2)" opacity="0.5" />
-          <g transform="translate(300 130) scale(2)"><Dibujo girando /></g>
-          <g transform="translate(40 120) scale(1.9)"><Burro /></g>
-          {Nuevo && <g transform="translate(445 128) scale(1.9)"><Nuevo /></g>}
+          <Ilustracion clave={`destino-${id}`} x={300} y={182} ancho={200}>
+            <g transform="translate(300 130) scale(2)"><Dibujo girando /></g>
+          </Ilustracion>
+          <Ilustracion clave="animal-burro" x={97} y={205} ancho={114}>
+            <g transform="translate(40 120) scale(1.9)"><Burro /></g>
+          </Ilustracion>
+          {Nuevo && (
+            <Ilustracion clave={`animal-${d.animal}`} x={502} y={213} ancho={114}>
+              <g transform="translate(445 128) scale(1.9)"><Nuevo /></g>
+            </Ilustracion>
+          )}
         </svg>
         <div className="pagina">
           <h1>{escena?.titulo ?? d.nombre}</h1>

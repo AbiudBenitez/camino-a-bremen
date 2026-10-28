@@ -1,5 +1,6 @@
 import { banda } from '../destinos/catalogo.js'
 import { ANIMAL } from './indice.js'
+import Ilustracion from '../ilustraciones/Ilustracion.jsx'
 
 const NOMBRE = { burro: 'el burro', perro: 'el perro', gato: 'el gato', gallo: 'el gallo' }
 
@@ -15,7 +16,11 @@ export default function Banda({ estado }) {
       <div className="banda-fila" aria-hidden="true">
         {quienes.map((a) => {
           const Animal = ANIMAL[a]
-          return <svg key={a} viewBox="0 0 60 50" className={`animal ${a}`}><Animal /></svg>
+          return (
+            <svg key={a} viewBox="0 0 60 50" className={`animal ${a}`}>
+              <Ilustracion clave={`animal-${a}`} x={30} y={45} ancho={60}><Animal /></Ilustracion>
+            </svg>
+          )
         })}
       </div>
       <figcaption>{texto}</figcaption>

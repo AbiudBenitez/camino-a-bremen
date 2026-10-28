@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { actual } from '../destinos/catalogo.js'
 import Mapa from './Mapa.jsx'
 import Conceptos from './Conceptos.jsx'
-import { LIENZO, PUNTOS } from './trazo.js'
+import { ALTURA, ESCALA, LIENZO, PUNTOS } from './trazo.js'
 
 /** El mapa a pantalla completa, con una burbuja sobre la siguiente parada. */
 export default function PantallaMapa({ estado }) {
@@ -18,6 +18,7 @@ export default function PantallaMapa({ estado }) {
   }, [siguiente.id])
 
   const [x, y] = PUNTOS[siguiente.id]
+  const cima = y - ALTURA[siguiente.id] * ESCALA[siguiente.id] - 12
 
   return (
     <div className="marco-mapa">
@@ -27,7 +28,7 @@ export default function PantallaMapa({ estado }) {
           <Conceptos estado={estado} />
           {/* La siguiente parada se señala donde está, no en un cuadro aparte que tape la isla. */}
           <a className="burbuja" href={`#destino-${siguiente.id}`}
-            style={{ left: `${(x / LIENZO.ancho) * 100}%`, top: `${((y - 78) / LIENZO.alto) * 100}%` }}>
+            style={{ left: `${(x / LIENZO.ancho) * 100}%`, top: `${(cima / LIENZO.alto) * 100}%` }}>
             <span className="eyebrow">Sigue</span>
             <span className="nombre">{siguiente.nombre} →</span>
           </a>

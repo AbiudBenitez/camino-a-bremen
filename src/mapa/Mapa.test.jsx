@@ -52,9 +52,8 @@ describe('Escena', () => {
 
 describe('Conceptos', () => {
   it('cada destino visible dice lo que enseña y tiene su botón «!»', () => {
-    const mapa = renderToStaticMarkup(<Mapa estado={vacio()} />)
-    expect(mapa).toContain('Acta de constitución')
     const html = renderToStaticMarkup(<Conceptos estado={vacio()} />)
+    expect(html).toContain('Acta de constitución')
     expect(html.match(/class="concepto-boton"/g)).toHaveLength(5)
   })
 
