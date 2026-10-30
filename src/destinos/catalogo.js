@@ -14,7 +14,7 @@ import { fuente } from '../motor/contrato.js'
 export const DESTINOS = [
   { id: 'molino', nombre: 'El molino', tipo: 'juego', animal: 'burro', metodo: 'PMI' },
   { id: 'perro', nombre: 'El perro', tipo: 'escena', animal: 'perro', metodo: 'PMI' },
-  { id: 'gato', nombre: 'El gato', tipo: 'juego', animal: 'gato', metodo: 'PMI', construido: false },
+  { id: 'gato', nombre: 'El gato', tipo: 'juego', animal: 'gato', metodo: 'PMI' },
   { id: 'gallo', nombre: 'El gallo', tipo: 'escena', animal: 'gallo', metodo: 'PMI' },
   { id: 'bosque', nombre: 'El bosque', tipo: 'escena', metodo: 'PMI' },
   { id: 'casa', nombre: 'La casa', tipo: 'juego', metodo: 'Scrum' },

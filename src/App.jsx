@@ -4,6 +4,7 @@ import { abierto, deNoche, destino } from './destinos/catalogo.js'
 import { useMusica } from './sonido/useMusica.js'
 import Molino from './destinos/molino/Molino.jsx'
 import Casa from './destinos/casa/Casa.jsx'
+import Gato from './destinos/gato/Gato.jsx'
 import Escena from './destinos/Escena.jsx'
 import PantallaMapa from './mapa/PantallaMapa.jsx'
 import Cabecera from './mapa/Cabecera.jsx'
@@ -55,7 +56,8 @@ export default function App() {
       <Red>
         {aqui === 'molino' && <Molino estado={estado} despachar={despachar} />}
         {aqui === 'casa' && <Casa estado={estado} despachar={despachar} />}
-        {aqui && aqui !== 'molino' && aqui !== 'casa' && <Escena id={aqui} despachar={despachar} />}
+        {aqui === 'gato' && <Gato estado={estado} despachar={despachar} />}
+        {aqui && !['molino', 'casa', 'gato'].includes(aqui) && <Escena id={aqui} despachar={despachar} />}
         {!aqui && <PantallaMapa estado={estado} />}
       </Red>
     </main>
