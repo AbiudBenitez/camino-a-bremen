@@ -17,7 +17,7 @@ export const DESTINOS = [
   { id: 'gato', nombre: 'El gato', tipo: 'juego', animal: 'gato', metodo: 'PMI', construido: false },
   { id: 'gallo', nombre: 'El gallo', tipo: 'escena', animal: 'gallo', metodo: 'PMI' },
   { id: 'bosque', nombre: 'El bosque', tipo: 'escena', metodo: 'PMI' },
-  { id: 'casa', nombre: 'La casa', tipo: 'juego', metodo: 'Scrum', construido: false },
+  { id: 'casa', nombre: 'La casa', tipo: 'juego', metodo: 'Scrum' },
   { id: 'final', nombre: 'El acto final', tipo: 'juego', metodo: 'Scrum', construido: false },
 ]
 

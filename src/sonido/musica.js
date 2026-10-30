@@ -16,6 +16,10 @@ let ctx = null
 let maestro = null
 let filtro = null
 const capas = {}
+// El silencio del giro: apaga la música un momento sin tocar la preferencia del estudiante.
+let mudo = false
+// Solo mezclar() la enciende: enmudecer(false) nunca sube el volumen de una música que el estudiante apagó.
+let encendida = false
 
 /** Solo se puede llamar desde un gesto del usuario: los navegadores lo exigen. */
 export async function iniciar() {
@@ -57,10 +61,19 @@ export function mezclar({ banda, noche }) {
     capas[animal]?.gain.setTargetAtTime(banda.includes(animal) ? 1 : 0, t, SUAVE)
   }
   filtro.frequency.setTargetAtTime(noche ? 1100 : 18000, t, 1.2)
-  maestro.gain.setTargetAtTime(VOLUMEN, t, SUAVE)
+  encendida = true
+  maestro.gain.setTargetAtTime(mudo ? 0 : VOLUMEN, t, SUAVE)
+}
+
+/** La casa de los ladrones apaga la música mientras el plan se rompe y la devuelve cuando huyen. */
+export function enmudecer(si) {
+  mudo = si
+  if (!ctx || !encendida) return
+  maestro.gain.setTargetAtTime(si ? 0 : VOLUMEN, ctx.currentTime, si ? 0.8 : SUAVE)
 }
 
 export function callar() {
+  encendida = false
   if (!ctx) return
   maestro.gain.setTargetAtTime(0, ctx.currentTime, 0.15)
   setTimeout(() => { if (maestro.gain.value < 0.01) ctx.suspend() }, 900)
