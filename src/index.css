@@ -1,37 +1,136 @@
+@font-face {
+  font-family: 'Alegreya';
+  src: url('./assets/fuentes/alegreya-latin.woff2') format('woff2');
+  font-weight: 400 900;
+  font-display: swap;
+}
+
 :root {
-  /* Papel y tinta: el mundo del expediente. */
-  --papel: #faf7f2;
-  --hoja: #ffffff;
-  --tinta: #1b1a17;
-  --tinta-2: #4a4742;
-  --tinta-3: #6e6861;
-  --linea: #ddd8d0;
+  /* Libro ilustrado, de día. Los destinos del plan (PMI) van con luz de día;
+     desde el bosque cae la noche y la casa trae luz de ventana. El cambio de
+     paleta marca el paso a Scrum sin decirlo. */
+  --papel: #fbf4e6;
+  --hoja: #fffaf0;
+  --tinta: #2b2620;
+  --tinta-2: #574d43;
+  --tinta-3: #776b5f;
+  --linea: #e4d8c4;
 
-  /* El plan (PMI) y el camino (Scrum). */
-  --plan: #16457a;
-  --plan-10: #e7edf6;
-  --camino: #1c6b4a;
-  --camino-10: #e2f0e8;
+  /* El acento de interfaz y el texto que va encima de él. */
+  /* Azul petróleo, de la familia del río: el acento pertenece al mapa. */
+  --plan: #1d6a86;
+  --plan-10: #e1eff4;
+  --plan-hondo: #155069;
+  --sobre-plan: #ffffff;
+  --camino: #3d7a4f;
+  --camino-10: #e3f0e4;
 
-  /* La casa de los ladrones: lo imprevisto. Nunca es error. */
-  --casa: #c8791a;
-  --casa-10: #fbeedc;
+  /* Lo imprevisto. Nunca es error. */
+  --casa: #9e5714;
+  --casa-10: #fbecd8;
 
   /* El lápiz rojo del revisor. Reservado a incumplimientos del motor. */
   --lapiz: #b3261e;
   --lapiz-10: #f9eceb;
   --sello: #a8841f;
 
+  /* El paisaje del mapa. */
+  --cielo: #cfe5f0;
+  --pasto: #b9d48f;
+  --pasto-2: #9cc272;
+  --tierra: #d8b47a;
+  --tierra-2: #b98f55;
+  --madera: #8a5a3b;
+  --techo: #c2553b;
+  --muro: #f1e3c6;
+  --bosque: #4f7a4a;
+  --bosque-2: #3c6239;
+  --luz: #f2c14e;
+  --niebla: #fbf4e6;
+  --agua: #8cc6e3;
+  --agua-2: #6aaed0;
+  --nube: #ffffff;
+  --contorno: #2b2620;
+  --piso: #9c5a22;
+  --paja: #f2dc9b;
+  --sobre-piso: #fff6e6;
+  --pelaje-burro: #8f8a86;
+  --pelaje-perro: #b07a46;
+  --pelaje-gato: #4a4a52;
+  --pluma-gallo: #c8452e;
+
+  --ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --cuento: 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  /* Títulos y nombres: Alegreya, incluida en el proyecto (licencia OFL al lado del archivo). */
+  --titulo: 'Alegreya', 'Iowan Old Style', Georgia, serif;
+
+  /* El cielo del mapa. */
+  --cielo-alto: #1f5fa8;
+  --cielo-medio: #5f9bd0;
+  --cielo-bajo: #bcd6e6;
+  --horizonte: #f4e2bd;
+  --sol: #fffaf0;
+  --sol-halo: #fff3d0;
+  --nube-sombra: #d5e0ea;
+
   --rapido: 140ms;
   --normal: 200ms;
   --salida: 120ms;
   --curva: cubic-bezier(0.2, 0, 0, 1);
 
-  font-family: 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  font-family: var(--cuento);
   line-height: 1.6;
   color: var(--tinta);
   background: var(--papel);
   -webkit-font-smoothing: antialiased;
+}
+
+/* La noche. Se activa al llegar al bosque, no por preferencia del sistema:
+   es parte del cuento. */
+:root[data-hora='noche'] {
+  --papel: #1b2032;
+  --hoja: #242a3f;
+  --tinta: #ede6d6;
+  --tinta-2: #c9c0ae;
+  --tinta-3: #a39b88;
+  --linea: #3a4159;
+  --plan: #9cc0e8;
+  --plan-10: #2b3552;
+  --plan-hondo: #c3dbf5;
+  --sobre-plan: #141a2b;
+  --camino: #8cc79c;
+  --camino-10: #22362c;
+  --casa: #f0a54a;
+  --casa-10: #3a2f22;
+  --lapiz: #f08a80;
+  --lapiz-10: #3a2427;
+  --sello: #e0c060;
+  --cielo: #18213b;
+  --pasto: #2b3b39;
+  --pasto-2: #24322f;
+  --tierra: #4d4436;
+  --tierra-2: #3d362b;
+  --madera: #3f2d22;
+  --techo: #5c2e27;
+  --muro: #3a3a45;
+  --bosque: #1f3529;
+  --bosque-2: #172a20;
+  --luz: #ffcf6b;
+  --niebla: #1b2032;
+  --cielo-alto: #0b1430;
+  --cielo-medio: #18264a;
+  --cielo-bajo: #2c3a5e;
+  --horizonte: #4a4560;
+  --sol: #f3ecd2;
+  --sol-halo: #c9c3e0;
+  --nube-sombra: #2a3150;
+  --agua: #23405f;
+  --agua-2: #1b3350;
+  --nube: #39425f;
+  --contorno: #0e1220;
+  --piso: #4a3222;
+  --paja: #807048;
+  --sobre-piso: #ede6d6;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -40,7 +139,7 @@
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--papel); }
+body { margin: 0; background: var(--papel); transition: background 600ms var(--curva); }
 
 h1, h2, h3 { font-weight: 600; text-wrap: balance; }
 a { color: var(--plan); }
@@ -70,22 +169,35 @@ input[type='text']:focus, input[type='date']:focus, textarea:focus {
 
 textarea { resize: vertical; min-height: 4.4rem; }
 
+/* El ejemplo de un campo nunca debe pasar por algo ya escrito. */
+::placeholder { color: var(--tinta-3); opacity: 0.7; font-style: italic; }
+
+/* Una sola regla tipográfica: serif para lo que se lee como cuento, letra de
+   interfaz para todo lo que se toca. Los botones tienen pestaña inferior para
+   que se sientan presionables, como en un juego; al presionarlos, bajan. */
 button {
   min-height: 44px;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--plan);
+  padding: 0.55rem 1.1rem;
+  border: 2px solid var(--linea);
+  border-radius: 12px;
   background: var(--hoja);
-  color: var(--plan);
-  border-radius: 2px;
+  color: var(--tinta);
+  font-family: var(--ui);
+  font-weight: 600;
+  box-shadow: 0 3px 0 var(--linea);
   cursor: pointer;
-  transition: background var(--rapido) var(--curva);
+  transition: background var(--rapido) var(--curva), transform var(--rapido) var(--curva),
+    box-shadow var(--rapido) var(--curva);
 }
 
 button:hover { background: var(--plan-10); }
-button:focus-visible { outline: 2px solid var(--plan); outline-offset: 2px; }
+button:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--linea); }
+button:focus-visible { outline: 3px solid var(--plan); outline-offset: 2px; }
 button:disabled { opacity: 0.6; cursor: default; }
 
-button.primario { background: var(--plan); color: #fff; border-color: var(--plan); }
-button.primario:hover { background: #10365f; }
+button.primario { background: var(--plan); color: var(--sobre-plan); border-color: var(--plan-hondo);
+  box-shadow: 0 3px 0 var(--plan-hondo); }
+button.primario:hover { background: var(--plan-hondo); }
+button.primario:active:not(:disabled) { box-shadow: 0 1px 0 var(--plan-hondo); }
 button.peligro { border-color: var(--lapiz); color: var(--lapiz); }
 button.peligro:hover { background: var(--lapiz-10); }

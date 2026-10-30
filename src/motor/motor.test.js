@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { evaluar, artefactos } from './motor.js'
-import { ERROR, fuente, hallazgo } from './contrato.js'
+import { ERROR, cita, fuente, hallazgo } from './contrato.js'
 
 const FUENTE = fuente('PMBOK', 'apartado de prueba')
 
@@ -61,5 +61,23 @@ describe('motor', () => {
 
   it('acepta la gravedad error', () => {
     expect(hallazgo({ regla: 'r', gravedad: ERROR, mensaje: 'm', fuente: FUENTE }).gravedad).toBe('error')
+  })
+
+  // Lo que no dice el PMBOK ni la Guía de Scrum no se les atribuye.
+  it('rechaza una obra que no está en la lista de citables', () => {
+    expect(() => fuente('Wikipedia', 'Historia de usuario')).toThrow(/Obra desconocida/)
+    const malo = { prueba: { nombre: 'x', etapa: 0, reglas: [
+      { id: 'mala', descripcion: 'd', fuente: { obra: 'Blog', apartado: 'a' }, evaluar: () => [] },
+    ] } }
+    expect(() => evaluar('prueba', {}, malo)).toThrow(/obra desconocida/)
+  })
+
+  it('cita la práctica complementaria con su autor', () => {
+    const f = fuente('Práctica complementaria', 'Cohn, User Stories Applied (2004)')
+    expect(cita(f)).toBe('Práctica complementaria · Cohn, User Stories Applied (2004)')
+  })
+
+  it('cita el PMBOK con su edición', () => {
+    expect(cita(fuente('PMBOK', '4.1 Desarrollar el Acta'))).toBe('PMBOK 6.ª ed. · 4.1 Desarrollar el Acta')
   })
 })

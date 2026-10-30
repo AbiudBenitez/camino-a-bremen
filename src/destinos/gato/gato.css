@@ -1,0 +1,50 @@
+/* ================================================================ el gato
+   Un móvil colgado del tejado: arriba el proyecto, una varilla que se inclina
+   con el peso y tres entregables colgando de hilos. */
+
+.gato { max-width: 72rem; margin: 0 auto; }
+.gato-titulo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 1rem; margin-bottom: 1rem; }
+.gato-titulo h1 { margin: 0; font-family: var(--titulo); font-size: 1.8rem; }
+.gato-titulo .entrada { flex-basis: 100%; margin: 0; color: var(--tinta-2); max-width: 46rem; }
+
+.tejado { display: grid; grid-template-columns: minmax(14rem, 1fr) minmax(22rem, 2fr); gap: 1.4rem; align-items: start;
+  padding: 1.4rem; border-radius: 22px; background: linear-gradient(var(--cielo-bajo), var(--hoja)); }
+.mesa-gato { display: grid; gap: 0.6rem; background: var(--hoja); border-style: solid; }
+.mesa-gato .pieza { width: 100%; }
+.horas { font-family: var(--ui); font-size: 0.85em; color: var(--tinta-3); white-space: nowrap; }
+
+.movil { display: grid; justify-items: center; gap: 0; }
+.proyecto { margin: 0; padding: 0.6rem 1.2rem; background: var(--madera); color: var(--sobre-piso);
+  border-radius: 10px; font-family: var(--titulo); font-size: 1.15rem; font-weight: 700; text-align: center; }
+.proyecto span { display: block; font-family: var(--ui); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; opacity: 0.85; }
+/* La varilla gira sobre su centro, como un móvil de verdad. */
+.varilla { position: relative; width: 100%; margin-top: 2.4rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem;
+  padding-top: 2.2rem; border-top: 6px solid var(--madera); transform-origin: 50% 0;
+  transition: transform 700ms cubic-bezier(0.3, 1.4, 0.5, 1); }
+.varilla::before { content: ''; position: absolute; left: 50%; top: -2.4rem; width: 2px; height: 2.4rem; translate: -50% 0;
+  background: var(--tinta-3); }
+.colgante { position: relative; display: grid; }
+.hilo { position: absolute; left: 50%; top: -2.2rem; width: 2px; height: 2.2rem; translate: -50% 0; background: var(--tinta-3); }
+.rama { display: grid; align-content: start; gap: 0.5rem; min-height: 11rem; background: var(--hoja);
+  border: 2px dashed var(--tierra-2); border-radius: 14px; }
+.rama.disponible { border-style: solid; border-color: var(--plan); }
+.rama .pieza { width: 100%; }
+
+.tejado .nota-margen { grid-column: 1 / -1; }
+.tejado .nota-margen:not(:empty) { padding: 0.8rem 1rem; background: var(--hoja); border: 1px dashed var(--casa); border-radius: 12px; }
+.tejado .nota-margen p { margin: 0 0 0.3rem; }
+.tejado .nota-margen .fuente { margin: 0; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.75rem; color: var(--tinta-3); }
+
+.pie-gato { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
+.pie-gato .primario { margin-left: auto; min-width: 14rem; }
+.pie-gato .hallazgos { flex-basis: 100%; margin: 0; padding: 0.9rem 1rem; background: var(--hoja); border-radius: 14px; }
+
+@media (prefers-reduced-motion: reduce) { .varilla { transition: none; } }
+
+@media (max-width: 60rem) {
+  .tejado { grid-template-columns: minmax(0, 1fr); padding: 1rem; }
+  .varilla { grid-template-columns: minmax(0, 1fr); transform: none !important; border-top: 0; padding-top: 0; gap: 1.6rem; }
+  .varilla::before { display: none; }
+  .hilo { top: -1.6rem; height: 1.6rem; }
+}

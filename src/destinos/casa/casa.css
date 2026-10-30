@@ -1,0 +1,89 @@
+/* ================================================================ la casa
+   De noche siempre: la casa está en la segunda mitad del cuento. El giro
+   primero, luego la mesa de esa noche en tres zonas: opciones, la pila con la
+   banda al lado y lo que dice el burro. */
+
+.casa { max-width: 72rem; margin: 0 auto; }
+.casa-titulo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1rem; margin-bottom: 1rem; }
+.casa-titulo h1 { margin: 0; font-family: var(--titulo); font-size: 1.8rem; }
+
+/* ------------------------------------------------------------- el giro */
+.giro { display: grid; gap: 1.2rem; }
+.giro-entrada { margin: 0; font-size: 1.15rem; max-width: 42rem; }
+.hatillo-viejo { position: relative; padding: 1.1rem 1.2rem 3.4rem; background: var(--piso); border-radius: 18px; overflow: hidden; }
+.hatillo-viejo .ranura-etiqueta { color: var(--sobre-piso); }
+.hatillo-columnas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+.hatillo-columnas > div { background: var(--hoja); border-radius: 12px; padding: 0.8rem 1rem; }
+.hatillo-columnas h2 { margin: 0 0 0.4rem; font-family: var(--ui); font-size: 0.75rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--tinta-3); }
+.hatillo-columnas ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.2rem; }
+
+/* La tarjeta que no cabe: busca lugar a la izquierda, luego a la derecha, y cae. */
+.tarjeta-intrusa { position: absolute; left: 50%; bottom: 0.9rem; translate: -50% 0; margin: 0; padding: 0.5rem 1rem;
+  background: var(--casa-10); color: var(--tinta); border: 2px dashed var(--casa); border-radius: 8px;
+  font-family: var(--cuento); white-space: nowrap; animation: no-cabe 3.4s var(--curva) 0.6s both; }
+@keyframes no-cabe {
+  0% { transform: none; opacity: 1; }
+  18% { transform: translate(-22vw, -1.2rem) rotate(-3deg); }
+  26% { transform: translate(-21vw, -1.2rem) rotate(3deg); }
+  34% { transform: translate(-22vw, -1.2rem) rotate(-2deg); }
+  52% { transform: translate(22vw, -1.2rem) rotate(3deg); }
+  60% { transform: translate(21vw, -1.2rem) rotate(-3deg); }
+  68% { transform: translate(22vw, -1.2rem) rotate(2deg); }
+  100% { transform: translate(14vw, 6rem) rotate(28deg); opacity: 0; }
+}
+.giro-golpe { display: grid; gap: 0.2rem; max-width: 44rem; animation: entra 600ms var(--curva) 3.8s both; }
+.giro-golpe h2 { margin: 0 0 0.4rem; font-family: var(--titulo); font-size: 1.6rem; }
+.giro-golpe p { margin: 0 0 0.6rem; }
+.giro-golpe q { font-style: italic; quotes: '«' '»'; }
+.giro-golpe .fuente, .burro-po .fuente { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.75rem; color: var(--tinta-3); }
+.giro-golpe .primario { justify-self: start; margin-top: 0.4rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tarjeta-intrusa { animation: none; opacity: 0.5; text-decoration: line-through; }
+  .giro-golpe { animation: none; }
+}
+
+/* ------------------------------------------------------------- la mesa de esa noche */
+.noche-casa { display: grid; grid-template-columns: minmax(14rem, 1fr) minmax(18rem, 1.2fr) minmax(16rem, 1fr);
+  gap: 1.2rem; align-items: start; padding: 1.3rem; background: var(--piso); border-radius: 22px; }
+.noche-casa .ranura-etiqueta { color: var(--sobre-piso); }
+.opciones { display: grid; gap: 0.6rem; padding: 0; border: 0; background: none; min-height: 0; }
+.opciones .pieza { width: 100%; }
+
+.pila-y-banda { display: grid; grid-template-columns: minmax(0, 1fr) 4.5rem; gap: 0.6rem; align-items: stretch; }
+.pila { display: grid; align-content: start; gap: 0.5rem; min-height: 22rem; background: var(--hoja);
+  border: 2px dashed var(--tierra-2); border-radius: 14px; }
+.pila .ranura-etiqueta { color: var(--tinta-3); }
+.pila.disponible { border-style: solid; border-color: var(--plan); }
+.pila .pieza { width: 100%; }
+/* La pirámide de la banda, de arriba abajo: el orden del backlog es el orden en que cantan. */
+.piramide { display: grid; grid-template-rows: repeat(4, minmax(0, 1fr)); align-items: center; justify-items: center;
+  padding-top: 1.8rem; }
+.piso { width: 100%; height: auto; }
+
+.burro-po { display: grid; gap: 0.7rem; padding: 1rem; background: var(--hoja); border-radius: 14px; }
+.burro-po .ranura-etiqueta { color: var(--tinta-3); }
+.burro-po ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.3rem; font-style: italic; }
+.burro-po .nota-margen:not(:empty) { padding: 0.7rem 0.8rem; background: var(--casa-10); border-radius: 10px; }
+.burro-po .nota-margen p { margin: 0 0 0.3rem; }
+
+.historia-propia { margin: 0; padding: 0.8rem; border: 1px solid var(--linea); border-radius: 10px; display: grid; gap: 0.5rem; }
+.historia-propia legend { padding: 0 0.3rem; font-weight: 700; font-size: 0.95rem; }
+.lo-de-fuera { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0; }
+.lo-de-fuera span { font-size: 0.82rem; padding: 0.15rem 0.5rem; border: 1px dashed var(--linea); border-radius: 999px; }
+.parte { display: grid; grid-template-columns: 4rem minmax(0, 1fr); align-items: center; gap: 0.5rem; }
+.parte span { font-family: var(--ui); font-weight: 600; color: var(--tinta-2); }
+
+.pie-casa { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1.2rem; }
+.pie-casa .tibio { margin: 0; flex: 1 1 20rem; color: var(--sobre-piso); font-style: italic; }
+.pie-casa .primario { margin-left: auto; min-width: 16rem; }
+.pie-casa .hallazgos { flex-basis: 100%; margin: 0; padding: 0.9rem 1rem; background: var(--hoja); border-radius: 14px; }
+
+.backlog-final { margin: 0 0 1rem; padding-left: 1.3rem; display: grid; gap: 0.3rem; }
+
+@media (max-width: 60rem) {
+  .noche-casa { grid-template-columns: minmax(0, 1fr); padding: 1rem; }
+  .hatillo-columnas { grid-template-columns: minmax(0, 1fr); }
+  .pila { min-height: 14rem; }
+}

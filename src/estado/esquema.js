@@ -7,7 +7,7 @@
  * escribió: si leyera el borrador, bastaría con volver a la etapa 1 y editar el
  * acta para desactivar el giro.
  */
-export const VERSION = 2
+export const VERSION = 3
 
 export function vacio() {
   return {
@@ -15,7 +15,11 @@ export function vacio() {
     creado: new Date().toISOString(),
     actualizado: new Date().toISOString(),
     artefactos: {},
-    preferencias: { sonido: false },
+    // Destinos del mapa ya recorridos, con su fecha. Las escenas no producen
+    // artefacto, así que el avance del cuento no se puede deducir de artefactos.
+    recorrido: {},
+    // null: todavía no se le preguntó «¿con música?». Nunca suena sin respuesta.
+    preferencias: { sonido: null },
     bitacora: [],
   }
 }
@@ -36,6 +40,13 @@ const MIGRACIONES = {
         id, { ...artefactoVacio(), borrador: contenido ?? {} },
       ]),
     ),
+  }),
+  2: (viejo) => ({
+    ...viejo,
+    version: 3,
+    recorrido: {},
+    // En la versión 2 el sonido valía false sin habérselo preguntado a nadie.
+    preferencias: { ...viejo.preferencias, sonido: null },
   }),
 }
 
