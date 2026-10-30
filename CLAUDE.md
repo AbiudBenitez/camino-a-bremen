@@ -27,15 +27,19 @@ se corrige allá y se corre `./regenerar.sh`. Lo mismo vale para los `.docx`.
 
 ## Estado
 
-Sección sostenida a mano. **Última revisión: 22 de octubre de 2026.** Si la fecha ya quedó
+Sección sostenida a mano. **Última revisión: 23 de octubre de 2026.** Si la fecha ya quedó
 atrás, verifica con `git log` y `gh pr list` antes de creerle.
 
-- Sprint 1 cierra el **22 de octubre** y se presenta el **23**. La entrega 0.1 son H-01, H-03
+- Sprint 1 cerró el **22 de octubre** y se presenta el **23**. La entrega 0.1 son H-01, H-03
   y H-05.
-- `main` todavía trae solo el andamio previo al formulario. **Lo que está publicado en línea
-  no es lo que el equipo construyó**, y eso se arregla al unir el PR #1.
-- `feat/formulario-del-acta` (PR #1) trae la etapa 1 completa: motor, expediente, recorrido
-  del acta y 41 pruebas. Espera la aprobación de Bernardo.
+- PR #1 (etapa 1: motor, expediente, recorrido del acta) y PR #2 (contexto de Scrum) ya están
+  unidos. `main` trae 41 pruebas en verde y lo publicado en línea es lo que el equipo
+  construyó.
+- Validado a mano el 23 de octubre: H-03 completa (acta incompleta, corrección y reenvío) y
+  H-05 completa (continuar tras cerrar el navegador, reiniciar y dos dispositivos, uno
+  teléfono).
+- **Pendiente de H-01:** acceso de escritura en GitHub para Edgar, Ángel, Roberto e Ismael.
+  Hoy solo lo tienen Abiud y Bernardo.
 - `docs/mesa-de-trabajo` trae la especificación de la mesa de trabajo, aprobada en alcance y
   **sin construir**: es trabajo del sprint 2.
 
@@ -80,8 +84,8 @@ A estas se suman dos que salieron de la revisión de patrones oscuros:
 |---|---|
 | `src/motor/` | Motor de reglas. `contrato.js` define Fuente, Hallazgo y Regla; `motor.js` las corre; `catalogo.js` dice qué reglas usa cada artefacto. |
 | `src/motor/reglas/` | Un archivo por artefacto, con sus pruebas al lado. |
-| `src/estado/` | `esquema.js` (versión y migraciones), `taller.js` (reductor puro) y `almacen.js` (escritura a `localStorage`). Llega con el PR #1. |
-| `src/voz/` | Catálogo de personajes: qué dice el burro, el perro, el gato o el gallo ante cada hallazgo. **Separado del motor a propósito.** Llega con el PR #1. |
+| `src/estado/` | `esquema.js` (versión y migraciones), `taller.js` (reductor puro) y `almacen.js` (escritura a `localStorage`). |
+| `src/voz/` | Catálogo de personajes: qué dice el burro, el perro, el gato o el gallo ante cada hallazgo. **Separado del motor a propósito.** |
 | `src/etapas/` | Las seis etapas. `acta/campos.js` define los pasos del recorrido de la etapa 1. |
 | `src/componentes/` | Interfaz. Sabe pintar hallazgos; no sabe de actas ni de EDT. |
 | `src/ia/` | Cliente de la opinión opcional. |
@@ -135,8 +139,6 @@ El producto es un taller que se califica solo con reglas citables.
 - Proveedor de LLM para la opinión opcional y su tope de llamadas (historia H-09, sprint 2).
 - Herramienta de tablero. El reporte comparativo recomienda **Jira plan Free**. Al importar
   el CSV, la estimación se configura en **Time (hours)**, no en puntos de historia.
-- Los nueve elementos del acta salieron de la plantilla de la docente y **esperan la
-  confirmación de Ángel**.
 
 ## Instrucciones para Claude
 
