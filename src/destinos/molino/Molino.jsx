@@ -113,51 +113,51 @@ export default function Molino({ estado, despachar }) {
             )}
           </Ranura>
 
-          <div className="centro-molino">
-            <svg className={`burro-carga${tambaleo ? ' tambalea' : ''}`} key={tambaleo}
-              viewBox="0 0 70 56" aria-hidden="true">
-              {/* La paja separa al burro del piso: es el indicador de avance y tiene que verse. */}
-              <ellipse cx="35" cy="50" rx="33" ry="7" className="paja" />
-              <g transform={`translate(5 2) rotate(${inclinacion} 30 44)`}>
-                <Ilustracion clave="animal-burro" x={30} y={45} ancho={60}><Burro /></Ilustracion>
-                <g transform={`translate(27 21) scale(${0.45 + 0.55 * carga})`} className="hatillo-lomo">
-                  <path d="M-10 0 Q-12 -11 0 -13 Q12 -11 10 0 Z" />
-                  <path d="M-3 -13 L0 -17 L3 -13" fill="none" />
+          <section className="carga" aria-label="El burro y su hatillo">
+            <div className="burro-y-decidido">
+              <svg className={`burro-carga${tambaleo ? ' tambalea' : ''}`} key={tambaleo}
+                viewBox="0 0 70 56" aria-hidden="true">
+                {/* La paja separa al burro del piso: es el indicador de avance y tiene que verse. */}
+                <ellipse cx="35" cy="50" rx="33" ry="7" className="paja" />
+                <g transform={`translate(5 2) rotate(${inclinacion} 30 44)`}>
+                  <Ilustracion clave="animal-burro" x={30} y={45} ancho={60}><Burro /></Ilustracion>
+                  <g transform={`translate(27 21) scale(${0.45 + 0.55 * carga})`} className="hatillo-lomo">
+                    <path d="M-10 0 Q-12 -11 0 -13 Q12 -11 10 0 Z" />
+                    <path d="M-3 -13 L0 -17 L3 -13" fill="none" />
+                  </g>
                 </g>
-              </g>
-            </svg>
-
-            <div className="nota-margen" role="status">
-              {nota && (
-                <>
-                  <p className="nota-tarjeta">«{tarjeta(nota.pieza)?.texto}» regresó a la mesa.</p>
-                  <p>{nota.mensaje}</p>
-                  <p className="fuente">{cita(nota.fuente)}</p>
-                </>
-              )}
+              </svg>
+              <details className="decidido">
+                <summary>Ya está decidido</summary>
+                <p><strong>Enfoque.</strong> {DECIDIDO.enfoque}</p>
+                <p><strong>Hitos.</strong> {DECIDIDO.hitos.join(' · ')}</p>
+              </details>
             </div>
 
-            <details className="decidido">
-              <summary>Ya está decidido</summary>
-              <p><strong>Enfoque.</strong> {DECIDIDO.enfoque}</p>
-              <p><strong>Hitos.</strong> {DECIDIDO.hitos.join(' · ')}</p>
-            </details>
-
-          </div>
-
-          <section className="hatillo" aria-label="El hatillo">
-            {COMPARTIMENTOS.map((c) => (
-              <Ranura key={c.id} id={c.id} etiqueta={c.nombre} className={`compartimento ${c.id}`}>
-                {(col[c.id] ?? []).map((id, i) => (
-                  <Pieza key={id} id={id} en={c.id} indice={i}>{tarjeta(id)?.texto ?? id}</Pieza>
-                ))}
-              </Ranura>
-            ))}
-            {/* Las medidas son parte del acta: van en el hatillo, no en medio del escenario. */}
-            <section className="compartimento medidas">
-              <Campo spec={MEDIDAS} valor={datos.medidas} onCambio={escribir} />
-            </section>
+            <div className="hatillo">
+              {COMPARTIMENTOS.map((c) => (
+                <Ranura key={c.id} id={c.id} etiqueta={c.nombre} className={`compartimento ${c.id}`}>
+                  {(col[c.id] ?? []).map((id, i) => (
+                    <Pieza key={id} id={id} en={c.id} indice={i}>{tarjeta(id)?.texto ?? id}</Pieza>
+                  ))}
+                </Ranura>
+              ))}
+              {/* Las medidas son parte del acta: van en el hatillo, no en medio del escenario. */}
+              <section className="compartimento medidas">
+                <Campo spec={MEDIDAS} valor={datos.medidas} onCambio={escribir} />
+              </section>
+            </div>
           </section>
+
+          <div className="nota-margen" role="status">
+            {nota && (
+              <>
+                <p className="nota-tarjeta">«{tarjeta(nota.pieza)?.texto}» regresó a la mesa.</p>
+                <p>{nota.mensaje}</p>
+                <p className="fuente">{cita(nota.fuente)}</p>
+              </>
+            )}
+          </div>
 
           <div className="pie-molino">
             <p>{lleno ? 'El hatillo va lleno.' : 'Cuando el hatillo vaya lleno y tenga sus medidas, el burro puede salir.'}</p>

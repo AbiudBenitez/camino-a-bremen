@@ -142,3 +142,14 @@ h2 { font-size: 1.35rem; margin: 2.2rem 0 0.8rem; }
 .se-rompio p { margin: 0 0 0.6rem; max-width: 34rem; }
 .se-rompio .detalle code { font-family: ui-monospace, Menlo, monospace; font-size: 0.78rem;
   color: var(--tinta-2); }
+
+/* ------------------------------------------------- piezas de los destinos */
+/* La nota al margen y la salida se ven igual en el molino, el gato y la casa. */
+.nota-margen p { margin: 0 0 0.3rem; }
+.nota-margen .fuente { margin: 0; font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.75rem; color: var(--tinta-3); }
+.nota-tarjeta { font-style: italic; color: var(--tinta-2); }
+
+.salida { padding: 1.4rem 1.5rem; background: var(--hoja); border: 1px solid var(--camino);
+  border-radius: 14px; animation: entra var(--normal) var(--curva); }
+.salida h2 { margin: 0 0 0.5rem; color: var(--camino); }
