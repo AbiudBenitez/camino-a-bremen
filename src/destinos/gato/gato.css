@@ -31,11 +31,6 @@
 .rama.disponible { border-style: solid; border-color: var(--plan); }
 .rama .pieza { width: 100%; }
 
-.tejado .nota-margen { grid-column: 1 / -1; }
-.tejado .nota-margen:not(:empty) { padding: 0.8rem 1rem; background: var(--hoja); border: 1px dashed var(--casa); border-radius: 12px; }
-.tejado .nota-margen p { margin: 0 0 0.3rem; }
-.tejado .nota-margen .fuente { margin: 0; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.75rem; color: var(--tinta-3); }
-
 .pie-gato { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
 .pie-gato .primario { margin-left: auto; min-width: 14rem; }
 .pie-gato .hallazgos { flex-basis: 100%; margin: 0; padding: 0.9rem 1rem; background: var(--hoja); border-radius: 14px; }

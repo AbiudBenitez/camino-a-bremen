@@ -20,13 +20,38 @@ const EXCLUSIONES = fuente('PMBOK', '5.3.3.1 Enunciado del Alcance del Proyecto:
 const RIESGOS = fuente('PMBOK', '4.1.3.1 Acta de Constitución: riesgos generales del proyecto')
 const INTERESADOS = fuente('PMBOK', '13.1 Identificar a los Interesados')
 
+/**
+ * Cada compartimento trae una explicación breve para el «!»: qué es esa parte del
+ * acta, sin decir qué tarjeta va ahí, porque eso regalaría el ejercicio.
+ */
 export const COMPARTIMENTOS = [
-  { id: 'objetivo', nombre: 'Objetivo', cupo: 1, fuente: OBJETIVOS },
-  { id: 'dentro', nombre: 'Dentro del alcance', fuente: LIMITES },
-  { id: 'fuera', nombre: 'Fuera del alcance', fuente: EXCLUSIONES },
-  { id: 'riesgos', nombre: 'Riesgos', fuente: RIESGOS },
-  { id: 'interesados', nombre: 'Interesados', fuente: INTERESADOS },
+  { id: 'objetivo', nombre: 'Objetivo', cupo: 1, fuente: OBJETIVOS,
+    explicacion: 'Lo que el proyecto tiene que lograr, dicho de forma que se pueda comprobar al final. '
+      + 'El acta registra objetivos medibles: si no se puede verificar, es un deseo, no un objetivo.' },
+  { id: 'dentro', nombre: 'Dentro del alcance', fuente: LIMITES,
+    explicacion: 'El trabajo que el proyecto sí va a hacer, a grandes rasgos. El acta describe el proyecto '
+      + 'en alto nivel y sus límites; el detalle llega después, al planificar el alcance.' },
+  { id: 'fuera', nombre: 'Fuera del alcance', fuente: EXCLUSIONES,
+    explicacion: 'Lo que se declara, a propósito, que el proyecto no va a hacer. Decirlo por escrito evita '
+      + 'que alguien lo dé por incluido más adelante.' },
+  { id: 'riesgos', nombre: 'Riesgos', fuente: RIESGOS,
+    explicacion: 'Lo incierto que, si llega a pasar, afectaría al proyecto. No es trabajo ni un hecho: '
+      + 'todavía no ocurre. En el acta van los riesgos generales; su análisis se hace al planificar.' },
+  { id: 'interesados', nombre: 'Interesados', fuente: INTERESADOS,
+    explicacion: 'Las personas o grupos que influyen en el proyecto o a quienes les afecta su resultado, '
+      + 'también los que están en contra. Identificarlos desde el inicio es el primer paso para gestionarlos.' },
 ]
+
+/** Las explicaciones que no son de un compartimento: el acta completa y sus medidas de éxito. */
+export const ACERCA = {
+  acta: { titulo: 'Acta de constitución', fuente: ACTA,
+    explicacion: 'El documento que autoriza formalmente el proyecto y le da al director la autoridad para '
+      + 'usar recursos. Deja por escrito, en alto nivel, qué se busca, qué entra y qué no, qué puede salir '
+      + 'mal y a quién le importa. El detalle se planifica después.' },
+  medidas: { titulo: 'Medidas de éxito', fuente: OBJETIVOS,
+    explicacion: 'Cómo se va a saber que el proyecto lo logró. Cada medida necesita algo que se pueda '
+      + 'contar o comprobar: una fecha, una cifra, un resultado.' },
+}
 
 export const TARJETAS = [
   { id: 'lobos', texto: 'Lobos en el bosque', va: 'riesgos', fuente: RIESGOS,

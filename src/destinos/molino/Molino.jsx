@@ -2,11 +2,12 @@ import { useCallback, useState } from 'react'
 import { MESA, colocar, enMesa, normalizar } from '../../arrastre/colocacion.js'
 import { Mesa, Pieza, Ranura } from '../../arrastre/Mesa.jsx'
 import { evaluar } from '../../motor/motor.js'
-import { cita } from '../../motor/contrato.js'
-import { COMPARTIMENTOS, DECIDIDO, TARJETAS, tarjeta } from '../../motor/reglas/molino.js'
+import { ACERCA, COMPARTIMENTOS, DECIDIDO, TARJETAS, tarjeta } from '../../motor/reglas/molino.js'
 import { borrador } from '../../estado/taller.js'
 import Campo from '../../componentes/Campo.jsx'
 import Hallazgos from '../../componentes/Hallazgos.jsx'
+import Explica from '../../componentes/Explica.jsx'
+import NotaFlotante from '../../componentes/NotaFlotante.jsx'
 import { Burro } from '../../mapa/dibujos.jsx'
 import Ilustracion from '../../ilustraciones/Ilustracion.jsx'
 import './molino.css'
@@ -50,7 +51,7 @@ export default function Molino({ estado, despachar }) {
     const error = evaluar('molino', { ...datos, colocaciones: nuevas }).hallazgos
       .find((h) => h.regla === 'molino.en-su-lugar' && h.campo === pieza)
     if (error) {
-      setNota({ pieza, mensaje: error.mensaje, fuente: error.fuente })
+      setNota({ tarjeta: tarjeta(pieza)?.texto ?? pieza, mensaje: error.mensaje, fuente: error.fuente })
       setTambaleo((n) => n + 1)
       return
     }
@@ -91,6 +92,10 @@ export default function Molino({ estado, despachar }) {
       <div className="molino-titulo">
         <a className="volver" href="#mapa">← Al mapa</a>
         <h1>El molino</h1>
+        <span className="titulo-concepto">
+          {ACERCA.acta.titulo}
+          <Explica titulo={ACERCA.acta.titulo} fuente={ACERCA.acta.fuente}>{ACERCA.acta.explicacion}</Explica>
+        </span>
         <p className="entrada">
           El burro ya no puede con los costales y su amo piensa deshacerse de él. Antes de irse a
           Bremen arma su hatillo: cada cosa que sabe va en su lugar, o se queda en el molino.
@@ -137,6 +142,7 @@ export default function Molino({ estado, despachar }) {
             <div className="hatillo">
               {COMPARTIMENTOS.map((c) => (
                 <Ranura key={c.id} id={c.id} etiqueta={c.nombre} className={`compartimento ${c.id}`}>
+                  <Explica titulo={c.nombre} fuente={c.fuente}>{c.explicacion}</Explica>
                   {(col[c.id] ?? []).map((id, i) => (
                     <Pieza key={id} id={id} en={c.id} indice={i}>{tarjeta(id)?.texto ?? id}</Pieza>
                   ))}
@@ -144,20 +150,13 @@ export default function Molino({ estado, despachar }) {
               ))}
               {/* Las medidas son parte del acta: van en el hatillo, no en medio del escenario. */}
               <section className="compartimento medidas">
+                <Explica titulo={ACERCA.medidas.titulo} fuente={ACERCA.medidas.fuente}>{ACERCA.medidas.explicacion}</Explica>
                 <Campo spec={MEDIDAS} valor={datos.medidas} onCambio={escribir} />
               </section>
             </div>
           </section>
 
-          <div className="nota-margen" role="status">
-            {nota && (
-              <>
-                <p className="nota-tarjeta">«{tarjeta(nota.pieza)?.texto}» regresó a la mesa.</p>
-                <p>{nota.mensaje}</p>
-                <p className="fuente">{cita(nota.fuente)}</p>
-              </>
-            )}
-          </div>
+          <NotaFlotante nota={nota} onCerrar={() => setNota(null)} />
 
           <div className="pie-molino">
             <p>{lleno ? 'El hatillo va lleno.' : 'Cuando el hatillo vaya lleno y tenga sus medidas, el burro puede salir.'}</p>

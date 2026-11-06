@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { evaluar } from '../motor.js'
-import { COMPARTIMENTOS, TARJETAS } from './molino.js'
+import { ACERCA, COMPARTIMENTOS, TARJETAS } from './molino.js'
 import { MESA, colocar } from '../../arrastre/colocacion.js'
 
 const MEDIDAS = ['Llegar en 12 días', 'Pasar 1 audición']
@@ -8,6 +8,16 @@ const resuelto = () => TARJETAS.filter((t) => t.va !== MESA)
   .reduce((col, t) => colocar(col, t.id, t.va), {})
 
 describe('molino', () => {
+  // El «!» enseña qué es cada parte del acta, con su fuente, sin nombrar ninguna tarjeta.
+  it('cada parte del acta trae su explicación con fuente y sin regalar la respuesta', () => {
+    const partes = [...COMPARTIMENTOS, ...Object.values(ACERCA)]
+    for (const p of partes) {
+      expect(p.explicacion.length).toBeGreaterThan(60)
+      expect(p.fuente.obra).toBe('PMBOK')
+      for (const t of TARJETAS) expect(p.explicacion).not.toContain(t.texto)
+    }
+  })
+
   it('cada tarjeta tiene un lugar que existe, una nota y su fuente', () => {
     const lugares = new Set([MESA, ...COMPARTIMENTOS.map((c) => c.id)])
     for (const t of TARJETAS) {
