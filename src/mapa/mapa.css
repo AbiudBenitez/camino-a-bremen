@@ -101,6 +101,9 @@ main.en-mapa > .cabecera { position: absolute; top: 1.2rem; left: 1.5rem; right:
 /* El área de toque llega a 44 px aunque el círculo se vea de 32. */
 .concepto-boton::before { content: ''; position: absolute; inset: -6px; }
 .concepto-boton:hover, .concepto-boton[aria-expanded='true'] { background: var(--hoja); }
+/* El rótulo es su propio contexto de apilamiento: con la explicación abierta sube
+   completo por encima de la burbuja y de los demás rótulos, o la tarjeta queda tapada. */
+.rotulo.explicando { z-index: 6; }
 .concepto-tarjeta { position: absolute; width: 17rem; padding: 0.9rem 1rem; white-space: normal; text-align: left;
   font-size: 1rem; background: var(--hoja); border: 1px solid var(--linea); border-radius: 14px; z-index: 3;
   box-shadow: 0 14px 32px rgb(27 26 23 / 0.2); animation: entra var(--normal) var(--curva); }

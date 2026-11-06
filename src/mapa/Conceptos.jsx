@@ -42,7 +42,7 @@ export default function Conceptos({ estado }) {
         const lado = x < LIENZO.ancho * 0.25 ? 'izq' : x > LIENZO.ancho * 0.75 ? 'der' : 'centro'
         const vertical = y > LIENZO.alto * 0.6 ? 'arriba' : 'abajo'
         return (
-          <div key={d.id} className={`rotulo${hecho ? ' hecho' : ''}${cerrado ? ' cerrado' : ''}`}
+          <div key={d.id} className={`rotulo${hecho ? ' hecho' : ''}${cerrado ? ' cerrado' : ''}${abierto === d.id ? ' explicando' : ''}`}
             style={{ left: `${(x / LIENZO.ancho) * 100}%`, top: `${((y + 14 + 6 * k) / LIENZO.alto) * 100}%`,
               '--k': Math.min(1.15, 0.8 + 0.2 * k) }}>
             <span className="rotulo-nombre">{d.nombre}</span>
