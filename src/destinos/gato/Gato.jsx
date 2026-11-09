@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { MESA, colocar, enMesa, normalizar } from '../../arrastre/colocacion.js'
 import { Mesa, Pieza, Ranura } from '../../arrastre/Mesa.jsx'
 import { evaluar } from '../../motor/motor.js'
-import { cita } from '../../motor/contrato.js'
 import { CUPO_RAMA, PIEZAS, PROYECTO, RAMAS, pieza } from '../../motor/reglas/gato.js'
 import { borrador } from '../../estado/taller.js'
 import Hallazgos from '../../componentes/Hallazgos.jsx'
+import NotaFlotante from '../../componentes/NotaFlotante.jsx'
 import './gato.css'
 
 const PESO = 320
@@ -34,7 +34,7 @@ export default function Gato({ estado, despachar }) {
     const nuevas = colocar(col, id, ranura, { indice, cupo: ranura === MESA ? undefined : CUPO_RAMA })
     const error = evaluar('gato', { ...datos, colocaciones: nuevas }).hallazgos
       .find((h) => h.regla === 'gato.en-su-rama' && h.campo === id)
-    if (error) { setNota({ id, mensaje: error.mensaje, fuente: error.fuente }); return }
+    if (error) { setNota({ tarjeta: pieza(id)?.texto ?? id, mensaje: error.mensaje, fuente: error.fuente }); return }
     setNota(null)
     setResultado(null)
     despachar({ tipo: 'escribir', artefacto: 'gato', campo: 'colocaciones', valor: nuevas })
@@ -100,15 +100,7 @@ export default function Gato({ estado, despachar }) {
             </div>
           </section>
 
-          <div className="nota-margen" role="status">
-            {nota && (
-              <>
-                <p className="nota-tarjeta">«{pieza(nota.id)?.texto}» regresó a la mesa.</p>
-                <p>{nota.mensaje}</p>
-                <p className="fuente">{cita(nota.fuente)}</p>
-              </>
-            )}
-          </div>
+          <NotaFlotante nota={nota} onCerrar={() => setNota(null)} />
 
           <div className="pie-gato">
             <button type="button" className="primario" onClick={colgar} disabled={leyendo}>
