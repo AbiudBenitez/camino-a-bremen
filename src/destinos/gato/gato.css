@@ -11,7 +11,6 @@
   padding: 1.4rem; border-radius: 22px; background: linear-gradient(var(--cielo-bajo), var(--hoja)); }
 .mesa-gato { display: grid; gap: 0.6rem; background: var(--hoja); border-style: solid; }
 .mesa-gato .pieza { width: 100%; }
-.horas { font-family: var(--ui); font-size: 0.85em; color: var(--tinta-3); white-space: nowrap; }
 
 .movil { display: grid; justify-items: center; gap: 0; }
 .proyecto { margin: 0; padding: 0.6rem 1.2rem; background: var(--madera); color: var(--sobre-piso);

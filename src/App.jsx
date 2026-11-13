@@ -5,6 +5,7 @@ import { useMusica } from './sonido/useMusica.js'
 import Molino from './destinos/molino/Molino.jsx'
 import Casa from './destinos/casa/Casa.jsx'
 import Gato from './destinos/gato/Gato.jsx'
+import Perro from './destinos/perro/Perro.jsx'
 import Escena from './destinos/Escena.jsx'
 import PantallaMapa from './mapa/PantallaMapa.jsx'
 import Cabecera from './mapa/Cabecera.jsx'
@@ -14,6 +15,8 @@ import './mapa/mapa.css'
 
 // Navegación por hash: en GitHub Pages una ruta real da 404 al recargar, y el
 // botón de atrás del teléfono tiene que volver al mapa en vez de salirse.
+const JUEGOS = ['molino', 'perro', 'gato', 'casa']
+
 function useHash() {
   const [hash, setHash] = useState(() => window.location.hash)
   useEffect(() => {
@@ -57,7 +60,8 @@ export default function App() {
         {aqui === 'molino' && <Molino estado={estado} despachar={despachar} />}
         {aqui === 'casa' && <Casa estado={estado} despachar={despachar} />}
         {aqui === 'gato' && <Gato estado={estado} despachar={despachar} />}
-        {aqui && !['molino', 'casa', 'gato'].includes(aqui) && <Escena id={aqui} despachar={despachar} />}
+        {aqui === 'perro' && <Perro estado={estado} despachar={despachar} />}
+        {aqui && !JUEGOS.includes(aqui) && <Escena id={aqui} despachar={despachar} />}
         {!aqui && <PantallaMapa estado={estado} />}
       </Red>
     </main>

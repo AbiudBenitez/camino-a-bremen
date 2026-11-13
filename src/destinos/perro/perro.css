@@ -1,0 +1,80 @@
+/* ================================================================ el perro
+   Mismo esqueleto que el gato y el molino: a la izquierda la mesa, a la
+   derecha la matriz de poder e interés con el perro a un lado. El fondo es el
+   pasto de la orilla del camino. */
+
+.perro { max-width: 72rem; margin: 0 auto; }
+/* En rejilla y no en flex: con flex, la entrada se subía junto al título cuando cabía. */
+.perro-titulo { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: baseline; gap: 0.3rem 1rem; margin-bottom: 1rem; }
+.perro-titulo h1 { margin: 0; white-space: nowrap; font-family: var(--titulo); font-size: 1.8rem; }
+.perro-titulo .entrada { grid-column: 1 / -1; margin: 0; color: var(--tinta-2); max-width: 46rem; }
+
+.campo-perro { display: grid; grid-template-columns: minmax(14rem, 1fr) minmax(22rem, 2fr); gap: 1.4rem; align-items: start;
+  padding: 1.4rem; border-radius: 22px; background: linear-gradient(var(--camino-10), var(--hoja)); }
+.mesa-perro { display: grid; gap: 0.6rem; background: var(--hoja); border-style: solid; }
+.mesa-perro .pieza { width: 100%; }
+@media (min-width: 60.01rem) { .mesa-perro { position: sticky; top: 1rem; } }
+
+.matriz-y-perro { display: grid; gap: 0.8rem; }
+
+/* La matriz: poder hacia arriba, interés hacia la derecha. Los ejes se leen en
+   el margen, como en el PMBOK, para que el cuadrante no sea una etiqueta suelta. */
+.matriz { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem;
+  padding: 0 0 1.6rem 1.8rem; }
+.eje { position: absolute; font-family: var(--ui); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--tinta-3); }
+.eje-poder { left: 0; bottom: 1.6rem; transform-origin: 0 0; rotate: -90deg; translate: 0 0; white-space: nowrap; }
+.eje-interes { right: 0; bottom: 0; }
+.matriz::before, .matriz::after { content: ''; position: absolute; background: var(--tinta-3); }
+.matriz::before { left: 1.2rem; top: 0; bottom: 1.2rem; width: 2px; }
+.matriz::after { left: 1.2rem; right: 0; bottom: 1.2rem; height: 2px; }
+
+.cuadrante { position: relative; display: grid; align-content: start; gap: 0.5rem; min-height: 9rem;
+  padding-right: 2.6rem; background: var(--hoja); border: 2px dashed var(--tierra-2); border-radius: 14px; }
+.cuadrante > .explica { position: absolute; top: 0.4rem; right: 0.4rem; }
+.cuadrante .pieza { width: 100%; }
+.cuadrante.disponible { border-style: solid; border-color: var(--plan); }
+/* Lo que más pesa, más tinta: arriba a la derecha es donde se juega el proyecto. */
+.cuadrante.cerca { background: var(--plan-10); }
+.ejes-cuadrante { font-family: var(--ui); font-size: 0.78rem; color: var(--tinta-3); }
+
+.perro-olfato { display: flex; align-items: center; gap: 0.8rem; padding-left: 1.8rem; }
+.perro-olfato p { margin: 0; color: var(--tinta-2); font-style: italic; }
+.perro-dibujo { width: 6rem; height: auto; overflow: visible; }
+.perro-dibujo [stroke] { vector-effect: non-scaling-stroke; }
+/* Cada interesado bien ubicado, el perro baja el hocico: encontró el rastro. */
+.perro-dibujo.olfatea { animation: olfatea 520ms var(--curva); transform-origin: 70% 80%; }
+@keyframes olfatea {
+  0%, 100% { transform: none; }
+  40% { transform: rotate(8deg) translateY(2px); }
+  70% { transform: rotate(3deg); }
+}
+
+.pie-perro { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
+.pie-perro .primario { margin-left: auto; min-width: 14rem; }
+.pie-perro .hallazgos { flex-basis: 100%; margin: 0; padding: 0.9rem 1rem; background: var(--hoja); border-radius: 14px; }
+
+@media (prefers-reduced-motion: reduce) { .perro-dibujo.olfatea { animation: none; } }
+
+@media (max-width: 60rem) {
+  .campo-perro { grid-template-columns: minmax(0, 1fr); padding: 1rem; }
+}
+@media (max-width: 34rem) {
+  .perro-titulo { grid-template-columns: auto minmax(0, 1fr); }
+  .perro-titulo .titulo-concepto { grid-column: 1 / -1; }
+  .matriz { grid-template-columns: minmax(0, 1fr); padding: 0; }
+  .matriz::before, .matriz::after, .eje { display: none; }
+  .perro-olfato { padding-left: 0; }
+}
+
+/* Teléfono en horizontal: el mazo queda fijo y la matriz a un lado. */
+@media (orientation: landscape) and (max-height: 34rem) {
+  .perro-titulo { margin-bottom: 0.6rem; }
+  .perro-titulo h1 { font-size: 1.4rem; }
+  .perro-titulo .entrada { font-size: 0.92rem; }
+  .campo-perro { grid-template-columns: minmax(12rem, 1fr) minmax(0, 1.8fr); gap: 0.9rem; padding: 0.8rem; }
+  .mesa-perro { position: sticky; top: 0.5rem; max-height: calc(100dvh - 1rem); overflow-y: auto; }
+  .mesa-perro .pieza { min-height: 40px; padding: 0.4rem 0.7rem; }
+  .cuadrante { min-height: 6rem; }
+  .perro-dibujo { width: 4rem; }
+}

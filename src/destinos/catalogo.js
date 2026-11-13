@@ -5,15 +5,15 @@ import { fuente } from '../motor/contrato.js'
  * la puerta: un destino se abre cuando el anterior quedó recorrido.
  *
  *   juego  -> minijuego con reglas citables. Produce un artefacto.
- *   escena -> tramo de cuento. En el sprint 2 el perro, el gallo y el bosque son
- *             escenas; sus minijuegos llegan en el sprint 3.
+ *   escena -> tramo de cuento, para los destinos que todavía no tienen
+ *             minijuego.
  *
  * `animal` es quien se suma a la banda al recorrer el destino, y con él su capa
  * de la música.
  */
 export const DESTINOS = [
   { id: 'molino', nombre: 'El molino', tipo: 'juego', animal: 'burro', metodo: 'PMI' },
-  { id: 'perro', nombre: 'El perro', tipo: 'escena', animal: 'perro', metodo: 'PMI' },
+  { id: 'perro', nombre: 'El perro', tipo: 'juego', animal: 'perro', metodo: 'PMI' },
   { id: 'gato', nombre: 'El gato', tipo: 'juego', animal: 'gato', metodo: 'PMI' },
   { id: 'gallo', nombre: 'El gallo', tipo: 'escena', animal: 'gallo', metodo: 'PMI' },
   { id: 'bosque', nombre: 'El bosque', tipo: 'escena', metodo: 'PMI' },
