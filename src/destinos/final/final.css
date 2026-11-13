@@ -1,0 +1,87 @@
+/* ================================================================ el acto final
+   De noche, como la casa. Arriba los acuerdos de la planeación (objetivo y
+   Definición de Terminado); abajo la mesa con el trabajo y los cuatro puestos,
+   cada animal con su medidor de horas. */
+
+.final { max-width: 72rem; margin: 0 auto; }
+.final-titulo { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: baseline; gap: 0.3rem 1rem; margin-bottom: 1rem; }
+.final-titulo h1 { margin: 0; white-space: nowrap; font-family: var(--titulo); font-size: 1.8rem; }
+.final > .entrada { margin: 0 0 1rem; color: var(--tinta-2); max-width: 46rem; }
+
+.acuerdos { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1rem; margin-bottom: 1rem; }
+.objetivo { margin: 0; padding: 0.9rem 1rem; background: var(--hoja); border: 1px solid var(--linea); border-radius: 14px; display: grid; gap: 0.4rem; }
+.objetivo legend, .terminado .ranura-etiqueta, .capacidad-titulo { display: flex; align-items: center; gap: 0.5rem; }
+.objetivo legend { padding: 0 0.3rem; font-family: var(--titulo); font-weight: 700; font-size: 1.05rem; }
+.objetivo legend .explica-tarjeta, .terminado .explica-tarjeta, .capacidad-titulo .explica-tarjeta { left: 0; right: auto; }
+.opcion { display: flex; align-items: center; gap: 0.6rem; min-height: 44px; padding: 0.2rem 0.5rem; border-radius: 10px; cursor: pointer; }
+.opcion:has(input:checked) { background: var(--plan-10); }
+.opcion input { width: 20px; height: 20px; accent-color: var(--plan); flex: none; }
+.terminado { padding: 0.9rem 1rem; background: var(--madera); color: var(--sobre-piso); border-radius: 14px; }
+.terminado .ranura-etiqueta { color: var(--sobre-piso); }
+.terminado p:last-child { margin: 0.4rem 0 0; font-family: var(--cuento); font-size: 1.02rem; }
+
+.casa-noche { display: grid; grid-template-columns: minmax(14rem, 1fr) minmax(22rem, 2fr); gap: 1.4rem; align-items: start;
+  padding: 1.4rem; border-radius: 22px; background: linear-gradient(var(--plan-10), var(--hoja)); }
+.mesa-final { display: grid; gap: 0.6rem; background: var(--hoja); border-style: solid; }
+.mesa-final .pieza { width: 100%; }
+@media (min-width: 60.01rem) { .mesa-final { position: sticky; top: 1rem; } }
+
+.banda-puestos { display: grid; gap: 0.6rem; }
+.puestos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+.puesto { display: grid; align-content: start; gap: 0.5rem; min-height: 10rem; background: var(--hoja);
+  border: 2px dashed var(--tierra-2); border-radius: 14px; }
+.puesto.disponible { border-style: solid; border-color: var(--plan); }
+.puesto .pieza { width: 100%; }
+.puesto-animal { width: 4rem; height: auto; overflow: visible; }
+.puesto-animal [stroke] { vector-effect: non-scaling-stroke; }
+/* Una rayita por hora: se ve cuánto le cabe sin tener que restar. */
+.medidor { display: flex; align-items: center; gap: 4px; }
+.medidor > span:not(.cifra) { width: 18px; height: 10px; border-radius: 3px; border: 1.5px solid var(--tierra-2); }
+.medidor > span.llena { background: var(--plan); border-color: var(--plan); }
+.medidor .cifra { margin-left: 0.4rem; font-family: var(--ui); font-size: 0.8rem; color: var(--tinta-3); font-variant-numeric: tabular-nums; }
+
+.pie-final { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
+.pie-final .primario { margin-left: auto; min-width: 14rem; }
+.pie-final .hallazgos { flex-basis: 100%; margin: 0; padding: 0.9rem 1rem; background: var(--hoja); border-radius: 14px; }
+
+/* ------------------------------------------------------------- la noche */
+.noche { max-width: 44rem; margin: 0 auto; padding: 1.6rem 1.8rem; border-radius: 22px; background: var(--hoja);
+  font-family: var(--cuento); font-size: 1.1rem; display: grid; gap: 0.2rem; }
+.noche h2 { margin: 0 0 0.4rem; font-family: var(--titulo); }
+.noche p { margin: 0 0 0.6rem; }
+.noche .primario { justify-self: end; font-family: var(--ui); }
+/* El final se cuenta en orden: cada paso aparece cuando el ladrón llega ahí. */
+.paso { animation: aparece 600ms var(--curva) both; }
+@keyframes aparece { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ------------------------------------------------------------- la retrospectiva */
+.retro { max-width: 46rem; display: grid; gap: 0.8rem; padding: 1.4rem; border-radius: 22px; background: var(--hoja); }
+.retro-cabeza { display: flex; align-items: center; gap: 0.6rem; }
+.retro-cabeza h2 { margin: 0; font-family: var(--titulo); }
+.retro-cabeza .explica-tarjeta { left: 0; right: auto; }
+.retro > p { margin: 0; color: var(--tinta-2); }
+.campo-retro { display: grid; gap: 0.3rem; font-family: var(--ui); font-weight: 600; font-size: 0.95rem; }
+.campo-retro textarea { font: inherit; font-family: var(--cuento); font-weight: 400; font-size: 1.02rem; padding: 0.6rem 0.8rem;
+  border: 1px solid var(--tierra-2); border-radius: 10px; background: var(--papel); color: var(--tinta); resize: vertical; }
+.campo-retro textarea:focus-visible { outline: 3px solid var(--plan); outline-offset: 1px; }
+
+.fin .compromiso { display: grid; gap: 0.2rem; padding: 0.8rem 1rem; background: var(--hoja); border-radius: 12px; font-family: var(--cuento); }
+
+@media (prefers-reduced-motion: reduce) { .paso { animation: none; } }
+@media (max-width: 60rem) {
+  .casa-noche { grid-template-columns: minmax(0, 1fr); padding: 1rem; }
+  .acuerdos { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 34rem) {
+  .final-titulo { grid-template-columns: auto minmax(0, 1fr); }
+  .final-titulo .titulo-concepto { grid-column: 1 / -1; }
+  .puestos { grid-template-columns: minmax(0, 1fr); }
+  .noche { padding: 1.1rem; }
+}
+@media (orientation: landscape) and (max-height: 34rem) {
+  .final-titulo h1 { font-size: 1.4rem; }
+  .casa-noche { grid-template-columns: minmax(12rem, 1fr) minmax(0, 1.8fr); gap: 0.9rem; padding: 0.8rem; }
+  .mesa-final { position: sticky; top: 0.5rem; max-height: calc(100dvh - 1rem); overflow-y: auto; }
+  .puesto { min-height: 7rem; }
+  .puesto-animal { width: 2.8rem; }
+}

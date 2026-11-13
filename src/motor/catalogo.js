@@ -9,6 +9,7 @@ import { reglasCasa } from './reglas/casa.js'
 import { reglasGato } from './reglas/gato.js'
 import { reglasPerro } from './reglas/perro.js'
 import { reglasGallo } from './reglas/gallo.js'
+import { reglasFinal } from './reglas/final.js'
 
 export const CATALOGO = {
   acta: {
@@ -41,7 +42,11 @@ export const CATALOGO = {
     etapa: 6,
     reglas: reglasCasa,
   },
+  final: {
+    nombre: 'El acto final: un sprint de una noche y su retrospectiva',
+    etapa: 6,
+    reglas: reglasFinal,
+  },
   // etapa 2 · EDT        -> historia H-04
   // etapa 4 · backlog    -> historia H-08
-  // etapa 5 · sprint     -> historia H-11
 }
