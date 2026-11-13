@@ -160,6 +160,17 @@ main.en-mapa > .cabecera { position: absolute; top: 1.2rem; left: 1.5rem; right:
 .pagina .primario { margin-top: 0.6rem; }
 .en-construccion { font-family: var(--ui); font-size: 0.9rem !important; color: var(--tinta-3);
   padding: 0.6rem 0.8rem; border: 1px dashed var(--linea); border-radius: 8px; }
+/* Teléfono en horizontal: el libro abierto, lámina a la izquierda y texto a la
+   derecha. Apilados, el dibujo llenaba la pantalla y el texto quedaba abajo. */
+@media (orientation: landscape) and (max-height: 34rem) {
+  .escena { max-width: 60rem; }
+  .lamina { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: stretch; }
+  /* El dibujo se apoya abajo y el cielo sigue hacia arriba con el mismo color. */
+  .escena-dibujo { height: 100%; background: var(--cielo); }
+  .pagina { padding: 1rem 1.3rem 1.1rem; }
+  .pagina h1 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .pagina p { font-size: 0.98rem; line-height: 1.55; margin-bottom: 0.6rem; }
+}
 
 /* «Volver» es un control, no un vínculo de documento. */
 .volver { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.8rem;

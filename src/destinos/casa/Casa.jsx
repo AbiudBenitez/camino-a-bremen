@@ -58,7 +58,7 @@ function Giro({ estado, onSeguir }) {
   return (
     <section className="giro" aria-labelledby="giro-titulo">
       <p className="giro-entrada">
-        Desde la punta del árbol, el gallo vio una luz. Es una casa, y adentro hay ladrones comiendo.
+        Una casa con ladrones, a mitad del camino. El burro saca el hatillo que armó en el molino.
       </p>
       <div className="hatillo-viejo">
         <p className="ranura-etiqueta">{hatillo.propio ? 'Tu hatillo, tal como salió del molino' : 'El hatillo del burro'}</p>

@@ -9,6 +9,7 @@ import Perro from './destinos/perro/Perro.jsx'
 import Gallo from './destinos/gallo/Gallo.jsx'
 import Final from './destinos/final/Final.jsx'
 import Escena from './destinos/Escena.jsx'
+import ConCuento from './destinos/ConCuento.jsx'
 import PantallaMapa from './mapa/PantallaMapa.jsx'
 import Cabecera from './mapa/Cabecera.jsx'
 import Red from './componentes/Red.jsx'
@@ -59,12 +60,16 @@ export default function App() {
       <Cabecera estado={estado} taller={taller} musica={musica} />
 
       <Red>
-        {aqui === 'molino' && <Molino estado={estado} despachar={despachar} />}
-        {aqui === 'casa' && <Casa estado={estado} despachar={despachar} />}
-        {aqui === 'gato' && <Gato estado={estado} despachar={despachar} />}
-        {aqui === 'perro' && <Perro estado={estado} despachar={despachar} />}
-        {aqui === 'gallo' && <Gallo estado={estado} despachar={despachar} />}
-        {aqui === 'final' && <Final estado={estado} despachar={despachar} />}
+        {aqui && JUEGOS.includes(aqui) && (
+          <ConCuento key={aqui} id={aqui}>
+            {aqui === 'molino' && <Molino estado={estado} despachar={despachar} />}
+            {aqui === 'casa' && <Casa estado={estado} despachar={despachar} />}
+            {aqui === 'gato' && <Gato estado={estado} despachar={despachar} />}
+            {aqui === 'perro' && <Perro estado={estado} despachar={despachar} />}
+            {aqui === 'gallo' && <Gallo estado={estado} despachar={despachar} />}
+            {aqui === 'final' && <Final estado={estado} despachar={despachar} />}
+          </ConCuento>
+        )}
         {aqui && !JUEGOS.includes(aqui) && <Escena id={aqui} despachar={despachar} />}
         {!aqui && <PantallaMapa estado={estado} />}
       </Red>
