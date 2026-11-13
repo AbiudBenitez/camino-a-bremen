@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Banda from './Banda.jsx'
 import Expediente from './Expediente.jsx'
-import { IconoBanda, IconoExpediente, IconoMusica } from './iconos.jsx'
+import { IconoBanda, IconoExpediente, IconoLibro, IconoMusica } from './iconos.jsx'
 
 /**
  * La cabecera de todas las pantallas: el título lleva al mapa y los botones
@@ -49,6 +49,10 @@ export default function Cabecera({ estado, taller, musica }) {
           onClick={() => alternar('expediente')}>
           <IconoExpediente />
         </button>
+        <a className="redondo" href="#referencias" aria-label="Referencias y certificaciones"
+          title="Referencias y certificaciones">
+          <IconoLibro />
+        </a>
       </nav>
       {panel === 'banda' && (
         <div className="panel-flotante" id="panel-banda"><Banda estado={estado} /></div>

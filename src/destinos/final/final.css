@@ -84,3 +84,4 @@
   .puesto { min-height: 7rem; }
   .puesto-animal { width: 2.8rem; }
 }
+.fin .seguir-aprendiendo { margin: 0; font-family: var(--ui); font-size: 0.92rem; color: var(--tinta-2); }

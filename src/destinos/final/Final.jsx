@@ -246,6 +246,9 @@ function Fin({ estado }) {
       {compromiso && (
         <p className="compromiso"><span className="ranura-etiqueta">Su compromiso para el siguiente sprint</span>{compromiso}</p>
       )}
+      <p className="seguir-aprendiendo">
+        ¿De dónde sale todo esto, y dónde se certifica de verdad? <a href="#referencias">Referencias y certificaciones</a>.
+      </p>
       <a className="como-boton primario" href="#mapa">Ver el camino recorrido →</a>
     </section>
   )

@@ -32,3 +32,13 @@ export function IconoExpediente() {
     </svg>
   )
 }
+
+/** Un libro abierto: de dónde sale lo que dice el taller. */
+export function IconoLibro() {
+  return (
+    <svg {...BASE}>
+      <path d="M2 5c3-1.3 6.5-1.3 10 1v14c-3.5-2.3-7-2.3-10-1z" />
+      <path d="M22 5c-3-1.3-6.5-1.3-10 1v14c3.5-2.3 7-2.3 10-1z" />
+    </svg>
+  )
+}

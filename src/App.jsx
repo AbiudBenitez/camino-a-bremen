@@ -11,6 +11,7 @@ import Final from './destinos/final/Final.jsx'
 import Escena from './destinos/Escena.jsx'
 import ConCuento from './destinos/ConCuento.jsx'
 import PantallaMapa from './mapa/PantallaMapa.jsx'
+import Referencias from './referencias/Referencias.jsx'
 import Cabecera from './mapa/Cabecera.jsx'
 import Red from './componentes/Red.jsx'
 import './App.css'
@@ -41,7 +42,9 @@ export default function App() {
   const taller = useTaller()
   const { estado, despachar, aviso, descartarAviso } = taller
   const musica = useMusica(estado, despachar)
-  const pedido = destinoDelHash(useHash())
+  const hash = useHash()
+  const pedido = destinoDelHash(hash)
+  const enReferencias = hash === '#referencias'
   // Un destino cerrado no se abre escribiendo su dirección: el giro no se adelanta.
   const aqui = pedido && abierto(estado, pedido) ? pedido : null
   const noche = deNoche(estado)
@@ -49,7 +52,7 @@ export default function App() {
   useEffect(() => { document.documentElement.dataset.hora = noche ? 'noche' : 'dia' }, [noche])
 
   return (
-    <main className={aqui ? 'en-destino' : 'en-mapa'}>
+    <main className={aqui || enReferencias ? 'en-destino' : 'en-mapa'}>
       {aviso && (
         <div className="banner" role="alert">
           <p>{aviso}</p>
@@ -71,7 +74,8 @@ export default function App() {
           </ConCuento>
         )}
         {aqui && !JUEGOS.includes(aqui) && <Escena id={aqui} despachar={despachar} />}
-        {!aqui && <PantallaMapa estado={estado} />}
+        {enReferencias && <Referencias />}
+        {!aqui && !enReferencias && <PantallaMapa estado={estado} />}
       </Red>
     </main>
   )
