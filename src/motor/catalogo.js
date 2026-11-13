@@ -8,6 +8,7 @@ import { reglasMolino } from './reglas/molino.js'
 import { reglasCasa } from './reglas/casa.js'
 import { reglasGato } from './reglas/gato.js'
 import { reglasPerro } from './reglas/perro.js'
+import { reglasGallo } from './reglas/gallo.js'
 
 export const CATALOGO = {
   acta: {
@@ -30,13 +31,17 @@ export const CATALOGO = {
     etapa: 3,
     reglas: reglasGato,
   },
+  gallo: {
+    nombre: 'El corral del gallo: cronograma y ruta crítica',
+    etapa: 3,
+    reglas: reglasGallo,
+  },
   casa: {
     nombre: 'La casa de los ladrones: el product backlog de esa noche',
     etapa: 6,
     reglas: reglasCasa,
   },
   // etapa 2 · EDT        -> historia H-04
-  // etapa 3 · ruta crítica -> historia H-06
   // etapa 4 · backlog    -> historia H-08
   // etapa 5 · sprint     -> historia H-11
 }
