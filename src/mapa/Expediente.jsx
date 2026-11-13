@@ -29,8 +29,8 @@ export default function Expediente({ taller }) {
         )}
       </div>
       <p className="no-oficial">
-        Este taller no otorga una certificación oficial del PMI ni de Scrum.org. Lo que escribes
-        no sale de este navegador.
+        Este taller no otorga una certificación oficial del PMI ni de Scrum.org.{' '}
+        <a href="#referencias">Dónde sí se certifica</a>. Lo que escribes no sale de este navegador.
       </p>
     </section>
   )

@@ -4,6 +4,8 @@ import { ACERCA, ACTIVIDADES, TIEMPOS, criticasDe, numero, renglonBien } from '.
 import { borrador } from '../../estado/taller.js'
 import Hallazgos from '../../componentes/Hallazgos.jsx'
 import Explica from '../../componentes/Explica.jsx'
+import ComoSeJuega from '../../componentes/ComoSeJuega.jsx'
+import { PASOS } from '../instrucciones.js'
 import { Gallo as DibujoGallo } from '../../mapa/dibujos.jsx'
 import Ilustracion from '../../ilustraciones/Ilustracion.jsx'
 import './gallo.css'
@@ -74,11 +76,7 @@ export default function Gallo({ estado, despachar }) {
           {ACERCA.cronograma.titulo}
           <Explica titulo={ACERCA.cronograma.titulo} fuente={ACERCA.cronograma.fuente}>{ACERCA.cronograma.explicacion}</Explica>
         </span>
-        <p className="entrada">
-          Al pasar por un corral, un gallo canta en el portón: mañana lo quieren en la sopa. Se va con la
-          banda, pero antes quiere saber cuánto dura el viaje y qué no se puede atrasar. Las cajas del corral
-          son el viaje; los números los calculas tú. El viaje empieza el día 0.
-        </p>
+        {!listo && <ComoSeJuega pasos={PASOS.gallo} />}
       </div>
 
       {listo ? (
