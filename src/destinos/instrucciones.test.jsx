@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { PASOS } from './instrucciones.js'
+import { PASOS, PASOS_MAPA } from './instrucciones.js'
+import { reducir } from '../estado/taller.js'
+import PantallaMapa from '../mapa/PantallaMapa.jsx'
 import { DESTINOS } from './catalogo.js'
 import { vacio } from '../estado/esquema.js'
 import Molino from './molino/Molino.jsx'
@@ -31,5 +33,21 @@ describe('Cómo se juega', () => {
       expect(html, id).toContain('Cómo se juega')
       expect(html, id).toContain(PASOS[id][0].slice(0, 30))
     }
+  })
+})
+
+describe('Cómo se juega en el mapa', () => {
+  it('es corto y no nombra lo que sigue bajo la bruma', () => {
+    expect(PASOS_MAPA.length).toBeLessThanOrEqual(3)
+    expect(PASOS_MAPA.join(' ').toLowerCase()).not.toMatch(/ladr|casa|noche|plan|seis|6/)
+  })
+
+  it('arranca abierto la primera vez y plegado ya en camino', () => {
+    const nuevo = renderToStaticMarkup(<PantallaMapa estado={vacio()} />)
+    expect(nuevo).toMatch(/<details class="como-se-juega en-el-mapa" open/)
+    const enCamino = reducir(vacio(), { tipo: 'llegar', destino: 'molino' })
+    const html = renderToStaticMarkup(<PantallaMapa estado={enCamino} />)
+    expect(html).toContain('Cómo se juega')
+    expect(html).not.toMatch(/<details class="como-se-juega en-el-mapa" open/)
   })
 })

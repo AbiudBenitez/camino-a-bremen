@@ -121,6 +121,17 @@ main.en-mapa > .cabecera { position: absolute; top: 1.2rem; left: 1.5rem; right:
 .concepto-tarjeta .fuente { margin: 0; font-family: ui-monospace, 'SF Mono', Menlo, monospace;
   font-size: 0.74rem !important; color: var(--tinta-3); }
 
+/* «Cómo se juega» del mapa: flota en el cielo, bajo los botones, donde no hay paradas.
+   A la izquierda tapaba la burbuja de «Sigue» sobre el molino.
+   Fuera del lienzo, así no se desliza con el mapa en teléfono. */
+.como-se-juega.en-el-mapa { position: absolute; top: 5.2rem; right: 1.5rem; z-index: 7; width: min(20rem, calc(100% - 3rem));
+  padding: 0.5rem 0.9rem 0.6rem; background: var(--hoja); border: 1px solid var(--linea); box-shadow: 0 10px 24px rgb(27 26 23 / 0.16); }
+.como-se-juega.en-el-mapa:not([open]) { width: auto; }
+.como-se-juega.en-el-mapa ol { gap: 0.2rem; margin-top: 0.2rem; }
+.como-se-juega.en-el-mapa li { font-size: 0.86rem; line-height: 1.4; }
+@media (max-width: 52rem) { .como-se-juega.en-el-mapa { top: 4.6rem; right: 0.8rem; width: min(20rem, calc(100% - 1.6rem)); } }
+@media (orientation: landscape) and (max-height: 34rem) { .como-se-juega.en-el-mapa { top: 4rem; } }
+
 .burbuja { z-index: 4; position: absolute; translate: -50% -100%; display: grid; justify-items: center;
   padding: 0.45rem 1rem 0.55rem; background: var(--plan); color: var(--sobre-plan); border-radius: 14px;
   box-shadow: 0 3px 0 var(--plan-hondo), 0 10px 22px rgb(27 26 23 / 0.2); text-decoration: none;

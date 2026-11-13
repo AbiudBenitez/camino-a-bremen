@@ -45,3 +45,13 @@ export const PASOS = {
     'Cuando cada puesto tenga a alguien, presiona «Apagar las luces y esperar». Después viene la noche y, al amanecer, la retrospectiva.',
   ],
 }
+
+/**
+ * El mapa: cómo se avanza. Solo habla de lo que ya se ve; lo que sigue bajo la
+ * bruma no se nombra, ni se cuenta cuántas paradas hay.
+ */
+export const PASOS_MAPA = [
+  'Toca «Sigue» para entrar a la siguiente parada. Cada una abre con su página del cuento.',
+  'El candado se quita al terminar la parada anterior. El «!» explica qué se aprende ahí.',
+  'Arriba: música, la banda, tu expediente y las referencias. Tu avance se guarda en este navegador.',
+]
