@@ -15,10 +15,10 @@ export const DESTINOS = [
   { id: 'molino', nombre: 'El molino', tipo: 'juego', animal: 'burro', metodo: 'PMI' },
   { id: 'perro', nombre: 'El perro', tipo: 'juego', animal: 'perro', metodo: 'PMI' },
   { id: 'gato', nombre: 'El gato', tipo: 'juego', animal: 'gato', metodo: 'PMI' },
-  { id: 'gallo', nombre: 'El gallo', tipo: 'escena', animal: 'gallo', metodo: 'PMI' },
+  { id: 'gallo', nombre: 'El gallo', tipo: 'juego', animal: 'gallo', metodo: 'PMI' },
   { id: 'bosque', nombre: 'El bosque', tipo: 'escena', metodo: 'PMI' },
   { id: 'casa', nombre: 'La casa', tipo: 'juego', metodo: 'Scrum' },
-  { id: 'final', nombre: 'El acto final', tipo: 'juego', metodo: 'Scrum', construido: false },
+  { id: 'final', nombre: 'El acto final', tipo: 'juego', metodo: 'Scrum' },
 ]
 
 export const ANIMALES = ['burro', 'perro', 'gato', 'gallo']
