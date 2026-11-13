@@ -12,14 +12,6 @@ export const ESCENAS = {
     ],
     seguir: 'Seguir con el gato',
   },
-  gallo: {
-    titulo: 'Un gallo en el portón',
-    parrafos: [
-      'Al pasar por un corral, un gallo canta en el portón con todas sus fuerzas. Mañana hay visitas y la cocinera lo quiere en la sopa: esta noche le cortan la cabeza.',
-      '—Vente con nosotros —le dice el burro—. Algo mejor que la muerte encontrarás donde sea. Tienes buena voz: si cantamos juntos, algo bueno saldrá.',
-    ],
-    seguir: 'Seguir con el gallo',
-  },
   bosque: {
     titulo: 'Cae la noche',
     parrafos: [
