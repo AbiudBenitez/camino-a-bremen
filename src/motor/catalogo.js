@@ -7,6 +7,7 @@ import { reglasActa } from './reglas/acta.js'
 import { reglasMolino } from './reglas/molino.js'
 import { reglasCasa } from './reglas/casa.js'
 import { reglasGato } from './reglas/gato.js'
+import { reglasPerro } from './reglas/perro.js'
 
 export const CATALOGO = {
   acta: {
@@ -18,6 +19,11 @@ export const CATALOGO = {
     nombre: 'El hatillo del burro: acta de constitución',
     etapa: 1,
     reglas: reglasMolino,
+  },
+  perro: {
+    nombre: 'El olfato del perro: matriz de poder e interés',
+    etapa: 1,
+    reglas: reglasPerro,
   },
   gato: {
     nombre: 'El móvil del gato: estructura de desglose del trabajo',

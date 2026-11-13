@@ -1,17 +1,9 @@
 /**
  * Los tramos de cuento. Fieles a los Grimm y cortos: se leen en voz alta en
- * menos de medio minuto. En el sprint 2 el perro, el gallo y el bosque son
- * solo esto; sus minijuegos llegan en el sprint 3.
+ * menos de medio minuto. Los destinos que todavía no tienen minijuego son solo
+ * esto.
  */
 export const ESCENAS = {
-  perro: {
-    titulo: 'Un perro de caza',
-    parrafos: [
-      'En el camino, el burro encuentra a un perro de caza tirado a la orilla, jadeando como quien corrió mucho. Está viejo, ya no sirve para cazar y su amo quiso deshacerse de él.',
-      '—Me voy a Bremen a ser músico —le dice el burro—. Vente conmigo: yo toco el laúd y tú los timbales.',
-    ],
-    seguir: 'Seguir con el perro',
-  },
   gato: {
     titulo: 'Un gato con cara de tres días de lluvia',
     parrafos: [
