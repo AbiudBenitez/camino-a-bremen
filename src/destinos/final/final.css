@@ -6,7 +6,6 @@
 .final { max-width: 72rem; margin: 0 auto; }
 .final-titulo { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: baseline; gap: 0.3rem 1rem; margin-bottom: 1rem; }
 .final-titulo h1 { margin: 0; white-space: nowrap; font-family: var(--titulo); font-size: 1.8rem; }
-.final > .entrada { margin: 0 0 1rem; color: var(--tinta-2); max-width: 46rem; }
 
 .acuerdos { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1rem; margin-bottom: 1rem; }
 .objetivo { margin: 0; padding: 0.9rem 1rem; background: var(--hoja); border: 1px solid var(--linea); border-radius: 14px; display: grid; gap: 0.4rem; }

@@ -5,7 +5,6 @@
 .gato { max-width: 72rem; margin: 0 auto; }
 .gato-titulo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 1rem; margin-bottom: 1rem; }
 .gato-titulo h1 { margin: 0; font-family: var(--titulo); font-size: 1.8rem; }
-.gato-titulo .entrada { flex-basis: 100%; margin: 0; color: var(--tinta-2); max-width: 46rem; }
 
 .tejado { display: grid; grid-template-columns: minmax(14rem, 1fr) minmax(22rem, 2fr); gap: 1.4rem; align-items: start;
   padding: 1.4rem; border-radius: 22px; background: linear-gradient(var(--cielo-bajo), var(--hoja)); }

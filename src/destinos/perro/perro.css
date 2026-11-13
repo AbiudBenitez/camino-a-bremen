@@ -4,10 +4,9 @@
    pasto de la orilla del camino. */
 
 .perro { max-width: 72rem; margin: 0 auto; }
-/* En rejilla y no en flex: con flex, la entrada se subía junto al título cuando cabía. */
+/* En rejilla y no en flex: con flex, el texto bajo el título se subía junto a él cuando cabía. */
 .perro-titulo { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: baseline; gap: 0.3rem 1rem; margin-bottom: 1rem; }
 .perro-titulo h1 { margin: 0; white-space: nowrap; font-family: var(--titulo); font-size: 1.8rem; }
-.perro-titulo .entrada { grid-column: 1 / -1; margin: 0; color: var(--tinta-2); max-width: 46rem; }
 
 .campo-perro { display: grid; grid-template-columns: minmax(14rem, 1fr) minmax(22rem, 2fr); gap: 1.4rem; align-items: start;
   padding: 1.4rem; border-radius: 22px; background: linear-gradient(var(--camino-10), var(--hoja)); }
@@ -71,7 +70,6 @@
 @media (orientation: landscape) and (max-height: 34rem) {
   .perro-titulo { margin-bottom: 0.6rem; }
   .perro-titulo h1 { font-size: 1.4rem; }
-  .perro-titulo .entrada { font-size: 0.92rem; }
   .campo-perro { grid-template-columns: minmax(12rem, 1fr) minmax(0, 1.8fr); gap: 0.9rem; padding: 0.8rem; }
   .mesa-perro { position: sticky; top: 0.5rem; max-height: calc(100dvh - 1rem); overflow-y: auto; }
   .mesa-perro .pieza { min-height: 40px; padding: 0.4rem 0.7rem; }

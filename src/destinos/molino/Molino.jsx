@@ -7,6 +7,8 @@ import { borrador } from '../../estado/taller.js'
 import Campo from '../../componentes/Campo.jsx'
 import Hallazgos from '../../componentes/Hallazgos.jsx'
 import Explica from '../../componentes/Explica.jsx'
+import ComoSeJuega from '../../componentes/ComoSeJuega.jsx'
+import { PASOS } from '../instrucciones.js'
 import NotaFlotante from '../../componentes/NotaFlotante.jsx'
 import { Burro } from '../../mapa/dibujos.jsx'
 import Ilustracion from '../../ilustraciones/Ilustracion.jsx'
@@ -96,10 +98,7 @@ export default function Molino({ estado, despachar }) {
           {ACERCA.acta.titulo}
           <Explica titulo={ACERCA.acta.titulo} fuente={ACERCA.acta.fuente}>{ACERCA.acta.explicacion}</Explica>
         </span>
-        <p className="entrada">
-          El burro ya no puede con los costales y su amo piensa deshacerse de él. Antes de irse a
-          Bremen arma su hatillo: cada cosa que sabe va en su lugar, o se queda en el molino.
-        </p>
+        {!listo && <ComoSeJuega pasos={PASOS.molino} />}
       </div>
 
       {listo ? (

@@ -7,6 +7,8 @@ import { borrador, entregado } from '../../estado/taller.js'
 import { recorrido } from '../catalogo.js'
 import Hallazgos from '../../componentes/Hallazgos.jsx'
 import Explica from '../../componentes/Explica.jsx'
+import ComoSeJuega from '../../componentes/ComoSeJuega.jsx'
+import { PASOS } from '../instrucciones.js'
 import NotaFlotante from '../../componentes/NotaFlotante.jsx'
 import Ilustracion from '../../ilustraciones/Ilustracion.jsx'
 import { ANIMAL } from '../../mapa/indice.js'
@@ -81,11 +83,7 @@ function Planeacion({ estado, despachar, onListo }) {
 
   return (
     <>
-      <p className="entrada">
-        La banda ya tiene la casa. Pero desde el bosque, el jefe de los ladrones ve que las luces se apagaron y
-        piensa mandar a alguien a revisar. Esta noche es un sprint: un objetivo, la capacidad de cada quien y
-        nada que no sirva para lograrlo.
-      </p>
+      <ComoSeJuega pasos={PASOS.final} />
 
       <div className="acuerdos">
         <fieldset className="objetivo">

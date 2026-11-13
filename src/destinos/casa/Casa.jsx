@@ -9,6 +9,8 @@ import { borrador, entregado } from '../../estado/taller.js'
 import { recorrido } from '../catalogo.js'
 import { enmudecer } from '../../sonido/musica.js'
 import Hallazgos from '../../componentes/Hallazgos.jsx'
+import ComoSeJuega from '../../componentes/ComoSeJuega.jsx'
+import { PASOS } from '../instrucciones.js'
 import Ilustracion from '../../ilustraciones/Ilustracion.jsx'
 import { ANIMAL } from '../../mapa/indice.js'
 import './casa.css'
@@ -128,40 +130,42 @@ function Backlog({ estado, despachar, onListo }) {
   const desorden = resultado?.hallazgos.some((h) => h.regla === 'casa.ordenada')
 
   return (
-    <Mesa onColocar={alColocar} nombrePieza={(p) => historia(p)?.texto ?? p}
-      nombreRanura={(r) => (r === PILA ? 'la pila' : 'la mesa')} className="noche-casa">
-      <Ranura id={MESA} etiqueta="Lo que podría hacer la banda" className="opciones">
-        {enMesa(HISTORIAS.map((h) => h.id), col).map((id) => <Pieza key={id} id={id}>{historia(id).texto}</Pieza>)}
-      </Ranura>
-
-      <section className="pila-y-banda" aria-label="La pila: el backlog de esta noche">
-        <Ranura id={PILA} etiqueta="La pila · arriba lo que más importa" className="pila">
-          {pila.map((id, i) => (
-            <Pieza key={id} id={id} en={PILA} indice={i}>{historia(id)?.texto ?? id}</Pieza>
-          ))}
+    <>
+      <ComoSeJuega pasos={PASOS.casa} />
+      <Mesa onColocar={alColocar} nombrePieza={(p) => historia(p)?.texto ?? p}
+        nombreRanura={(r) => (r === PILA ? 'la pila' : 'la mesa')} className="noche-casa">
+        <Ranura id={MESA} etiqueta="Lo que podría hacer la banda" className="opciones">
+          {enMesa(HISTORIAS.map((h) => h.id), col).map((id) => <Pieza key={id} id={id}>{historia(id).texto}</Pieza>)}
         </Ranura>
-        <div className="piramide" aria-hidden="true">
-          {PIRAMIDE.map((a) => {
-            const Animal = ANIMAL[a]
-            return (
-              <svg key={a} viewBox="0 0 60 50" className={`piso ${a}`}>
-                <Ilustracion clave={`animal-${a}`} x={30} y={45} ancho={60}><Animal /></Ilustracion>
-              </svg>
-            )
-          })}
-        </div>
-      </section>
 
-      <aside className="burro-po" aria-label="Lo que dice el burro">
-        <p className="ranura-etiqueta">El burro, que hace de Product Owner</p>
-        <ul>{LO_QUE_IMPORTA.map((l) => <li key={l}>{l}</li>)}</ul>
+        <section className="pila-y-banda" aria-label="La pila: el backlog de esta noche">
+          <Ranura id={PILA} etiqueta="La pila · arriba lo que más importa" className="pila">
+            {pila.map((id, i) => (
+              <Pieza key={id} id={id} en={PILA} indice={i}>{historia(id)?.texto ?? id}</Pieza>
+            ))}
+          </Ranura>
+          <div className="piramide" aria-hidden="true">
+            {PIRAMIDE.map((a) => {
+              const Animal = ANIMAL[a]
+              return (
+                <svg key={a} viewBox="0 0 60 50" className={`piso ${a}`}>
+                  <Ilustracion clave={`animal-${a}`} x={30} y={45} ancho={60}><Animal /></Ilustracion>
+                </svg>
+              )
+            })}
+          </div>
+        </section>
 
-        <div className="nota-margen" role="status">
-          {nota && (
-            <>
-              <p className="nota-tarjeta">«{historia(nota.pieza)?.texto}» regresó a la mesa.</p>
-              <p>{nota.mensaje}</p>
-              <p className="fuente">{cita(nota.fuente)}</p>
+        <aside className="burro-po" aria-label="Lo que dice el burro">
+          <p className="ranura-etiqueta">El burro, que hace de Product Owner</p>
+          <ul>{LO_QUE_IMPORTA.map((l) => <li key={l}>{l}</li>)}</ul>
+
+          <div className="nota-margen" role="status">
+            {nota && (
+              <>
+                <p className="nota-tarjeta">«{historia(nota.pieza)?.texto}» regresó a la mesa.</p>
+                <p>{nota.mensaje}</p>
+                <p className="fuente">{cita(nota.fuente)}</p>
             </>
           )}
         </div>
@@ -190,6 +194,7 @@ function Backlog({ estado, despachar, onListo }) {
         <Hallazgos key={estado.artefactos.casa?.intentos ?? 0} resultado={resultado} />
       </div>
     </Mesa>
+    </>
   )
 }
 

@@ -193,3 +193,25 @@ h2 { font-size: 1.35rem; margin: 2.2rem 0 0.8rem; }
 
 /* Las horas de una pieza, en el gato y en el acto final: nunca se parten del número. */
 .horas { font-family: var(--ui); font-size: 0.85em; color: var(--tinta-3); white-space: nowrap; }
+
+/* «Cómo se juega»: los pasos de cada minijuego, bajo el título. Se pliega para
+   dejarle la pantalla al juego. Abarca la fila entera, sea el título rejilla o flex. */
+.como-se-juega { grid-column: 1 / -1; flex-basis: 100%; max-width: 46rem; margin: 0; padding: 0.7rem 1rem 0.8rem;
+  background: var(--plan-10); border-radius: 12px; font-family: var(--ui); }
+.casa > .como-se-juega, .final > .como-se-juega { margin-bottom: 1rem; }
+.como-se-juega summary { cursor: pointer; min-height: 32px; display: flex; align-items: center; gap: 0.55rem;
+  list-style: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--plan); }
+.como-se-juega summary::-webkit-details-marker { display: none; }
+/* La flecha dice que se pliega: abajo abierto, a la derecha plegado. */
+.como-se-juega summary::before { content: ''; width: 0.45rem; height: 0.45rem; border-right: 2px solid; border-bottom: 2px solid;
+  transform: translateY(-2px) rotate(45deg); transition: transform var(--normal) var(--curva); }
+.como-se-juega:not([open]) summary::before { transform: rotate(-45deg); }
+@media (prefers-reduced-motion: reduce) { .como-se-juega summary::before { transition: none; } }
+.como-se-juega summary:focus-visible { outline: 3px solid var(--plan); outline-offset: 2px; border-radius: 4px; }
+.como-se-juega ol { display: grid; gap: 0.3rem; margin: 0.35rem 0 0; padding-left: 1.3rem; }
+.como-se-juega li { font-size: 0.92rem; line-height: 1.5; color: var(--tinta-2); }
+.como-se-juega li::marker { font-weight: 700; color: var(--plan); }
+@media (orientation: landscape) and (max-height: 34rem) {
+  .como-se-juega { padding: 0.5rem 0.8rem 0.6rem; }
+  .como-se-juega li { font-size: 0.86rem; line-height: 1.4; }
+}
