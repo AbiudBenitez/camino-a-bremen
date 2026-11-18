@@ -6,6 +6,8 @@ import { ACERCA, CUADRANTES, INTERESADOS, PERSONAJES, personaje } from '../../mo
 import { borrador } from '../../estado/taller.js'
 import Hallazgos from '../../componentes/Hallazgos.jsx'
 import Explica from '../../componentes/Explica.jsx'
+import ComoSeJuega from '../../componentes/ComoSeJuega.jsx'
+import { PASOS } from '../instrucciones.js'
 import NotaFlotante from '../../componentes/NotaFlotante.jsx'
 import { Perro as DibujoPerro } from '../../mapa/dibujos.jsx'
 import Ilustracion from '../../ilustraciones/Ilustracion.jsx'
@@ -67,11 +69,7 @@ export default function Perro({ estado, despachar }) {
           {ACERCA.matriz.titulo}
           <Explica titulo={ACERCA.matriz.titulo} fuente={ACERCA.matriz.fuente}>{ACERCA.matriz.explicacion}</Explica>
         </span>
-        <p className="entrada">
-          A la orilla del camino, el burro encuentra a un perro de caza viejo que ya no sirve para cazar. Le
-          queda el olfato: antes de seguir, husmea a quién le importa el viaje y quién puede detenerlo. Cada
-          quien va en su lugar de la matriz; lo que no es interesado se queda en la mesa.
-        </p>
+        {!listo && <ComoSeJuega pasos={PASOS.perro} />}
       </div>
 
       {listo ? (

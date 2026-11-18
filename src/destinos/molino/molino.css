@@ -6,7 +6,6 @@
 .molino { max-width: 72rem; margin: 0 auto; }
 .molino-titulo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 1rem; margin-bottom: 1rem; }
 .molino-titulo h1 { margin: 0; font-family: var(--titulo); font-size: 1.8rem; }
-.molino-titulo .entrada { flex-basis: 100%; margin: 0; color: var(--tinta-2); max-width: 46rem; }
 
 .piso-molino { display: grid; grid-template-columns: minmax(14rem, 1fr) minmax(22rem, 2fr); gap: 1.4rem; align-items: start;
   padding: 1.4rem; border-radius: 22px; background: linear-gradient(var(--muro), var(--hoja)); }
@@ -90,7 +89,6 @@
 @media (orientation: landscape) and (max-height: 34rem) {
   .molino-titulo { margin-bottom: 0.6rem; }
   .molino-titulo h1 { font-size: 1.4rem; }
-  .molino-titulo .entrada { font-size: 0.92rem; }
   .piso-molino { grid-template-columns: minmax(12rem, 1fr) minmax(0, 1.8fr); gap: 0.9rem; padding: 0.8rem; }
   .mazo { position: sticky; top: 0.5rem; max-height: calc(100dvh - 1rem); overflow-y: auto; }
   .mazo .pieza { min-height: 40px; padding: 0.4rem 0.7rem; }

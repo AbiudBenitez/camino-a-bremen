@@ -1,0 +1,37 @@
+/* ================================================================ referencias
+   Una página para leer: una columna angosta, la bibliografía como lista
+   numerada y los organismos en tarjetas. Nada de escenario: aquí se consulta. */
+
+.referencias { max-width: 46rem; margin: 0 auto; }
+.referencias h1 { margin: 1rem 0 0.5rem; font-family: var(--titulo); font-size: 2rem; }
+.ref-entrada { margin: 0 0 0.5rem; font-size: 1.05rem; line-height: 1.6; color: var(--tinta-2); }
+.referencias h2 { margin: 2rem 0 0.8rem; font-family: var(--titulo); font-size: 1.35rem; }
+
+.ref-lista { display: grid; gap: 0.6rem; margin: 0; padding: 0; list-style: none; counter-reset: ref; }
+.ref-lista > li { counter-increment: ref; position: relative; padding: 0.8rem 1rem 0.85rem 2.8rem;
+  background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; }
+.ref-lista > li::before { content: counter(ref); position: absolute; left: 1rem; top: 0.8rem;
+  font-family: var(--titulo); font-weight: 700; color: var(--plan); }
+.ref-obra { font-family: var(--ui); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--tinta-3); }
+.ref-cita { margin: 0.2rem 0 0.3rem; line-height: 1.5; }
+.ref-usa { margin: 0; font-family: var(--ui); font-size: 0.88rem; line-height: 1.45; color: var(--tinta-2); }
+.ref-enlace { margin: 0.4rem 0 0; font-family: var(--ui); font-size: 0.9rem; font-weight: 600; }
+.ref-enlace a { color: var(--plan); }
+
+.no-oficial-grande { margin: 0 0 1rem; padding: 0.8rem 1rem; border-radius: 12px; background: var(--plan-10);
+  font-family: var(--ui); font-size: 0.95rem; line-height: 1.5; color: var(--tinta); }
+
+.ref-organismos { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.8rem;
+  margin: 0 0 2rem; padding: 0; list-style: none; }
+.ref-organismos > li { display: flex; flex-direction: column; gap: 0.4rem; padding: 1rem;
+  background: var(--hoja); border: 1px solid var(--linea); border-radius: 14px; }
+.ref-organismos h3 { margin: 0; font-family: var(--titulo); font-size: 1.1rem; }
+.ref-organismos ul { margin: 0.2rem 0 0; padding-left: 1.1rem; font-family: var(--ui); font-size: 0.9rem; line-height: 1.5; }
+.ref-organismos .ref-enlace { margin-top: auto; padding-top: 0.3rem; }
+
+@media (max-width: 34rem) {
+  .referencias h1 { font-size: 1.6rem; }
+  .ref-lista > li { padding-left: 2.4rem; }
+  .ref-lista > li::before { left: 0.8rem; }
+}

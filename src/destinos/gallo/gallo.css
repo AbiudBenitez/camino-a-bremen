@@ -3,10 +3,9 @@
    el estudiante hace las cuentas. Mismo marco que los otros destinos. */
 
 .gallo { max-width: 72rem; margin: 0 auto; }
-/* En rejilla y no en flex: con flex, la entrada se subía junto al título cuando cabía. */
+/* En rejilla y no en flex: con flex, el texto bajo el título se subía junto a él cuando cabía. */
 .gallo-titulo { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: baseline; gap: 0.3rem 1rem; margin-bottom: 1rem; }
 .gallo-titulo h1 { margin: 0; white-space: nowrap; font-family: var(--titulo); font-size: 1.8rem; }
-.gallo-titulo .entrada { grid-column: 1 / -1; margin: 0; color: var(--tinta-2); max-width: 46rem; }
 
 .corral { display: grid; gap: 1.2rem; padding: 1.4rem; border-radius: 22px;
   background: linear-gradient(var(--muro), var(--hoja)); }
@@ -73,7 +72,6 @@
 }
 @media (orientation: landscape) and (max-height: 34rem) {
   .gallo-titulo h1 { font-size: 1.4rem; }
-  .gallo-titulo .entrada { font-size: 0.92rem; }
   .corral { padding: 0.8rem; gap: 0.8rem; }
   .red-dibujo { max-height: 60dvh; }
 }

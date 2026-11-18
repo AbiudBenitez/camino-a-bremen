@@ -6,6 +6,8 @@ import { CUPO_RAMA, PIEZAS, PROYECTO, RAMAS, pieza } from '../../motor/reglas/ga
 import { borrador } from '../../estado/taller.js'
 import Hallazgos from '../../componentes/Hallazgos.jsx'
 import NotaFlotante from '../../componentes/NotaFlotante.jsx'
+import ComoSeJuega from '../../componentes/ComoSeJuega.jsx'
+import { PASOS } from '../instrucciones.js'
 import './gato.css'
 
 const PESO = 320
@@ -65,10 +67,7 @@ export default function Gato({ estado, despachar }) {
       <div className="gato-titulo">
         <a className="volver" href="#mapa">← Al mapa</a>
         <h1>El gato</h1>
-        <p className="entrada">
-          El gato, que sabe de música de noche, tiene un móvil colgado del tejado. Hay que colgar en él
-          todo lo que la banda va a entregar para llegar a Bremen: que no falte nada y que no sobre nada.
-        </p>
+        {!listo && <ComoSeJuega pasos={PASOS.gato} />}
       </div>
 
       {listo ? (

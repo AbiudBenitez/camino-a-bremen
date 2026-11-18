@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
-import { actual } from '../destinos/catalogo.js'
+import { actual, recorrido } from '../destinos/catalogo.js'
+import { PASOS_MAPA } from '../destinos/instrucciones.js'
+import ComoSeJuega from '../componentes/ComoSeJuega.jsx'
 import Mapa from './Mapa.jsx'
 import Conceptos from './Conceptos.jsx'
 import { ALTURA, ESCALA, LIENZO, PUNTOS } from './trazo.js'
@@ -34,6 +36,8 @@ export default function PantallaMapa({ estado }) {
           </a>
         </div>
       </div>
+      {/* Abierto la primera vez; ya en camino, plegado para dejarle el mapa al mapa. */}
+      <ComoSeJuega className="en-el-mapa" pasos={PASOS_MAPA} plegado={recorrido(estado, 'molino')} />
     </div>
   )
 }
