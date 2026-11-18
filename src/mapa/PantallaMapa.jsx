@@ -4,7 +4,10 @@ import { PASOS_MAPA } from '../destinos/instrucciones.js'
 import ComoSeJuega from '../componentes/ComoSeJuega.jsx'
 import Mapa from './Mapa.jsx'
 import Conceptos from './Conceptos.jsx'
+import LineaEtapas from './LineaEtapas.jsx'
 import { ALTURA, ESCALA, LIENZO, PUNTOS } from './trazo.js'
+
+const angosta = () => typeof window !== 'undefined' && Boolean(window.matchMedia?.('(max-width: 52rem)').matches)
 
 /** El mapa a pantalla completa, con una burbuja sobre la siguiente parada. */
 export default function PantallaMapa({ estado }) {
@@ -36,8 +39,10 @@ export default function PantallaMapa({ estado }) {
           </a>
         </div>
       </div>
-      {/* Abierto la primera vez; ya en camino, plegado para dejarle el mapa al mapa. */}
-      <ComoSeJuega className="en-el-mapa" pasos={PASOS_MAPA} plegado={recorrido(estado, 'molino')} />
+      <LineaEtapas estado={estado} />
+      {/* Abierto la primera vez; ya en camino, plegado para dejarle el mapa al mapa. En
+          pantalla angosta va bajo el cronograma y abierto taparía la burbuja de «Sigue». */}
+      <ComoSeJuega className="en-el-mapa" pasos={PASOS_MAPA} plegado={recorrido(estado, 'molino') || angosta()} />
     </div>
   )
 }
