@@ -121,6 +121,81 @@ main.en-mapa > .cabecera { position: absolute; top: 1.2rem; left: 1.5rem; right:
 .concepto-tarjeta .fuente { margin: 0; font-family: ui-monospace, 'SF Mono', Menlo, monospace;
   font-size: 0.74rem !important; color: var(--tinta-3); }
 
+/* ------------------------------------------------------ cronograma
+   La línea de etapas va en la fila de la cabecera cuando cabe entre el título y
+   los botones; si no, en una franja bajo la cabecera. Fuera del lienzo, así no
+   se desliza con el mapa. */
+.linea-etapas { position: absolute; z-index: 11; top: 1.2rem; left: 50%; translate: -50% 0; }
+.linea-boton { display: flex; align-items: center; gap: 0.9rem; height: 52px; min-height: 0; box-sizing: border-box;
+  padding: 0 1rem 0 1.1rem; border-radius: 999px; border: 2px solid var(--linea); background: var(--hoja);
+  box-shadow: 0 2px 0 var(--linea); color: var(--tinta); font-family: var(--ui); cursor: pointer; }
+.linea-boton:hover { background: var(--plan-10); }
+.linea-boton[aria-expanded='true'] { border-color: var(--plan); }
+.linea-boton:focus-visible { outline: 3px solid var(--plan); outline-offset: 3px; }
+.linea-rotulo { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--plan); }
+.linea-grupos { display: flex; align-items: flex-end; gap: 0.9rem; }
+.linea-grupo { display: grid; gap: 0.1rem; }
+.linea-metodo { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tinta-3);
+  border-bottom: 1px solid var(--linea); padding-bottom: 0.05rem; }
+.linea-grupo.scrum .linea-metodo { color: var(--plan); }
+.linea-paradas { display: flex; align-items: center; gap: 0.5rem; }
+.linea-parada { display: flex; align-items: center; gap: 0.25rem; font-size: 0.78rem; white-space: nowrap; }
+.linea-parada + .linea-parada::before { content: ''; width: 0.6rem; height: 2px; margin-right: 0.25rem; background: var(--linea); }
+.linea-parada.hecha + .linea-parada::before { background: var(--plan); }
+.linea-punto { display: grid; place-items: center; width: 15px; height: 15px; border-radius: 50%; box-sizing: border-box;
+  border: 2px solid var(--linea); font-size: 0.6rem; font-weight: 800; line-height: 1; color: var(--tinta-3); }
+.linea-parada.hecha .linea-punto { background: var(--plan); border-color: var(--plan); color: var(--sobre-plan); }
+.linea-parada.actual .linea-punto { background: var(--luz); border-color: var(--contorno); box-shadow: 0 0 0 3px rgb(242 193 78 / 0.35); }
+.linea-parada.actual .linea-nombre { font-weight: 700; }
+.linea-parada.cerrada .linea-nombre { color: var(--tinta-3); }
+.linea-flecha { width: 0.45rem; height: 0.45rem; border-right: 2px solid var(--tinta-3); border-bottom: 2px solid var(--tinta-3);
+  transform: translateY(-2px) rotate(45deg); transition: transform var(--normal) var(--curva); }
+.linea-boton[aria-expanded='true'] .linea-flecha { transform: translateY(2px) rotate(-135deg); }
+@media (prefers-reduced-motion: reduce) { .linea-flecha { transition: none; } }
+
+.panel-gantt { left: 50%; right: auto; translate: -50% 0; width: min(32rem, calc(100vw - 1.6rem)); }
+.gantt { margin: 0; font-family: var(--ui); }
+.gantt-titulo { margin: 0 0 0.7rem; font-family: var(--titulo); font-size: 1.15rem; font-weight: 700; }
+.gantt-filas { display: grid; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
+.gantt-fila { display: grid; grid-template-columns: 3.6rem 1fr 6.6rem; align-items: center; gap: 0.6rem; font-size: 0.82rem; }
+.gantt-nombre { font-weight: 600; }
+.gantt-fila.cerrada .gantt-nombre, .gantt-fila.cerrada .gantt-cuando { color: var(--tinta-3); }
+.gantt-pista { position: relative; height: 14px; border-radius: 7px; background: var(--plan-10); }
+.gantt-barra { position: absolute; top: 0; bottom: 0; border-radius: 7px; background: var(--plan); }
+.gantt-barra.en-curso { background: repeating-linear-gradient(135deg, var(--luz) 0 6px, rgb(242 193 78 / 0.55) 6px 12px);
+  border: 1px solid var(--contorno); box-sizing: border-box; }
+.gantt-cuando { font-size: 0.74rem; color: var(--tinta-2); text-align: right; }
+.gantt-eje { position: relative; height: 1.1rem; margin: 0.35rem 7.2rem 0 4.2rem; font-size: 0.68rem; color: var(--tinta-3); }
+.gantt-eje span { position: absolute; top: 0; translate: -50% 0; white-space: nowrap; }
+.gantt-eje span:first-child { translate: 0 0; }
+.gantt-eje span:last-child { translate: -100% 0; }
+.gantt-fuente { margin: 0.6rem 0 0; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.72rem; color: var(--tinta-3); }
+
+/* Sin lugar en la fila de la cabecera: franja bajo ella, y el recuadro de pasos baja. */
+@media (max-width: 75rem) {
+  .linea-etapas { top: 5rem; }
+  .como-se-juega.en-el-mapa { top: 9rem !important; }
+}
+@media (max-width: 52rem) {
+  .linea-etapas { top: 4.6rem; left: 0.8rem; right: 0.8rem; translate: none; display: flex; justify-content: center; }
+  .linea-boton { gap: 0.6rem; padding: 0 0.8rem; max-width: 100%; }
+  .linea-rotulo { display: none; }
+  .como-se-juega.en-el-mapa { top: 8.4rem !important; }
+}
+/* En teléfono solo lleva nombre la parada actual; las demás son puntos. */
+@media (max-width: 34rem), (orientation: landscape) and (max-height: 34rem) {
+  .linea-grupos { gap: 0.6rem; }
+  .linea-paradas { gap: 0.3rem; }
+  .linea-parada:not(.actual) .linea-nombre { display: none; }
+  .linea-parada + .linea-parada::before { width: 0.45rem; margin-right: 0.15rem; }
+}
+@media (orientation: landscape) and (max-height: 34rem) {
+  .linea-etapas { top: 0.8rem; left: 50%; right: auto; translate: -50% 0; }
+  .linea-boton { height: 46px; gap: 0.5rem; padding: 0 0.7rem; }
+  .linea-rotulo { display: none; }
+  .como-se-juega.en-el-mapa { top: 4rem !important; }
+}
+
 /* «Cómo se juega» del mapa: flota en el cielo, bajo los botones, donde no hay paradas.
    A la izquierda tapaba la burbuja de «Sigue» sobre el molino.
    Fuera del lienzo, así no se desliza con el mapa en teléfono. */
